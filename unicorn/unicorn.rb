@@ -1,6 +1,7 @@
 class Unicorn
-  def initialize(name, color="purple")
+  def initialize(name, color="white")
     @name = name
+    @color = color
   end
 
   def name
@@ -8,7 +9,7 @@ class Unicorn
   end
 
   def color
-    "white"
+    @color
   end
 
   def white?
