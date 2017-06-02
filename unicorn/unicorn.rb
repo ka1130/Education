@@ -15,4 +15,8 @@ class Unicorn
   def white?
     color == "white"
   end
+
+  def say(something)
+     "**;* Wonderful! **;*"
+  end
 end

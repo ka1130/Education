@@ -33,6 +33,11 @@ class UnicornTest < Minitest::Test
     unicorn = Unicorn.new("Roxanne", "green")
     refute unicorn.white?, "I guess Roxanne thinks she's white, when really she is green."
   end
+
+  def test_unicorn_says_sparkly_stuff
+    unicorn = Unicorn.new("Johnny")
+    assert_equal "**;* Wonderful! **;*", unicorn.say("Wonderful!")
+  end
 end
 
 
