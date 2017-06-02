@@ -35,8 +35,8 @@ class UnicornTest < Minitest::Test
   end
 
   def test_unicorn_says_sparkly_stuff
-    unicorn = Unicorn.new("Johnny")
-    assert_equal "**;* Wonderful! **;*", unicorn.say("Wonderful!")
+    unicorn = Unicorn.new("Francis")
+    assert_equal "**;* I don't like you very much. **;*", unicorn.say("I don't like you very much.")
   end
 end
 

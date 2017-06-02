@@ -17,6 +17,6 @@ class Unicorn
   end
 
   def say(something)
-     "**;* Wonderful! **;*"
+      "**;* #{something} **;*"
   end
 end
