@@ -33,6 +33,8 @@ def validate_phone(phone)
     return false
   elsif phone.length > 11
     return false
+  else
+    return false
   end
 end
 
