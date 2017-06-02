@@ -1,5 +1,5 @@
 class Unicorn
-  def initialize(name)
+  def initialize(name, color="purple")
     @name = name
   end
 
