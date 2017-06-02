@@ -6,4 +6,5 @@ class Unicorn
   def name
     @name
   end
+  
 end
