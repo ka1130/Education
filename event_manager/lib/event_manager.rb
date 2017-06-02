@@ -34,10 +34,24 @@ contents.each do |row|
   name = row[:first_name]
   zipcode = clean_zipcode(row[:zipcode])
   legislators = legislators_by_zipcode(zipcode)
-
   form_letter = erb_template.result(binding)
+  homephone = row[:homephone]
+
+  if homephone.length < 10 do
+    return false
+  elsif homephone.length == 10
+    return true
+  elsif homephone.length == 11 && homephone.first == "1"
+    homephone = homephone[1..11]
+  elsif homephone.length == 11 && homephone.first != "1"
+    return false
+  elsif homephone.length > 11
+    return false
+  end
 
   save_thank_you_letters(id,form_letter)
+
+  puts "#{name} #{zipcode} #{homephone}"
 end
 
 
