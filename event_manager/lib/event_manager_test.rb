@@ -4,7 +4,7 @@ require 'minitest/pride'
 require_relative 'event_manager'
 
 class EventManagerTest < Minitest::Test
-  def test_homephone
-    assert_equal 3, 1 + 1
+  def test_phone
+    assert_equal validate_phone("888888888882"), false
   end
 end

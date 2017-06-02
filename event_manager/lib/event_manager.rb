@@ -22,6 +22,21 @@ def save_thank_you_letters(id,form_letter)
   end
 end
 
+def validate_phone(phone)
+  if phone.length < 10 
+    return false
+  elsif phone.length == 10
+    return true
+  elsif phone.length == 11 && phone[0] == "1"
+    phone = phone[1..11]
+  elsif phone.length == 11 && phone[0] != "1"
+    return false
+  elsif phone.length > 11
+    return false
+  end
+end
+
+
 puts "EventManager initialized."
 
 contents = CSV.open 'event_attendees.csv', headers: true, header_converters: :symbol
@@ -35,23 +50,11 @@ contents.each do |row|
   zipcode = clean_zipcode(row[:zipcode])
   legislators = legislators_by_zipcode(zipcode)
   form_letter = erb_template.result(binding)
-  homephone = row[:homephone]
-
-  if homephone.length < 10 do
-    return false
-  elsif homephone.length == 10
-    return true
-  elsif homephone.length == 11 && homephone.first == "1"
-    homephone = homephone[1..11]
-  elsif homephone.length == 11 && homephone.first != "1"
-    return false
-  elsif homephone.length > 11
-    return false
-  end
+  phone = validate_phone(row[:homephone])
 
   save_thank_you_letters(id,form_letter)
 
-  puts "#{name} #{zipcode} #{homephone}"
+  puts "#{name} #{zipcode} #{phone}"
 end
 
 
