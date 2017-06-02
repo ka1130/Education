@@ -25,7 +25,7 @@ end
 def validate_phone(phone)
   if phone.length < 10 
     return false
-  elsif phone.length == 10
+  elsif phone.length == 10 && phone.scan(/\D/).empty?
     return true
   elsif phone.length == 11 && phone[0] == "1"
     phone = phone[1..11]
