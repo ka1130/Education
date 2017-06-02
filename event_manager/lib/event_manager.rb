@@ -16,5 +16,9 @@ contents.each do |row|
   zipcode = clean_zipcode(row[:zipcode])
   legislators = Sunlight::Congress::Legislator.by_zipcode(zipcode)
 
-  puts "#{name} #{zipcode} #{legislators}"
+  legislator_names = legislators.collect do |legislator|
+    "#{legislator.first_name} #{legislator.last_name}"
+  end
+
+  puts "#{name} #{zipcode} #{legislator_names}"
 end
