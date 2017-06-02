@@ -6,5 +6,12 @@ class Unicorn
   def name
     @name
   end
-  
+
+  def color
+    "white"
+  end
+
+  def white?
+    true
+  end
 end

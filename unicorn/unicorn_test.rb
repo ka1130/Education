@@ -18,6 +18,11 @@ class UnicornTest < Minitest::Test
     unicorn = Unicorn.new("Margaret")
     assert_equal "white", unicorn.color
   end
+
+  def test_it_knows_if_it_is_white
+    unicorn = Unicorn.new("Elisabeth")
+    assert unicorn.white?, "Elisabeth should be white, but isn't."
+  end
 end
 
 
