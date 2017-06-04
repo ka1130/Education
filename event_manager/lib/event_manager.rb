@@ -1,6 +1,7 @@
 require 'csv'
 require 'sunlight/congress'
 require 'erb'
+require 'date'
 
 Sunlight::Congress.api_key = "e179a6973728c4dd3fb1204283aaccb5"
 
@@ -38,6 +39,20 @@ def validate_phone(phone)
   end
 end
 
+def get_hour(date)
+  format = "%m/%d/%Y %H:%M"
+  date = DateTime.strptime(date, format)
+  hour = date.to_s.slice(11,14)[0..4]
+  return hour
+end
+
+def get_weekday(date)
+    format = "%m/%d/%Y %H:%M"
+    date = DateTime.strptime(date, format).wday
+    return date
+end
+
+
 
 puts "EventManager initialized."
 
@@ -53,10 +68,12 @@ contents.each do |row|
   legislators = legislators_by_zipcode(zipcode)
   form_letter = erb_template.result(binding)
   phone = validate_phone(row[:homephone])
-
+  date_time = get_hour(row[:regdate])
+  week_day = get_weekday(row[:regdate])
+ 
   save_thank_you_letters(id,form_letter)
 
-  puts "#{name} #{zipcode} #{phone}"
+  puts "#{name} #{zipcode} #{date_time} #{week_day}"
 end
 
 

@@ -4,6 +4,7 @@ require 'minitest/pride'
 require_relative 'event_manager'
 
 class EventManagerTest < Minitest::Test
+  # HomePhone Tests
   def test_phone_more_than_11_digits
     assert_equal false, validate_phone("888888888882")
   end
@@ -31,4 +32,6 @@ class EventManagerTest < Minitest::Test
   def test_phone_else_case
     assert_equal false, validate_phone("6-90+65") 
   end
+
+  # Time Tests
 end
