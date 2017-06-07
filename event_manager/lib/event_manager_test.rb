@@ -30,4 +30,7 @@ class EventManagerTest < Minitest::Test
   end
 
   # Time Tests
+  def test_date
+    assert_equal DateTime.new(2008, 11, 12, 10, 47), parse_date("11/12/08 10:47")
+  end
 end
