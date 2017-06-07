@@ -23,6 +23,9 @@ def save_thank_you_letters(id,form_letter)
   end
 end
 
+def sanitize_phone()
+end
+
 def validate_phone(phone)
   if phone.length < 10 
     return false
@@ -39,20 +42,11 @@ def validate_phone(phone)
   end
 end
 
-def get_hour(date)
-  format = "%m/%d/%Y %H:%M"
-  date = DateTime.strptime(date, format)
-  hour = date.to_s.slice(11,14)[0..4]
-  return hour
+def parse_date(date)
+ format = "%m/%d/%Y %H:%M"
+ date = DateTime.strptime(date, format)
+ return date
 end
-
-def get_weekday(date)
-    format = "%m/%d/%Y %H:%M"
-    date = DateTime.strptime(date, format).wday
-    return date
-end
-
-
 
 puts "EventManager initialized."
 
@@ -67,13 +61,17 @@ contents.each do |row|
   zipcode = clean_zipcode(row[:zipcode])
   legislators = legislators_by_zipcode(zipcode)
   form_letter = erb_template.result(binding)
+# sanitize_phone - na tym, co ona zwróci wywołać validate_phone - jeżeli ta ostatnia zwróci false, to phone = ""
+
   phone = validate_phone(row[:homephone])
-  date_time = get_hour(row[:regdate])
-  week_day = get_weekday(row[:regdate])
+  date = parse_date(row[:regdate])
+  hour =  date.hour
+  minutes = date.min
+  week_day = date.wday
  
   save_thank_you_letters(id,form_letter)
 
-  puts "#{name} #{zipcode} #{date_time} #{week_day}"
+  puts "#{name} #{zipcode} #{hour}:#{minutes} #{week_day}"
 end
 
 
