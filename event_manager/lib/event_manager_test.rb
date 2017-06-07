@@ -17,10 +17,6 @@ class EventManagerTest < Minitest::Test
     assert_equal true, validate_phone("8765789065")
   end
 
-  def test_phone_equals_11_digits_firstis_1
-    assert_equal "8765789065", validate_phone("18765789065")
-  end
-
   def test_phone_equals_11_digits_firstisnot_1
     assert_equal false, validate_phone("68765789065") 
   end

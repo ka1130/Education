@@ -23,7 +23,13 @@ def save_thank_you_letters(id,form_letter)
   end
 end
 
-def sanitize_phone()
+def sanitize_phone(phone)
+  if phone.length == 11 && phone[0] == "1"
+    phone = phone[1..11]
+  elsif phone.length == 11 && phone[0] != "1"
+    return ""
+  end
+  return phone
 end
 
 def validate_phone(phone)
@@ -31,10 +37,6 @@ def validate_phone(phone)
     return false
   elsif phone.length == 10 && phone.scan(/\D/).empty?
     return true
-  elsif phone.length == 11 && phone[0] == "1"
-    phone = phone[1..11]
-  elsif phone.length == 11 && phone[0] != "1"
-    return false
   elsif phone.length > 11
     return false
   else
@@ -61,9 +63,8 @@ contents.each do |row|
   zipcode = clean_zipcode(row[:zipcode])
   legislators = legislators_by_zipcode(zipcode)
   form_letter = erb_template.result(binding)
-# sanitize_phone - na tym, co ona zwróci wywołać validate_phone - jeżeli ta ostatnia zwróci false, to phone = ""
-
-  phone = validate_phone(row[:homephone])
+  phone = sanitize_phone(row[:homephone])
+  phone = validate_phone(phone)
   date = parse_date(row[:regdate])
   hour =  date.hour
   minutes = date.min
