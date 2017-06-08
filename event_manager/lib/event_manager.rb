@@ -4,6 +4,8 @@ require 'erb'
 require 'date'
 require_relative 'event_methods.rb'
 
+Sunlight::Congress.api_key = "e179a6973728c4dd3fb1204283aaccb5"
+
 puts "EventManager initialized."
 
 contents = CSV.open 'event_attendees.csv', headers: true, header_converters: :symbol

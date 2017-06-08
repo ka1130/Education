@@ -1,9 +1,19 @@
 gem 'minitest', '~> 5.0'
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative 'event_manager'
+require 'date'
+require_relative 'event_methods'
 
 class EventManagerTest < Minitest::Test
+  # Sanitize Phone Tests
+  def test_sanitize_phone_first_digit_is_1
+    assert_equal "7634901241", sanitize_phone("17634901241")
+  end
+
+  def test_sanitize_phone_first_digit_is_not_1
+    assert_equal "", sanitize_phone("97634901241")
+  end
+
   # HomePhone Tests
   def test_phone_more_than_11_digits
     assert_equal false, validate_phone("888888888882")
