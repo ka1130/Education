@@ -1,7 +1,6 @@
 require 'csv'
 require 'sunlight/congress'
 require 'erb'
-require 'date'
 require_relative 'event_methods.rb'
 
 Sunlight::Congress.api_key = "e179a6973728c4dd3fb1204283aaccb5"
