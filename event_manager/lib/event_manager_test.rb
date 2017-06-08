@@ -43,4 +43,10 @@ class EventManagerTest < Minitest::Test
   def test_date
     assert_equal DateTime.new(2008, 11, 12, 10, 47), parse_date("11/12/08 10:47")
   end
+
+  # Frequency of hours Tests
+  def test_get_most_popular_hour
+    sample_array = [10, 10, 10, 19, 11, 15, 16, 17, 1, 16, 18, 21, 10, 13, 20, 19, 21, 16, 10]
+    assert_equal [10, 5], get_most_popular_hour(sample_array)
+  end
 end

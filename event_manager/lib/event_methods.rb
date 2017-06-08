@@ -44,3 +44,13 @@ def parse_date(date)
  date = DateTime.strptime(date, format)
  return date
 end
+
+def get_most_popular_hour(hours_array)
+  counts = Hash.new 0
+
+  hours_array.each do |hour|
+    counts[hour] +=1
+  end
+
+  counts.max_by{|k,v| v}
+end
