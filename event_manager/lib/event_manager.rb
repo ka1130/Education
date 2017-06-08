@@ -7,13 +7,12 @@ Sunlight::Congress.api_key = "e179a6973728c4dd3fb1204283aaccb5"
 
 puts "EventManager initialized."
 
-def get_data
+def generate_confirmation_letters
 
   contents = CSV.open 'event_attendees.csv', headers: true, header_converters: :symbol
 
   template_letter = File.read "form_letter.erb"
   erb_template = ERB.new template_letter
-  
 
   contents.each do |row|
     id = row[0]
@@ -24,8 +23,6 @@ def get_data
     phone = sanitize_phone(row[:homephone])
     phone = validate_phone(phone)
     date = parse_date(row[:regdate])
-    # hour =  date.hour
-    # minutes = date.min
     week_day = date.wday
   
     save_thank_you_letters(id,form_letter)
