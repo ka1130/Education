@@ -4,9 +4,8 @@ require 'minitest/pride'
 require_relative 'ex_1'
 
 class AlgorithmTest < Minitest::Test
-
   def test_single_one
-    assert_equal 0, solution(1) 
+    assert_equal 0, solution(1)
   end
 
   def test_sequence_of_zeros_on_the_left
@@ -32,5 +31,4 @@ class AlgorithmTest < Minitest::Test
   def test_single_zero_at_the_end
     assert_equal 0, solution(6)
   end
-
 end
