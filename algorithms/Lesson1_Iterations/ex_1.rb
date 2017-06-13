@@ -3,9 +3,6 @@ def solution(n)
   counter = 0
   max_value = 0
 
-  if n == 1
-    return counter
-  else 
     binary_arr = n.to_s(2).split("")   
     binary_arr.each do |number|    
       if number == "1"
@@ -18,5 +15,4 @@ def solution(n)
       end    
     end  
    return max_value    
-  end
 end
