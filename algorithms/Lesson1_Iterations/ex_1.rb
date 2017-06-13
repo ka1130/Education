@@ -6,9 +6,7 @@ def solution(n)
     binary_arr = n.to_s(2).split("")   
     binary_arr.each do |number|    
       if number == "1"
-        if counter > max_value
-          max_value = counter
-        end
+        max_value = counter if counter > max_value
         counter = 0       
       elsif number == "0"
         counter += 1           
