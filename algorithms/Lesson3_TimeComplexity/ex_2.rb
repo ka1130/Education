@@ -1,0 +1,1 @@
+def solution(array); end
