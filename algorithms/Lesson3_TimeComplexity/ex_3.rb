@@ -1,9 +1,16 @@
 def solution(array)
   n = array.length
   counter = 0
+  first_sum = 0
+  second_sum = 0
   results = []
-  n.times do
-    while counter < n
+  if array.length == 2
+    first_sum = array[0]
+    second_sum = array[1]
+    result = (first_sum - second_sum).abs
+    return result
+  else
+    n.times do
       counter += 1
       first_part = array.take(counter)
       second_part = array[counter..n]
@@ -14,7 +21,5 @@ def solution(array)
     end
   end
   minimum_val = results.min
-  print minimum_val
+  minimum_val
 end
-
-solution([3, 1, 2, 4, 3])
