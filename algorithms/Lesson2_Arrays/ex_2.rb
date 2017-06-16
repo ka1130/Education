@@ -1,5 +1,10 @@
-def solution(array, times)
-  ###
+def solution(arr, n)
+  return [] if arr == []
+  n = n % arr.length if n > arr.length
+  n.times do
+    arr.unshift(arr.pop)
+  end
+  arr
 end
 
-print solution([2, 5, 1, 5], 1)
+solution([3, 3, 5, 5, 3], 42)
