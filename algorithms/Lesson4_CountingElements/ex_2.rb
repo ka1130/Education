@@ -7,7 +7,7 @@ def solution(x, array)
       hit_array[i - 1] = 1
       points_left += i
     end
-    for i in 0..array.length do
+    for i in 0...array.length do
       current_leaf_position = array[i]
       if hit_array[current_leaf_position - 1] == 1
         hit_array[current_leaf_position - 1] = 0
