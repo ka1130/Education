@@ -21,8 +21,3 @@ def solution(x, array)
   end
   index
 end
-
-print solution(3, [1, 3, 1, 3, 2, 1, 3])
-print solution(2, [2, 2, 2, 2])
-print solution(5, [1, 3, 1, 4, 2, 3, 5, 4])
-print solution(8, [1, 3, 2, 2, 1, 4, 4, 3, 5, 6, 7, 8, 5, 6])
