@@ -1,7 +1,9 @@
 require 'sinatra'
 
 get '/' do
-  'Hello world!'
+  output = 'Hello world!'
+  output << '<br />'
+  output << '<a href=\'/goodbye\'>Leave</a>'
 end
 
 get '/goodbye' do
