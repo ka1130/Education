@@ -30,13 +30,12 @@ const list = [
 
 class App extends Component {
   render() {
-    const helloWorld = 'Welcome to the Road to learn React';
-    const paragraph = 'This is the first paragraph';
     return (
       <div className="App">
-        <h2>{helloWorld}</h2>
-        <p className="Paragraph">{paragraph}</p>
-        <h5>{formatName(user)}</h5>
+        {list
+          .map(function (item) {
+            return <div>{item.title}</div>;
+          })}
       </div>
     );
   }
