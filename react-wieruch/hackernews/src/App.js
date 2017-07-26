@@ -29,13 +29,22 @@ const list = [
 ];
 
 class App extends Component {
+
   constructor(props) {
     super(props);
 
     this.state = {
       list,
     };
+
+    this.onDismiss = this.onDismiss.bind(this);
   }
+
+  onDismiss(id) {
+    const isNotId = item => item.objectID !== id;
+    const updatedList = this.state.list.filter(isNotId);
+  }
+
   render() {
     return (
       <div className="App">
@@ -48,7 +57,8 @@ class App extends Component {
             <span>{item.num_comments}</span>
             <span>{item.points}</span>
             <span>
-              <button onclick={() => this.onDismiss(item.objectID)} type="button">
+              <button onClick={() => this.onDismiss(item.objectID)}
+                      type="button">
                 Dismiss
               </button>
             </span>
