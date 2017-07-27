@@ -28,12 +28,8 @@ const list = [
   }
 ];
 
-function isSearched(searchTerm) {
-  return function(item) {
-    return !searchTerm ||
-      item.title.toLowerCase().includes(searchTerm.toLowerCase());
-  }
-}
+const isSearched = (searchTerm) => (item) =>
+  !searchTerm || item.title.toLowerCase().includes(searchTerm.toLowerCase());
 
 class App extends Component {
 
