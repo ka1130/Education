@@ -48,7 +48,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.list.map(item =>
+        <form>
+          <input
+            type="text"
+            onChange = {this.onSearchChange}
+          />
+        </form>
+        { this.state.list.map(item =>
           <div key={item.objectID}>
             <span>
               <a href={item.url}>{item.title}</a>
@@ -63,7 +69,7 @@ class App extends Component {
               </button>
             </span>
           </div>
-        )}
+        ) }
       </div>
     );
   }
