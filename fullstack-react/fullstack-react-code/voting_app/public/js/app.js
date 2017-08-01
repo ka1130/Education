@@ -8,8 +8,7 @@ class Product extends React.Component {
       <div className='middle aligned content'>
         <div className='header'>
           <a>
-            <i className='large caret up icon' />Your first React Web Application
-          31
+            <i className='large caret up icon' />
           </a>
           {this.props.votes}
           </div>
@@ -29,18 +28,21 @@ class Product extends React.Component {
 
 class ProductList extends React.Component {
   render() {
-    const product = Seed.products[0];
+    const productComponents = Seed.products.map((product) => (
+      <Product
+        key={'product-' + product.id}
+        id={product.id}
+        title={product.title}
+        description={product.description}
+        url={product.url}
+        votes={product.votes}
+        submitterAvatarUrl={product.submitterAvatarUrl}
+        productImageUrl={product.productImageUrl}
+      />
+    ));
     return (
-        <div className="ui unstackable items">
-          <Product
-            id={product.id}
-            title={product.title}
-            description={product.description}
-            url={product.url}
-            votes={product.votes}
-            submitterAvatarUrl={product.submitterAvatarUrl}
-            productImageUrl={product.productImageUrl}
-        />
+        <div className='ui unstackable items'>
+          {productComponents}
         </div>
       );
   }
