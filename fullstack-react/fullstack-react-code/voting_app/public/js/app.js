@@ -1,3 +1,45 @@
+class ProductList extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      products: [],
+    };
+  }
+
+  componentDidMount() {
+    this.setState({ products: Seed.products });
+  }
+
+  handleProductUpVote(productId) {
+    console.log(productId + ' was upvoted');
+  }
+
+  render() {
+    const products = Seed.products.sort((a, b) => (
+      b.votes - a.votes
+    ));
+    const productComponents = products.map((product) => (
+      <Product
+        key={'product-' + product.id}
+        id={product.id}
+        title={product.title}
+        description={product.description}
+        url={product.url}
+        votes={product.votes}
+        submitterAvatarUrl={product.submitterAvatarUrl}
+        productImageUrl={product.productImageUrl}
+        onVote={this.handleProductUpVote}
+      />
+    ));
+    return (
+        <div className='ui unstackable items'>
+          {productComponents}
+        </div>
+      );
+  }
+}
+
 class Product extends React.Component {
   constructor(props) {
     super(props);
@@ -36,34 +78,6 @@ class Product extends React.Component {
   }
 }
 
-class ProductList extends React.Component {
-  handleProductUpVote(productId) {
-    console.log(productId + ' was upvoted');
-  }
 
-  render() {
-    const products = Seed.products.sort((a, b) => (
-      b.votes - a.votes
-    ));
-    const productComponents = products.map((product) => (
-      <Product
-        key={'product-' + product.id}
-        id={product.id}
-        title={product.title}
-        description={product.description}
-        url={product.url}
-        votes={product.votes}
-        submitterAvatarUrl={product.submitterAvatarUrl}
-        productImageUrl={product.productImageUrl}
-        onVote={this.handleProductUpVote}
-      />
-    ));
-    return (
-        <div className='ui unstackable items'>
-          {productComponents}
-        </div>
-      );
-  }
-}
 
 ReactDOM.render(<ProductList />, document.getElementById('content'));
