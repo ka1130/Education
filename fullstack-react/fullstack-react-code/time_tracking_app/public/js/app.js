@@ -22,10 +22,29 @@ class TimersDashboard extends React.Component {
     this.createTimer(timer);
   };
 
+  handleEditFormSubmit = (attrs) => {
+    this.updateTimer(attrs);
+  };
+
   createTimer = (timer) => {
     const t = helpers.newTimer(timer);
     this.setState({
       timers: this.state.timers.concat(t),
+    });
+  };
+
+  updateTimer = (attrs) => {
+    this.setState({
+        timers: this.state.timers.map((timer) => {
+          if (timer.id === attrs.id) {
+            return Object.assign({}, timer, {
+              title: attrs.title,
+              project: attrs.project,
+            });
+          } else {
+            return timer;
+        }
+      }),
     });
   };
 
@@ -56,6 +75,7 @@ class EditableTimerList extends React.Component {
           project={timer.project}
           elapsed={timer.elapsed}
           runningSince={timer.runningSince}
+          onFormSubmit={this.props.onFormSubmit}
         />
       ));
       return (
@@ -99,6 +119,8 @@ class EditableTimer extends React.Component {
             id={this.props.id}
             title={this.props.title}
             project={this.props.project}
+            onFormSubmit={this.handleSubmit}
+            onFormClose={this.handleFormClose}
           />
         );
     } else {
@@ -109,6 +131,7 @@ class EditableTimer extends React.Component {
             project={this.props.project}
             elapsed={this.props.elapsed}
             runningSince={this.props.runningSince}
+            onEditClick={this.handleEditClick}
           />
         );
     }
