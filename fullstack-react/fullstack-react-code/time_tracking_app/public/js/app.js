@@ -58,6 +58,46 @@ class TimersDashboard extends React.Component {
     });
   };
 
+  startTimer = (timerId) => {
+    const now = Date.now();
+    this.setState({
+      timers: this.state.timers.map((timer) => {
+        if (timer.id === timerId) {
+          return Object.assign({}, timer, {
+            runningSince: now,
+          });
+        } else {
+          return timer;
+        }
+      }),
+    });
+  };
+
+  stopTimer = (timerId) => {
+    const now = Date.now();
+    this.setState({
+      timers: this.state.timers.map((timer) => {
+        if (timer.id === timerId) {
+          const lastElapsed = now - timer.runningSince;
+          return Object.assign({}, timer, {
+            elapsed: timer.elapsed + lastElapsed,
+            runningSince: null,
+          });
+        } else {
+          return timer;
+        }
+      }),
+    });
+  };
+
+  handleStartClick = (timerId) => {
+    this.startTimer(timerId);
+  };
+
+  handleStopClick = (timerId) => {
+    this.stopTimer(timerId);
+  };
+
   render() {
     return (
         <div className="ui three column centered grid">
@@ -66,6 +106,8 @@ class TimersDashboard extends React.Component {
               timers={this.state.timers}
               onFormSubmit={this.handleEditFormSubmit}
               onTrashClick={this.handleTrashClick}
+              handleStartClick={this.handleStartClick}
+              handleStopClick={this.handleStopClick}
             />
             <ToggleableTimerForm
               onFormSubmit={this.handleCreateFormSubmit}
@@ -89,6 +131,8 @@ class EditableTimerList extends React.Component {
           runningSince={timer.runningSince}
           onFormSubmit={this.props.onFormSubmit}
           onTrashClick={this.props.onTrashClick}
+          onStartClick={this.props.handleStartClick}
+          onStopClick={this.props.handleStopClick}
         />
       ));
       return (
@@ -146,6 +190,8 @@ class EditableTimer extends React.Component {
             runningSince={this.props.runningSince}
             onEditClick={this.handleEditClick}
             onTrashClick={this.props.onTrashClick}
+            onStartClick={this.props.onStartClick}
+            onStopClick={this.props.onStopClick}
           />
         );
     }
@@ -275,6 +321,7 @@ class Timer extends React.Component {
   }
 
   handleStartClick = () => {
+    console.log("XXXX")
     this.props.onStartClick(this.props.id);
   };
 
@@ -318,9 +365,6 @@ class Timer extends React.Component {
               <i className="trash icon" />
             </span>
             </div>
-          </div>
-          <div className="ui bottom attached blue basic button">
-            Start
           </div>
           <TimerActionButton
             timerIsRunning={!!this.props.runningSince}
