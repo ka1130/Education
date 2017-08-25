@@ -4,8 +4,8 @@ class Description extends Component {
   render() {
     return (
         <div className="description">
-          <div>ID</div>
-          <div>description</div>
+          <div>{this.props.id}:&nbsp;</div>
+          <div>{this.props.description}description</div>
         </div>
       );
   }
