@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import FetchDemo from './components/FetchDemo';
 
 const list = [
   {
@@ -25,7 +26,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      list: list,
+      list,
     }
   }
   render() {
@@ -40,6 +41,7 @@ class App extends Component {
             <span>{item.num_comments}</span>
             <span>{item.points}</span>
           </div>)}
+          <FetchDemo />
       </div>
     );
   }
