@@ -12,7 +12,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-          <FetchDemo subreddit="reactjs"/>
           <DescriptionList />
       </div>
     );
