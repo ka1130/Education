@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+
 import FetchDemo from './components/FetchDemo';
+import DescriptionList from './components/DescriptionList';
 
 class App extends Component {
   constructor(props) {
@@ -11,6 +13,7 @@ class App extends Component {
     return (
       <div className="App">
           <FetchDemo subreddit="reactjs"/>
+          <DescriptionList />
       </div>
     );
   }
