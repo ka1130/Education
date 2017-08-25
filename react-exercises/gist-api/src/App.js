@@ -23,14 +23,14 @@ const list = [
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       list,
-    }
+    };
   }
   render() {
-    const helloWorld = "Hello World"
+    const helloWorld = "Hello World";
     return (
       <div className="App">
         {this.state.list.map( item => <div key={item.objectID}>
@@ -41,7 +41,7 @@ class App extends Component {
             <span>{item.num_comments}</span>
             <span>{item.points}</span>
           </div>)}
-          <FetchDemo />
+          <FetchDemo subreddit="reactjs"/>
       </div>
     );
   }
