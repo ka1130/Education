@@ -2,8 +2,15 @@
   text-align: center;
 }
 
+.id {
+  font-weight: bold;
+}
+
 .description {
   display: flex;
   margin: 1rem auto;
   justify-content: center;
+  text-align: left;
+  max-width: 40rem;
+  font-family: monospace;
 }
