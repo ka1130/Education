@@ -12,8 +12,7 @@ class DescriptionList extends Component {
   }
 
   componentDidMount() {
-    let date = '2012-04-16T11:16:27.930Z';
-    axios.get(`https://private-anon-24e65964bb-awapp.apiary-mock.com/gists?since=${date}.json`)
+    axios.get(`https://private-anon-24e65964bb-awapp.apiary-mock.com/gists`)
       .then(result => {
         const gists = result.data._embedded.gists.map(gist => gist);
         console.log(gists);
