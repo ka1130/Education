@@ -7,7 +7,7 @@ import Table from './components/Table';
 
 function App(props) {
   return(
-    <div>
+    <div className="App">
       <Header title={props.title} subtitle={props.subtitle}/>
       <Chooser title="Choose Options" />
       <Table />
