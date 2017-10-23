@@ -24,11 +24,13 @@ class DescriptionList extends Component {
     return (
       <div>
           <h1>List of Gists</h1>
-          {this.state.gists.map(gist => {
-            return (
-              <Description key={gist.id} id={gist.id} description={gist.description}/>
-              );
-          })}
+          {this.state.gists.map(gist =>
+            <Description
+              key={gist.id}
+              id={gist.id}
+              description={gist.description}
+            />
+          )}
       </div>
       );
   }
