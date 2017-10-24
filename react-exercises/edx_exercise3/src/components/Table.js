@@ -1,14 +1,14 @@
-import React from 'react'
+import React from 'react';
+
+import TableHeader from './TableHeader';
+import TableRow from './TableRow';
 
 function Table(props) {
   return (
-    <tr className="table">
-      <th>Remove</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Activity</th>
-      <th>Restrictions</th>
-    </tr>
+    <table className="table">
+      <TableHeader />
+      <TableRow />
+    </table>
   )
 }
 

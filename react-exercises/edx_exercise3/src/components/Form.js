@@ -10,11 +10,11 @@ function Form(props) {
       <Name label="First Name" name="firstName" handleChange={props.handleChange}/>
       <Name label="Last Name" name="lastName" handleChange={props.handleChange}/>
       <Select activity={props.activity} changeActivity={props.changeActivity}/>
-      <p>Check all that apply</p>
+      <p className="p-title">Check all that apply</p>
       <Checkbox name="dietaryRestrictions" title="Dietary Restrictions" handleCheckbox={props.handleChange}/>
       <Checkbox name="physicalDisabilities" title="Physical Disabilities" handleCheckbox={props.handleChange}/>
       <Checkbox name="medicalNeeds" title="Medical Needs" handleCheckbox={props.handleChange}/>
-      <button type="submit" onClick={props.submit}>Submit</button>
+      <button className="submit" type="submit" onClick={props.submit}>Submit</button>
     </form>
   )
 }
