@@ -4,11 +4,21 @@ import TableText from './TableText';
 function TableRow(props) {
   return (
     <tr>
-      <td className="button-remove"><button>x</button></td>
-      <td><TableText text="John"/></td>
-      <td><TableText text="Smith"/></td>
-      <td><TableText text="Cooking"/></td>
-      <td><TableText text="c"/></td>
+      <td className="button-remove">
+        <button onClick={props.removeItem}>x</button>
+      </td>
+      <td className="table-text">
+        <TableText text={props.firstName}/>
+      </td>
+      <td className="table-text">
+        <TableText text={props.lastName}/>
+      </td>
+      <td className="table-text">
+        <TableText text={props.activity}/>
+      </td>
+      <td className="table-text">
+        <TableText text={props.restrictions}/>
+      </td>
     </tr>
   )
 }

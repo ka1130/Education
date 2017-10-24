@@ -6,8 +6,20 @@ import TableRow from './TableRow';
 function Table(props) {
   return (
     <table className="table">
-      <TableHeader />
-      <TableRow />
+      <tbody>
+        <TableHeader />
+        {props.items.map(item => console.log(item))}
+        {props.items.map((item, index) =>
+          <TableRow
+            key={index}
+            firstName={item.firstName}
+            lastName={item.lastName}
+            activity={item.activity}
+            restrictions={item.restrictions}
+            removeItem={props.removeItem}
+          />)
+        }
+      </tbody>
     </table>
   )
 }

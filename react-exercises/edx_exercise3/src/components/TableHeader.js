@@ -3,11 +3,11 @@ import React from 'react';
 function TableHeader(props) {
   return (
     <tr>
-      <th>Remove</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Activity</th>
-      <th>Restrictions</th>
+      <th className="table-text">Remove</th>
+      <th className="table-text">First Name</th>
+      <th className="table-text">Last Name</th>
+      <th className="table-text">Activity</th>
+      <th className="table-text">Restrictions</th>
     </tr>
   )
 }

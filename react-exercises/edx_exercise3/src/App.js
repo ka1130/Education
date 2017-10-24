@@ -6,48 +6,38 @@ import Table from './components/Table';
 
 class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      firstName: "",
-      lastName: "",
-      activity: "Science Lab",
-      dietaryRestrictions: false,
-      physicalDisabilities: false,
-      medicalNeeds: false,
+      items:
+        [
+          {
+            firstName: "",
+            lastName: "",
+            activity: "Science Lab",
+            restrictions: "a b c",
+            dietaryRestrictions: false,
+            physicalDisabilities: false,
+            medicalNeeds: false,
+          },
+        ]
     }
   }
 
-  changeActivity = (event) => {
-    this.setState({
-      activity: event.target.value
-    })
-  }
-
-  handleInputChange = (event) => {
-    const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
-    const updatedState = {}
-    updatedState[event.target.name] = value
-    this.setState(updatedState)
-  }
-
-  submit = (event) => {
-    event.preventDefault()
-    console.log(this.state)
+  removeItem = (id) => {
+    console.log("Removing item");
   }
 
   render() {
     return (
       <div>
-        <Form
-          activity={this.state.activity}
-          handleChange={this.handleInputChange}
-          changeActivity={this.changeActivity}
-          submit={this.submit}
+        <Form />
+        <Table
+          items={this.state.items}
+          removeItem={this.removeItem}
         />
-        <Table />
       </div>
-    )
+    );
   }
 }
 
