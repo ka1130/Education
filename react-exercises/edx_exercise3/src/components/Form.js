@@ -24,7 +24,6 @@ class Form extends React.Component {
     this.setState({
       activity: event.target.value
     })
-    console.log("Changing activity")
   }
 
   handleInputChange = (event) => {
@@ -32,19 +31,16 @@ class Form extends React.Component {
     const updatedState = {}
     updatedState[event.target.name] = value
     this.setState(updatedState)
-    console.log("Input change", this.state)
   }
 
-  addItem = (event) => {
-    event.preventDefault()
-    console.log("Item added", this.state)
-    // wywolać funkcje przekazana z gory , ktora zmieni stan App
-    // ten stan przekazywac tez w dol do table'a
+  submitItem = (e) => {
+    e.preventDefault();
+    this.props.addItem(this.state);
   }
 
   render() {
     return (
-      <form className="form" onSubmit={this.addItem}>
+      <form className="form" onSubmit={this.submitItem}>
         <Name label="First Name" name="firstName" handleChange={this.handleInputChange}/>
         <Name label="Last Name" name="lastName" handleChange={this.handleInputChange}/>
         <Select activity="Science Lab" changeActivity={this.changeActivity}/>
@@ -52,7 +48,7 @@ class Form extends React.Component {
         <Checkbox name="dietaryRestrictions" title="Dietary Restrictions" handleCheckbox={this.handleInputChange}/>
         <Checkbox name="physicalDisabilities" title="Physical Disabilities" handleCheckbox={this.handleInputChange}/>
         <Checkbox name="medicalNeeds" title="Medical Needs" handleCheckbox={this.handleInputChange}/>
-        <button className="submit" type="submit" onClick={this.addItem}>Submit</button>
+        <button className="submit" type="submit">Submit</button>
       </form>
     )
   }

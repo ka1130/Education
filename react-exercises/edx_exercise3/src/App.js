@@ -24,14 +24,20 @@ class App extends React.Component {
     }
   }
 
-  removeItem = (id) => {
-    console.log("Removing item");
+  addItem = (item) => {
+    this.setState({items: [...this.state.items, item]});
+  }
+
+  removeItem = (index) => {
+    const itemsCopy = [...this.state.items];
+    itemsCopy.splice(index, 1);
+    this.setState({items: itemsCopy});
   }
 
   render() {
     return (
       <div>
-        <Form />
+        <Form addItem={this.addItem}/>
         <Table
           items={this.state.items}
           removeItem={this.removeItem}
