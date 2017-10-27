@@ -13,12 +13,10 @@ const Table = props => (
             firstName={item.firstName}
             lastName={item.lastName}
             activity={item.activity}
-            restrictions={`Dietary Restrictions: ${item.dietaryRestrictions},
-                          Physical Disabilities: ${item.physicalDisabilities},
-                          Medical Needs: ${item.medicalNeeds}`}
+            restrictions={Object.keys(item.restrictions).filter(key => item.restrictions[key])}
             removeItem={props.removeItem}
-            id={index}
-          />)
+            id={index}/>
+          )
         }
       </tbody>
     </table>

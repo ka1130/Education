@@ -12,9 +12,11 @@ class Form extends React.Component {
       firstName: "",
       lastName: "",
       activity: "Science Lab",
-      dietaryRestrictions: false,
-      physicalDisabilities: false,
-      medicalNeeds: false,
+      restrictions: {
+        "a": false,
+        "b": false,
+        "c": false
+      }
     }
   }
 
@@ -32,9 +34,24 @@ class Form extends React.Component {
     console.log(this.state);
   }
 
+  handleCheckbox = (event) => {
+    const restriction = event.target.name;
+    const value = event.target.checked;
+    const updatedRestrictions = {...this.state.restrictions};
+
+    if(value === true) {
+      updatedRestrictions[restriction] = true;
+    } else {
+      updatedRestrictions[restriction] = false;
+    }
+
+    this.setState({ restrictions: updatedRestrictions });
+  }
+
   submitItem = (event) => {
     event.preventDefault();
     this.props.addItem(this.state);
+    console.log(this.state);
   }
 
   render() {
@@ -44,9 +61,9 @@ class Form extends React.Component {
         <Name label="Last Name" name="lastName" handleChange={this.handleInputChange}/>
         <Select activity="Science Lab" changeActivity={this.changeActivity}/>
         <p className="p-title">Check all that apply</p>
-        <Checkbox name="dietaryRestrictions" title="Dietary Restrictions" handleCheckbox={this.handleInputChange}/>
-        <Checkbox name="physicalDisabilities" title="Physical Disabilities" handleCheckbox={this.handleInputChange}/>
-        <Checkbox name="medicalNeeds" title="Medical Needs" handleCheckbox={this.handleInputChange}/>
+        <Checkbox name="a" title="Dietary Restrictions" handleCheckbox={this.handleCheckbox}/>
+        <Checkbox name="b" title="Physical Disabilities" handleCheckbox={this.handleCheckbox}/>
+        <Checkbox name="c" title="Medical Needs" handleCheckbox={this.handleCheckbox}/>
         <button className="submit" type="submit">Submit</button>
       </form>
     )

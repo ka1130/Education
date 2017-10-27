@@ -18,6 +18,11 @@ class App extends React.Component {
             dietaryRestrictions: false,
             physicalDisabilities: false,
             medicalNeeds: false,
+            restrictions: {
+              "a": false,
+              "b": false,
+              "c": false
+            }
           },
         ]
     }
