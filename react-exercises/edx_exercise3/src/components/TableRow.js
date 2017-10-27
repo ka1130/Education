@@ -5,7 +5,7 @@ function TableRow(props) {
   return (
     <tr>
       <td className="button-remove">
-        <button onClick={props.removeItem}>x</button>
+        <button onClick={props.removeItem} id={props.id}>x</button>
       </td>
       <td className="table-text">
         <TableText text={props.firstName}/>

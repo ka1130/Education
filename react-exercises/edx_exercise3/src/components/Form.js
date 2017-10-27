@@ -33,8 +33,8 @@ class Form extends React.Component {
     this.setState(updatedState)
   }
 
-  submitItem = (e) => {
-    e.preventDefault();
+  submitItem = (event) => {
+    event.preventDefault();
     this.props.addItem(this.state);
   }
 

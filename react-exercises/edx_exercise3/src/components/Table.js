@@ -8,7 +8,7 @@ function Table(props) {
     <table className="table">
       <tbody>
         <TableHeader />
-        {props.items.map(item => console.log(item))}
+        {/* {props.items.map(item => console.log(item))} */}
         {props.items.map((item, index) =>
           <TableRow
             key={index}
@@ -17,6 +17,7 @@ function Table(props) {
             activity={item.activity}
             restrictions={item.restrictions}
             removeItem={props.removeItem}
+            id={index}
           />)
         }
       </tbody>

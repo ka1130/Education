@@ -28,13 +28,24 @@ class App extends React.Component {
     this.setState({items: [...this.state.items, item]});
   }
 
-  removeItem = (index) => {
-    const itemsCopy = [...this.state.items];
-    itemsCopy.splice(index, 1);
-    this.setState({items: itemsCopy});
+  removeItem = (event) => {
+    console.log("removing item", event.target.id);
+    //this.state.items[event.target.id: this is the element to be removed from this.state.items
+    //assign it to a variable and remove from the items array
+    let items = [...this.state.items];
+    const itemToRemove = parseInt(event.target.id);
+    // console.log(items[itemToRemove]);
+    console.log(items, itemToRemove);
+    items = items.filter((item, index) => index !== itemToRemove);
+    console.log(`newArray = ${items}`);
+    this.setState({ items });
+    // console.log(itemToRemove);
+    // const itemsCopy = [...this.state.items];
+    // this.setState({items: itemsCopy});
   }
 
   render() {
+    console.log(this.state.items);
     return (
       <div>
         <Form addItem={this.addItem}/>
