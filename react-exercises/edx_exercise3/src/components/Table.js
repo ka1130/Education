@@ -13,7 +13,9 @@ const Table = props => (
             firstName={item.firstName}
             lastName={item.lastName}
             activity={item.activity}
-            restrictions={item.dietaryRestrictions}
+            restrictions={`Dietary Restrictions: ${item.dietaryRestrictions},
+                          Physical Disabilities: ${item.physicalDisabilities},
+                          Medical Needs: ${item.medicalNeeds}`}
             removeItem={props.removeItem}
             id={index}
           />)
