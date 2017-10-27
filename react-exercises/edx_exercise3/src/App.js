@@ -15,7 +15,6 @@ class App extends React.Component {
             firstName: "",
             lastName: "",
             activity: "Science Lab",
-            restrictions: "a b c",
             dietaryRestrictions: false,
             physicalDisabilities: false,
             medicalNeeds: false,

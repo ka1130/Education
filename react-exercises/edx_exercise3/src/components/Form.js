@@ -12,8 +12,6 @@ class Form extends React.Component {
       firstName: "",
       lastName: "",
       activity: "Science Lab",
-      //change restrictions
-      restrictions: "a, b, c",
       dietaryRestrictions: false,
       physicalDisabilities: false,
       medicalNeeds: false,
@@ -23,14 +21,15 @@ class Form extends React.Component {
   changeActivity = (event) => {
     this.setState({
       activity: event.target.value
-    })
+    });
   }
 
   handleInputChange = (event) => {
-    const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
-    const updatedState = {}
-    updatedState[event.target.name] = value
-    this.setState(updatedState)
+    const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+    const updatedState = {};
+    updatedState[event.target.name] = value;
+    this.setState(updatedState);
+    console.log(this.state);
   }
 
   submitItem = (event) => {

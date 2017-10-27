@@ -1,26 +1,24 @@
 import React from 'react';
 import TableText from './TableText';
 
-function TableRow(props) {
-  return (
+const TableRow = ({removeItem, id, firstName, lastName, activity, restrictions}) => (
     <tr>
       <td className="button-remove">
-        <button onClick={props.removeItem} id={props.id}>x</button>
+        <button onClick={removeItem} id={id}>x</button>
       </td>
       <td className="table-text">
-        <TableText text={props.firstName}/>
+        <TableText text={firstName}/>
       </td>
       <td className="table-text">
-        <TableText text={props.lastName}/>
+        <TableText text={lastName}/>
       </td>
       <td className="table-text">
-        <TableText text={props.activity}/>
+        <TableText text={activity}/>
       </td>
       <td className="table-text">
-        <TableText text={props.restrictions}/>
+        <TableText text={restrictions}/>
       </td>
     </tr>
   )
-}
 
 export default TableRow;

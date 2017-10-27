@@ -3,19 +3,17 @@ import React from 'react';
 import TableHeader from './TableHeader';
 import TableRow from './TableRow';
 
-function Table(props) {
-  return (
+const Table = props => (
     <table className="table">
       <tbody>
         <TableHeader />
-        {/* {props.items.map(item => console.log(item))} */}
         {props.items.map((item, index) =>
           <TableRow
             key={index}
             firstName={item.firstName}
             lastName={item.lastName}
             activity={item.activity}
-            restrictions={item.restrictions}
+            restrictions={item.dietaryRestrictions}
             removeItem={props.removeItem}
             id={index}
           />)
@@ -23,6 +21,5 @@ function Table(props) {
       </tbody>
     </table>
   )
-}
 
 export default Table;

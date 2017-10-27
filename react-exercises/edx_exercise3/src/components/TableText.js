@@ -1,9 +1,5 @@
 import React from 'react';
 
-function TableText(props) {
-  return (
-    <span className="table-text">{props.text}</span>
-  )
-}
+const TableText = ({text}) => <span className="table-text">{text}</span>
 
 export default TableText;
