@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+.not-found {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  font-weight: bold;
+}
+
 .id {
   font-weight: bold;
 }
@@ -14,3 +21,22 @@
   max-width: 40rem;
   font-family: monospace;
 }
+
+.button-show {
+  margin-left: 1rem;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #888;
+  text-transform: uppercase;
+  color: #666;
+  font-weight: bold;
+}
+
+.button-show:hover {
+  background-color: tomato;
+  border: 1px solid tomato;
+  color: #fff;
+  cursor: pointer;
+}
+
+

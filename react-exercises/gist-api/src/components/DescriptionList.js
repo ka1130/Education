@@ -12,9 +12,9 @@ class DescriptionList extends Component {
   }
 
   componentDidMount() {
-    axios.get(`https://private-anon-24e65964bb-awapp.apiary-mock.com/gists`)
+    axios.get(`https://private-anon-8502f36fff-awapp.apiary-mock.com/gists`)
       .then(result => {
-        const gists = result.data._embedded.gists.map(gist => gist);
+        const gists = result.data._embedded.gists
         console.log(gists);
         this.setState({ gists });
       });

@@ -6,6 +6,7 @@ class Description extends Component {
         <div className="description">
           <div className="id">{this.props.id}:&nbsp;</div>
           <div>{this.props.description}</div>
+          <button className="button-show" onClick="">show gist</button>
         </div>
       );
   }
