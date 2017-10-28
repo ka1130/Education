@@ -30,6 +30,7 @@
   text-transform: uppercase;
   color: #666;
   font-weight: bold;
+  outline: none;
 }
 
 .button-show:hover {

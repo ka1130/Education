@@ -14,10 +14,23 @@ class DescriptionList extends Component {
   componentDidMount() {
     axios.get(`https://private-anon-8502f36fff-awapp.apiary-mock.com/gists`)
       .then(result => {
-        const gists = result.data._embedded.gists
+        const gists = result.data._embedded.gists;
         console.log(gists);
         this.setState({ gists });
       });
+  }
+
+  showGist = event => {
+    const id = event.target.id;
+    console.log(id);
+    axios.get(`https://private-anon-8502f36fff-awapp.apiary-mock.com/gists/${id}`)
+      .then(result => {
+        console.log(result.data);
+      });
+  }
+
+  addGist = () => {
+    console.log("gist added");
   }
 
   render() {
@@ -29,10 +42,11 @@ class DescriptionList extends Component {
               key={gist.id}
               id={gist.id}
               description={gist.description}
+              showGist={this.showGist}
             />
           )}
       </div>
-      );
+    );
   }
 }
 

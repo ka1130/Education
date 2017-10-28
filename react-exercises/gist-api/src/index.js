@@ -6,7 +6,8 @@ import './index.css';
 
 import App from './App';
 import Description from './components/Description';
-import notFound from './components/notFound'
+import SingleGist from './components/SingleGist';
+import NotFound from './components/NotFound'
 
 import registerServiceWorker from './registerServiceWorker';
 
@@ -16,8 +17,9 @@ const Root = () => {
       <div>
         {/* when I am on the homepage */}
         <Match exactly pattern="/" component={App}/>
-        <Match exactly pattern="/overview/:gistId" component={Description} />
-        <Miss component={notFound} />
+        {/*<Match exactly pattern="/overview/:gistId" component={Description} />*/}
+        <Match exactly pattern="/overview/:gistId" component={SingleGist} />
+        <Miss component={NotFound} />
       </div>
     </BrowserRouter>
   );
