@@ -22,6 +22,21 @@
   font-family: monospace;
 }
 
+.gist-description {
+  flex-direction: column;
+}
+
+.gist-header {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+}
+
+.gist-date {
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+}
+
 .button-show {
   margin-left: 1rem;
   background-color: #fff;
