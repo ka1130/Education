@@ -27,6 +27,9 @@ class DescriptionList extends Component {
       .then(result => {
         console.log(result.data);
       });
+    console.log("going to the single gist view");
+    // this.context.router.transitionTo(`/ovierview/${id}`);
+    console.log(this.context);
   }
 
   addGist = () => {
@@ -42,7 +45,7 @@ class DescriptionList extends Component {
               key={gist.id}
               id={gist.id}
               description={gist.description}
-              showGist={this.showGist}
+              showGist={event => this.showGist(event)}
             />
           )}
       </div>
