@@ -5,7 +5,7 @@ import { BrowserRouter, Match, Miss } from 'react-router';
 import './index.css';
 
 import App from './App';
-import Description from './components/Description';
+// import Description from './components/Description';
 import SingleGist from './components/SingleGist';
 import NotFound from './components/NotFound'
 
