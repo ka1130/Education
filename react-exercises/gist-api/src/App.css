@@ -37,8 +37,7 @@
   margin-bottom: 1rem;
 }
 
-.button-show {
-  margin-left: 1rem;
+.button {
   background-color: #fff;
   border-radius: 5px;
   border: 1px solid #888;
@@ -46,13 +45,23 @@
   color: #666;
   font-weight: bold;
   outline: none;
+  font-size: 0.8rem;
 }
 
-.button-show:hover {
+.button:hover {
   background-color: tomato;
   border: 1px solid tomato;
   color: #fff;
   cursor: pointer;
+}
+
+.button-show {
+  margin-left: 1rem;
+}
+
+.button-overview {
+  width: 12rem;
+  margin-top: 1rem;
 }
 
 

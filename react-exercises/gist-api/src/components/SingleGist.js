@@ -30,6 +30,10 @@ class SingleGist extends Component {
       });
   }
 
+  goToOverview = () => {
+    this.context.router.transitionTo('/');
+  }
+
   render() {
     const {id, content, created, dec} = this.state.id;
 
@@ -38,10 +42,15 @@ class SingleGist extends Component {
         <h4 className="gist-header">{this.state.desc}</h4>
         <h6 className="gist-date">Created at {this.state.created}</h6>
         <p><strong>Gist No {this.state.id}</strong>: {this.state.content}</p>
+        <button className="button button-overview" onClick={this.goToOverview}>Back to Gist Overview</button>
       </div>
     );
   }
 
 }
+
+SingleGist.contextTypes = {
+  router: React.PropTypes.object
+};
 
 export default SingleGist;

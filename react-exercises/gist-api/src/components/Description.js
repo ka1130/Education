@@ -5,7 +5,7 @@ const Description = props => {
       <div className="description">
         <div className="id">{props.id}:&nbsp;</div>
         <div>{props.description}</div>
-        <button className="button-show" onClick={props.showGist} id={props.id}>show gist</button>
+        <button className="button button-show" onClick={props.showGist} id={props.id}>show gist</button>
       </div>
     );
 }
