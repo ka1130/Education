@@ -46,6 +46,7 @@ class DescriptionList extends Component {
             showGist={event => this.showGist(event)}
           />
         )}
+        <button className="button button-add" onClick={this.addGist}>Add New Gist</button>
       </div>
     );
   }
