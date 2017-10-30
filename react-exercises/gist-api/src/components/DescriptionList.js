@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
+
 import Description from './Description';
 import axios from 'axios';
 
 class DescriptionList extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = {
       gists: [],
     }
+  }
+
+  static contextTypes = {
+    router: React.PropTypes.func.isRequired
   }
 
   componentDidMount() {
@@ -17,7 +22,7 @@ class DescriptionList extends Component {
         const gists = result.data._embedded.gists;
         console.log(gists);
         this.setState({ gists });
-      });
+    });
   }
 
   showGist = event => {
@@ -28,7 +33,7 @@ class DescriptionList extends Component {
         console.log(result.data);
       });
     console.log("going to the single gist view");
-    // this.context.router.transitionTo(`/ovierview/${id}`);
+    this.context.router.transitionTo(`/ovierview/${id}`);
     console.log(this.context);
   }
 
@@ -39,15 +44,15 @@ class DescriptionList extends Component {
   render() {
     return (
       <div>
-          <h1>List of Gists</h1>
-          {this.state.gists.map(gist =>
-            <Description
-              key={gist.id}
-              id={gist.id}
-              description={gist.description}
-              showGist={event => this.showGist(event)}
-            />
-          )}
+        <h1>List of Gists</h1>
+        {this.state.gists.map(gist =>
+          <Description
+            key={gist.id}
+            id={gist.id}
+            description={gist.description}
+            showGist={event => this.showGist(event)}
+          />
+        )}
       </div>
     );
   }

@@ -26,8 +26,8 @@ const Root = () => {
 }
 
 ReactDOM.render(<Root />, document.getElementById('root'));
-registerServiceWorker();
+// registerServiceWorker();
 
-if (module.hot) {
-  module.hot.accept()
-}
+// if (module.hot) {
+//   module.hot.accept()
+// }
