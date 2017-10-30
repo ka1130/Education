@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 
 import Description from './Description';
-import Button from './Button';
+// import Button from './Button';
 import axios from 'axios';
 
 class DescriptionList extends Component {
@@ -34,8 +35,8 @@ class DescriptionList extends Component {
         console.log(result.data);
       });
     console.log("going to the single gist view");
-    // this.context.router.transitionTo(`/ovierview/${id}`);
-    // console.log(this.context);
+    this.context.router.transitionTo(`/ovierview/${id}`);
+    console.log(this.context);
   }
 
   addGist = () => {
@@ -46,7 +47,6 @@ class DescriptionList extends Component {
     return (
       <div>
         <h1>List of Gists</h1>
-        <Button />
         {this.state.gists.map(gist =>
           <Description
             key={gist.id}
@@ -59,5 +59,9 @@ class DescriptionList extends Component {
     );
   }
 }
+
+DescriptionList.contextTypes = {
+  router: React.PropTypes.object
+};
 
 export default DescriptionList;
