@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 
 import Description from './Description';
-// import Button from './Button';
 import axios from 'axios';
 
 class DescriptionList extends Component {
