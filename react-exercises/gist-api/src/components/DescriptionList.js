@@ -35,7 +35,7 @@ class DescriptionList extends Component {
         console.log(result.data);
       });
     console.log("going to the single gist view");
-    this.context.router.transitionTo(`/ovierview/${id}`);
+    this.context.router.transitionTo(`/overview/${id}`);
     console.log(this.context);
   }
 
