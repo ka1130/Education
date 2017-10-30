@@ -14,10 +14,6 @@ class DescriptionList extends Component {
     }
   }
 
-  // static contextTypes = {
-  //   router: React.PropTypes.func.isRequired
-  // }
-
   componentDidMount() {
     axios.get(`https://private-anon-8502f36fff-awapp.apiary-mock.com/gists`)
       .then(result => {
@@ -29,14 +25,11 @@ class DescriptionList extends Component {
 
   showGist = event => {
     const id = event.target.id;
-    console.log(id);
     axios.get(`https://private-anon-8502f36fff-awapp.apiary-mock.com/gists/${id}`)
       .then(result => {
         console.log(result.data);
       });
-    console.log("going to the single gist view");
     this.context.router.transitionTo(`/overview/${id}`);
-    console.log(this.context);
   }
 
   addGist = () => {
