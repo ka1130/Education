@@ -36,12 +36,15 @@ class SingleGist extends Component {
   }
 
   deleteGist = event => {
-    const id = this.state.id;
-    console.log(`deleting gist no ${id}`);
-    axios.delete(`https://private-anon-8502f36fff-awapp.apiary-mock.com/gists/${id}`)
-      .then(result => {
-        console.log(result);
-      });
+    var isSure = window.confirm("Are you sure you want to delete this gist?");
+    if(isSure) {
+      const id = this.state.id;
+      console.log(`deleting gist no ${id}`);
+      axios.delete(`https://private-anon-8502f36fff-awapp.apiary-mock.com/gists/${id}`)
+        .then(result => {
+          console.log(result);
+        });
+    }
   }
 
   goToOverview = () => {
