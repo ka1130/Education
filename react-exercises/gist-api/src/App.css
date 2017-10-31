@@ -102,10 +102,21 @@ h1 {
   color: #fff;
 }
 
-/*.button-add:hover {
-  background-color: #666;
-  color: #fff;
-  border: 1px solid #666;
-}*/
+.button-submit {
+  width: 5rem;
+  margin-top: 0.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+}
+
+input, textarea {
+  border-radius: 3px;
+  margin-bottom: 1rem;
+  border: 1px solid #888;
+}
 
 

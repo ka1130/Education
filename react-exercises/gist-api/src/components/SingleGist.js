@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import EditForm from './EditForm';
 import axios from 'axios';
 
 class SingleGist extends Component {
@@ -33,6 +34,7 @@ class SingleGist extends Component {
   editGist = event => {
     const id = this.state.id;
     console.log(`editing gist no ${id}`);
+    return <span>EDIT FORM</span>;
   }
 
   deleteGist = event => {
@@ -52,7 +54,7 @@ class SingleGist extends Component {
   }
 
   render() {
-    const {id, content, created, dec} = this.state.id;
+    const {id, content, created, desc} = this.state;
 
     return (
       <div className="description gist-description">
@@ -63,6 +65,7 @@ class SingleGist extends Component {
           <button className="button button-edit" onClick={this.editGist}>Edit</button>
           <button className="button button-delete" onClick={this.deleteGist}>Delete</button>
         </div>
+        <EditForm content={content} desc={desc}/>
         <button className="button button-overview" onClick={this.goToOverview}>Back to Gist Overview</button>
       </div>
     );
