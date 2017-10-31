@@ -13,6 +13,7 @@ class SingleGist extends Component {
       created: "",
       desc: "",
       isEdited: false,
+      starred: false,
     }
   }
 
@@ -33,7 +34,17 @@ class SingleGist extends Component {
       });
   }
 
-  editGist = event => {
+  starGist = () => {
+    const starred = this.state.starred;
+    if(starred) {
+      this.setState({ starred: false });
+    } else {
+      this.setState({ starred: true });
+    }
+    console.log(`gist starred: ${starred}`);
+  }
+
+  editGist = () => {
     const id = this.state.id;
     console.log(`editing gist no ${id}`);
     this.setState({
@@ -41,7 +52,7 @@ class SingleGist extends Component {
     });
   }
 
-  deleteGist = event => {
+  deleteGist = () => {
     var isSure = window.confirm("Are you sure you want to delete this gist?");
     if(isSure) {
       const id = this.state.id;
@@ -84,7 +95,7 @@ class SingleGist extends Component {
         <p>
           <strong>Gist No {id}</strong>
           : {content}
-          <i className="fa fa-star-o star-icon" aria-hidden="true"></i>
+          <i className="fa fa-star-o star-icon" aria-hidden="true" onClick={this.starGist}></i>
         </p>
         <EditGroup editGist={this.editGist} deleteGist={this.deleteGist} isEdited={isEdited}/>
         <EditForm
