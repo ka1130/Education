@@ -30,7 +30,7 @@ class SingleGist extends Component {
         })
       })
       .catch(error => {
-        console.err(error);
+        console.error(error);
       });
   }
 
@@ -47,9 +47,7 @@ class SingleGist extends Component {
   editGist = () => {
     const id = this.state.id;
     console.log(`editing gist no ${id}`);
-    this.setState({
-      isEdited: true,
-    });
+    this.setState({ isEdited: true });
   }
 
   deleteGist = () => {
@@ -60,6 +58,9 @@ class SingleGist extends Component {
       axios.delete(`https://private-anon-8502f36fff-awapp.apiary-mock.com/gists/${id}`)
         .then(result => {
           console.log(result);
+        })
+        .catch(error => {
+          console.error(error);
         });
     }
   }
