@@ -65,7 +65,7 @@ class SingleGist extends Component {
           <button className="button button-edit" onClick={this.editGist}>Edit</button>
           <button className="button button-delete" onClick={this.deleteGist}>Delete</button>
         </div>
-        <EditForm content={content} desc={desc}/>
+        <EditForm content={content} desc={desc} isEdited={true}/>
         <button className="button button-overview" onClick={this.goToOverview}>Back to Gist Overview</button>
       </div>
     );
