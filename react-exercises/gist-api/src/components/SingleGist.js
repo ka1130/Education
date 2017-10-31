@@ -53,6 +53,16 @@ class SingleGist extends Component {
     }
   }
 
+  contentChange = event => {
+    const content = event.target.value;
+    this.setState({ content });
+  }
+
+  descChange = event => {
+    const desc = event.target.value;
+    this.setState({ desc });
+  }
+
   submitEdit = () => {
     console.log("edited gist has been submitted");
     this.setState({
@@ -73,7 +83,14 @@ class SingleGist extends Component {
         <h6 className="gist-date">Created at {this.state.created}</h6>
         <p><strong>Gist No {this.state.id}</strong>: {this.state.content}</p>
         <EditGroup editGist={this.editGist} deleteGist={this.deleteGist} isEdited={this.state.isEdited}/>
-        <EditForm content={content} desc={desc} isEdited={this.state.isEdited} submitEdit={this.submitEdit}/>
+        <EditForm
+          content={content}
+          desc={desc}
+          isEdited={this.state.isEdited}
+          contentChange={this.contentChange}
+          descChange={this.descChange}
+          submitEdit={this.submitEdit}
+        />
         <button className="button button-overview" onClick={this.goToOverview}>Back to Gist Overview</button>
       </div>
     );

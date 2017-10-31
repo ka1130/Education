@@ -6,8 +6,8 @@ const EditForm = props => {
   if(isEdited) {
     return (
       <form className="form">
-        <input type="text" className="form-header" value={props.content}/>
-        <textarea value={props.desc} className="form-desc"></textarea>
+        <input type="text" className="form-header" placeholder={props.desc} onChange={props.descChange}/>
+        <textarea placeholder={props.content} className="form-desc" onChange={props.contentChange}></textarea>
         <button className="button button-submit" type="submit" onClick={props.submitEdit}>Save</button>
       </form>
     );
