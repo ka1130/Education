@@ -44,7 +44,6 @@ class SingleGist extends Component {
     } else {
       this.setState({ starred: true });
     }
-    console.log(`gist starred: ${starred}`);
   }
 
   editGist = () => {
@@ -98,16 +97,6 @@ class SingleGist extends Component {
       "fa-star-o": !starred,
       "fa-star": starred,
     });
-
-    // if(starred) {
-    //   starClass -= "fa-star-o";
-    //   starClass += "fa-star";
-    //   console.log(starClass);
-    // } else {
-    //   starClass -= "fa-star";
-    //   starClass += "fa-star-o";
-    //   console.log(starClass);
-    // }
 
     return (
       <div className="description gist-description">
