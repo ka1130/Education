@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+
 import EditForm from './EditForm';
 import EditGroup from './EditGroup';
+
 import axios from 'axios';
+import classNames from 'classnames';
 
 class SingleGist extends Component {
   constructor(props) {
@@ -87,7 +90,24 @@ class SingleGist extends Component {
   }
 
   render() {
-    const {id, content, created, desc, isEdited} = this.state;
+    const {id, content, created, desc, isEdited, starred} = this.state;
+
+    let starClass = classNames({
+      "star-icon": true,
+      "fa": true,
+      "fa-star-o": !starred,
+      "fa-star": starred,
+    });
+
+    // if(starred) {
+    //   starClass -= "fa-star-o";
+    //   starClass += "fa-star";
+    //   console.log(starClass);
+    // } else {
+    //   starClass -= "fa-star";
+    //   starClass += "fa-star-o";
+    //   console.log(starClass);
+    // }
 
     return (
       <div className="description gist-description">
@@ -96,7 +116,7 @@ class SingleGist extends Component {
         <p>
           <strong>Gist No {id}</strong>
           : {content}
-          <i className="fa fa-star-o star-icon" aria-hidden="true" onClick={this.starGist}></i>
+          <i className={starClass} onClick={this.starGist}></i>
         </p>
         <EditGroup editGist={this.editGist} deleteGist={this.deleteGist} isEdited={isEdited}/>
         <EditForm
