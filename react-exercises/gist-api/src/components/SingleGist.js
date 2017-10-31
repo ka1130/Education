@@ -81,7 +81,11 @@ class SingleGist extends Component {
       <div className="description gist-description">
         <h4 className="gist-header">{desc}</h4>
         <h6 className="gist-date">Created at {created}</h6>
-        <p><strong>Gist No {id}</strong>: {content}</p>
+        <p>
+          <strong>Gist No {id}</strong>
+          : {content}
+          <i className="fa fa-star-o star-icon" aria-hidden="true"></i>
+        </p>
         <EditGroup editGist={this.editGist} deleteGist={this.deleteGist} isEdited={isEdited}/>
         <EditForm
           content={content}

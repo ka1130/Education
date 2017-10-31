@@ -44,6 +44,14 @@ h1 {
   margin-bottom: 1rem;
 }
 
+.star-icon {
+  margin-left: 1rem;
+}
+
+.star-icon:hover {
+  cursor: pointer;
+}
+
 .button-group {
   display: flex;
 }
