@@ -30,6 +30,20 @@ class SingleGist extends Component {
       });
   }
 
+  editGist = event => {
+    const id = this.state.id;
+    console.log(`editing gist no ${id}`);
+  }
+
+  deleteGist = event => {
+    const id = this.state.id;
+    console.log(`deleting gist no ${id}`);
+    axios.delete(`https://private-anon-8502f36fff-awapp.apiary-mock.com/gists/${id}`)
+      .then(result => {
+        console.log(result);
+      });
+  }
+
   goToOverview = () => {
     this.context.router.transitionTo('/');
   }
@@ -43,8 +57,8 @@ class SingleGist extends Component {
         <h6 className="gist-date">Created at {this.state.created}</h6>
         <p><strong>Gist No {this.state.id}</strong>: {this.state.content}</p>
         <div className="button-group">
-          <button className="button button-edit">Edit</button>
-          <button className="button button-delete">Delete</button>
+          <button className="button button-edit" onClick={this.editGist}>Edit</button>
+          <button className="button button-delete" onClick={this.deleteGist}>Delete</button>
         </div>
         <button className="button button-overview" onClick={this.goToOverview}>Back to Gist Overview</button>
       </div>
