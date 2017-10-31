@@ -40,6 +40,13 @@ class DescriptionList extends Component {
   addGist = () => {
     console.log("gist has been added");
     this.setState({ addingGist: false });
+    axios.post("https://private-anon-8502f36fff-awapp.apiary-mock.com/gists")
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   render() {
@@ -54,7 +61,7 @@ class DescriptionList extends Component {
             showGist={event => this.showGist(event)}
           />
         )}
-        <button className="button button-add" onClick={this.openAddForm}>Add New Gist</button>
+        <button type="button" className="button button-add" onClick={this.openAddForm}>Add New Gist</button>
         <AddForm addingGist={this.state.addingGist} handleSubmit={this.addGist}/>
       </div>
     );
