@@ -8,7 +8,7 @@ const EditForm = props => {
       <form>
         <input type="text" value={props.content}/>
         <textarea value={props.desc}></textarea>
-        <button className="button button-submit" type="submit">Submit</button>
+        <button className="button button-submit" type="submit">Save</button>
       </form>
     );
   }
