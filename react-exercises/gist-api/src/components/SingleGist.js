@@ -21,7 +21,7 @@ class SingleGist extends Component {
   }
 
   componentDidMount() {
-    const id = 42;
+    const id = 42; //change this hard-coded id
     axios.get(`https://private-anon-8502f36fff-awapp.apiary-mock.com/gists/${id}`)
       .then(result => {
         console.log(result);
@@ -38,12 +38,20 @@ class SingleGist extends Component {
   }
 
   starGist = () => {
-    const starred = this.state.starred;
+    const { id, starred } = this.state;
     if(starred) {
       this.setState({ starred: false });
     } else {
       this.setState({ starred: true });
     }
+
+    axios.put(`https://private-anon-8502f36fff-awapp.apiary-mock.com/gists/${id}/star`)
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   editGist = () => {
