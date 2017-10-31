@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Description from './Description';
+import AddForm from './AddForm';
 import axios from 'axios';
 
 class DescriptionList extends Component {
@@ -9,6 +10,7 @@ class DescriptionList extends Component {
 
     this.state = {
       gists: [],
+      addingGist: false,
     }
   }
 
@@ -30,8 +32,14 @@ class DescriptionList extends Component {
     this.context.router.transitionTo(`/overview/${id}`);
   }
 
+  openAddForm = () => {
+    console.log("adding gist form open");
+    this.setState({ addingGist: true });
+  }
+
   addGist = () => {
-    console.log("gist added");
+    console.log("gist has been added");
+    this.setState({ addingGist: false });
   }
 
   render() {
@@ -46,7 +54,8 @@ class DescriptionList extends Component {
             showGist={event => this.showGist(event)}
           />
         )}
-        <button className="button button-add" onClick={this.addGist}>Add New Gist</button>
+        <button className="button button-add" onClick={this.openAddForm}>Add New Gist</button>
+        <AddForm addingGist={this.state.addingGist} handleSubmit={this.addGist}/>
       </div>
     );
   }

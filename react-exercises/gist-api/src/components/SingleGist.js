@@ -62,6 +62,7 @@ class SingleGist extends Component {
     //ask axios if our gist is starred or not
     axios.get(`https://private-anon-8502f36fff-awapp.apiary-mock.com/gists/${id}/star`)
       .then(result => {
+        console.log(result);
         console.log(`Gist starred:${result.data.starred}`);
       })
       .catch(error => {
