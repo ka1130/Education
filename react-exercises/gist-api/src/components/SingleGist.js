@@ -12,6 +12,7 @@ class SingleGist extends Component {
       content: "",
       created: "",
       desc: "",
+      isEdited: false,
     }
   }
 
@@ -35,7 +36,9 @@ class SingleGist extends Component {
   editGist = event => {
     const id = this.state.id;
     console.log(`editing gist no ${id}`);
-    return <span>EDIT FORM</span>;
+    this.setState({
+      isEdited: true,
+    });
   }
 
   deleteGist = event => {
@@ -50,20 +53,27 @@ class SingleGist extends Component {
     }
   }
 
+  submitEdit = () => {
+    console.log("edited gist has been submitted");
+    this.setState({
+      isEdited: false,
+    });
+  }
+
   goToOverview = () => {
     this.context.router.transitionTo('/');
   }
 
   render() {
-    const {id, content, created, desc} = this.state;
+    const {id, content, created, desc, isEdited} = this.state;
 
     return (
       <div className="description gist-description">
         <h4 className="gist-header">{this.state.desc}</h4>
         <h6 className="gist-date">Created at {this.state.created}</h6>
         <p><strong>Gist No {this.state.id}</strong>: {this.state.content}</p>
-        <EditGroup editGist={this.editGist} deleteGist={this.deleteGist} isEdited={false}/>
-        <EditForm content={content} desc={desc} isEdited={true}/>
+        <EditGroup editGist={this.editGist} deleteGist={this.deleteGist} isEdited={this.state.isEdited}/>
+        <EditForm content={content} desc={desc} isEdited={this.state.isEdited} submitEdit={this.submitEdit}/>
         <button className="button button-overview" onClick={this.goToOverview}>Back to Gist Overview</button>
       </div>
     );

@@ -5,12 +5,14 @@ const EditForm = props => {
 
   if(isEdited) {
     return (
-      <form>
-        <input type="text" value={props.content}/>
-        <textarea value={props.desc}></textarea>
-        <button className="button button-submit" type="submit">Save</button>
+      <form className="form">
+        <input type="text" className="form-header" value={props.content}/>
+        <textarea value={props.desc} className="form-desc"></textarea>
+        <button className="button button-submit" type="submit" onClick={props.submitEdit}>Save</button>
       </form>
     );
+  } else {
+    return null;
   }
 }
 

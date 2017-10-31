@@ -10,6 +10,8 @@ const EditGroup = props => {
         <button className="button button-delete" onClick={props.deleteGist}>Delete</button>
       </div>
     );
+  } else {
+    return null;
   }
 }
 
