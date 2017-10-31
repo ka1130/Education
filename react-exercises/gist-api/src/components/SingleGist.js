@@ -42,6 +42,10 @@ class SingleGist extends Component {
         <h4 className="gist-header">{this.state.desc}</h4>
         <h6 className="gist-date">Created at {this.state.created}</h6>
         <p><strong>Gist No {this.state.id}</strong>: {this.state.content}</p>
+        <div className="button-group">
+          <button className="button button-edit">Edit</button>
+          <button className="button button-delete">Delete</button>
+        </div>
         <button className="button button-overview" onClick={this.goToOverview}>Back to Gist Overview</button>
       </div>
     );

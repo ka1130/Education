@@ -44,6 +44,10 @@ h1 {
   margin-bottom: 1rem;
 }
 
+.button-group {
+  display: flex;
+}
+
 .button {
   background-color: #fff;
   border-radius: 5px;
@@ -68,7 +72,28 @@ h1 {
 
 .button-overview {
   width: 12rem;
-  margin-top: 1rem;
+  margin-top: 3rem;
+}
+
+.button-edit, .button-delete {
+  width: 5rem;
+  margin: 1rem 1rem 0 0;
+  color: #fff;
+}
+
+.button-edit:hover, .button-delete:hover {
+  background-color: #666;
+  border: 1px solid #666;
+}
+
+.button-edit {
+  background-color: yellowgreen;
+  border: 1px solid yellowgreen;
+}
+
+.button-delete {
+  background-color: crimson;
+  border: 1px solid crimson;
 }
 
 .button-add {
