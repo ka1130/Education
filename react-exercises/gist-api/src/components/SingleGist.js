@@ -41,17 +41,23 @@ class SingleGist extends Component {
     const { id, starred } = this.state;
     if(starred) {
       this.setState({ starred: false });
+      axios.delete(`https://private-anon-8502f36fff-awapp.apiary-mock.com/gists/${id}/star`)
+        .then(result => {
+          console.log(result);
+        })
+        .catch(error => {
+          console.log(error);
+        })
     } else {
       this.setState({ starred: true });
+      axios.put(`https://private-anon-8502f36fff-awapp.apiary-mock.com/gists/${id}/star`)
+        .then(result => {
+          console.log(result);
+        })
+        .catch(error => {
+          console.error(error);
+        });
     }
-
-    axios.put(`https://private-anon-8502f36fff-awapp.apiary-mock.com/gists/${id}/star`)
-      .then(result => {
-        console.log(result);
-      })
-      .catch(error => {
-        console.error(error);
-      });
   }
 
   editGist = () => {
