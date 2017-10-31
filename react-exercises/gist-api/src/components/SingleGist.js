@@ -79,14 +79,14 @@ class SingleGist extends Component {
 
     return (
       <div className="description gist-description">
-        <h4 className="gist-header">{this.state.desc}</h4>
-        <h6 className="gist-date">Created at {this.state.created}</h6>
-        <p><strong>Gist No {this.state.id}</strong>: {this.state.content}</p>
-        <EditGroup editGist={this.editGist} deleteGist={this.deleteGist} isEdited={this.state.isEdited}/>
+        <h4 className="gist-header">{desc}</h4>
+        <h6 className="gist-date">Created at {created}</h6>
+        <p><strong>Gist No {id}</strong>: {content}</p>
+        <EditGroup editGist={this.editGist} deleteGist={this.deleteGist} isEdited={isEdited}/>
         <EditForm
           content={content}
           desc={desc}
-          isEdited={this.state.isEdited}
+          isEdited={isEdited}
           contentChange={this.contentChange}
           descChange={this.descChange}
           submitEdit={this.submitEdit}
