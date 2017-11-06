@@ -74,6 +74,13 @@ class SingleGist extends Component {
     const id = this.state.id;
     console.log(`editing gist no ${id}`);
     this.setState({ isEdited: true });
+    axios.patch(`https://private-anon-8502f36fff-awapp.apiary-mock.com/gists/${id}`)
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   deleteGist = () => {
