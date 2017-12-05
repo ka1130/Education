@@ -1,0 +1,38 @@
+.form, .table {
+  margin: 3rem;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.submit {
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: white;
+  background-color: lightcoral;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.2rem;
+  margin-top: 1rem;
+}
+
+.p-title {
+  font-weight: bold;
+  margin-top: 2rem;
+}
+
+.table-text {
+  text-align: center;
+  margin: 0.5rem 1.5rem;
+  padding: 0 1rem;
+}
+
+.button-remove {
+  text-align: center;
+}
+
