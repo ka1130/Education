@@ -24,27 +24,26 @@ app.get("/messages", (request, response) => {
   });
 });
 
-app.post("/messages", (request, response) => {
+app.post("/messages", async (request, response) => {
   var message = new Message(request.body);
 
-  message.save()
-    .then(() => {
-      console.log('message saved');
-      return Message.findOne({ message: "badword" });
-    })
-    // next then takes in the returned value
-    .then((censored) => {
-      if(censored) {
-        console.log("censored words found", censored);
-        return Message.remove({ _id: censored.id });
-      }
-      io.emit('message', request.body);
-      response.sendStatus(200);
-    })
-    .catch((error) => {
-      response.sendStatus(500);
-      console.error(error);
-    });
+  var savedMessage = await message.save()
+
+  console.log('message saved');
+  var censored =  await Message.findOne({ message: "badword" });
+
+  if(censored) {
+    await Message.remove({ _id: censored.id });
+  } else {
+    io.emit('message', request.body);
+  }
+
+  response.sendStatus(200);
+
+    // .catch((error) => {
+    //   response.sendStatus(500);
+    //   console.error(error);
+    // });
   });
 
 io.on('connection', (socket) => {
