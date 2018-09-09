@@ -25,26 +25,31 @@ app.get("/messages", (request, response) => {
 });
 
 app.post("/messages", async (request, response) => {
-  var message = new Message(request.body);
 
-  var savedMessage = await message.save()
+  try {
+    var message = new Message(request.body);
+    var savedMessage = await message.save()
+  
+    console.log('message saved');
+    var censored =  await Message.findOne({ message: "badword" });
+  
+    if(censored) {
+      await Message.remove({ _id: censored.id });
+    } else {
+      io.emit('message', request.body);
+    }
+  
+    response.sendStatus(200);
 
-  console.log('message saved');
-  var censored =  await Message.findOne({ message: "badword" });
+  } catch(error) {
+      response.sendStatus(500);
+      console.error(error);
 
-  if(censored) {
-    await Message.remove({ _id: censored.id });
-  } else {
-    io.emit('message', request.body);
+  } finally {
+    console.log("message post called");
   }
 
-  response.sendStatus(200);
-
-    // .catch((error) => {
-    //   response.sendStatus(500);
-    //   console.error(error);
-    // });
-  });
+});
 
 io.on('connection', (socket) => {
   console.log('a user connected');
