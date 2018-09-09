@@ -9,6 +9,8 @@ app.use(express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+mongoose.Promise = Promise;
+
 var dbUrl = 'mongodb://user:password1@ds151012.mlab.com:51012/learning-node';
 
 var Message = mongoose.model('Message', {
@@ -25,15 +27,25 @@ app.get("/messages", (request, response) => {
 app.post("/messages", (request, response) => {
   var message = new Message(request.body);
 
-  message.save((error) => {
-    if (error) {
-      sendStatus(500)
-    } 
-    // messages.push(request.body);
-    io.emit('message', request.body);
-    response.sendStatus(200);
+  message.save()
+    .then(() => {
+      console.log('message saved');
+      return Message.findOne({ message: "badword" });
+    })
+    // next then takes in the returned value
+    .then((censored) => {
+      if(censored) {
+        console.log("censored words found", censored);
+        return Message.remove({ _id: censored.id });
+      }
+      io.emit('message', request.body);
+      response.sendStatus(200);
+    })
+    .catch((error) => {
+      response.sendStatus(500);
+      console.error(error);
+    });
   });
-});
 
 io.on('connection', (socket) => {
   console.log('a user connected');
