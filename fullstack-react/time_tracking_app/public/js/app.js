@@ -180,14 +180,7 @@ class ToggleableTimerForm extends React.Component {
 
   onFormSubmit = (data) => {
     const { title, project } = data
-    console.log(title, project)
     this.props.addNewTimer(data);
-    // return (
-    //   <Timer
-    //     title={title}
-    //     project={project}
-    //   />
-    // );
   }
 
   render() {
