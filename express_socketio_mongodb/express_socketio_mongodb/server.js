@@ -24,6 +24,13 @@ app.get("/messages", (request, response) => {
   });
 });
 
+app.get("/messages/:user", (request, response) => {
+  var user = request.params.user;
+  Message.find({name: user}, (error, messages) => {
+    response.send(messages);
+  });
+});
+
 app.post("/messages", async (request, response) => {
 
   try {
