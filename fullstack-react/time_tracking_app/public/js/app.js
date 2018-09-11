@@ -22,18 +22,17 @@ class TimersDashboard extends React.Component {
     };
   }
 
-  addNewTimer = (data) => {
-    const { project, title } = data;
-    const newTimer = {
-      title,
-      project,
-      id: uuid.v4(),
-      elapsed: 5475099,
-      runningSince: Date.now(),
-    };
+  handleCreateFormSubmit = (timer) => {
+    this.createTimer(timer);
+  };
 
-    this.setState({ timers: [...this.state.timers, newTimer ] });
-  }
+  createTimer = (timer) => {
+    const t = helpers.newTimer(timer);
+
+    this.setState({
+      timers: this.state.timers.concat(t),
+    });
+  };
 
   render() {
     return (
@@ -44,7 +43,7 @@ class TimersDashboard extends React.Component {
           />
           <ToggleableTimerForm
             isOpen={true}
-            addNewTimer={this.addNewTimer}
+            onFormSubmit={this.handleCreateFormSubmit}
           />
         </div>
       </div>
@@ -178,17 +177,17 @@ class ToggleableTimerForm extends React.Component {
     this.setState({ isOpen: false });
   }
 
-  onFormSubmit = (data) => {
-    const { title, project } = data
-    this.props.addNewTimer(data);
+  handleFormSubmit = (timer) => {
+    this.props.onFormSubmit(timer);
+    this.setState({ isOpen: false });
   }
 
   render() {
     if (this.state.isOpen) {
       return (
         <TimerForm
+          onFormSubmit={this.handleFormSubmit}
           onFormClose={this.handleFormClose}
-          onFormSubmit={this.onFormSubmit}
         />
       );
     } else {
