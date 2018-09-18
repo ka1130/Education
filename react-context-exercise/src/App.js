@@ -6,12 +6,18 @@ const Context = React.createContext();
 
 class Provider extends Component {
   state = {
-    name: "Snowtooth Mountain"
+    name: "Snowtooth Mountain",
+    status: "OPEN"
   }
 
   render() {
     return (
-      <Context.Provider value={{ state: this.state }}>
+      <Context.Provider value={{
+          state: this.state,
+          changeStatus: () => this.setState({
+            status: "CLOSED"
+          })
+        }}>
         {this.props.children}
       </Context.Provider>
     )
@@ -22,7 +28,11 @@ const Trail = props => (
   <div>
     <Context.Consumer>
       {(context) => (
-        <p>This is the context: {context.state.name}</p>
+        <div>
+          <p>This is the context: {context.state.name}</p>
+          <p>The resort is: {context.state.status}</p>
+          <button onClick={context.changeStatus}>Close Resort</button>
+        </div>
       )}
     </Context.Consumer>
   </div>
