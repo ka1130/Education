@@ -54,6 +54,63 @@ class Resort extends Component {
   }
 }
 
+// url from which we'll get data
+const DataComponent = (ComposedComponent, url) =>
+  class DataComponent extends Component {
+    constructor(props) {
+      super(props)
+
+      this.state = {
+        data: [],
+        loading: false,
+        loaded: false,
+      }
+    }
+
+    componentDidMount() {
+      this.setState({ loading: true })
+      fetch(url)
+        .then(response => response.json())
+        .then(data =>
+          this.setState({
+            loaded: true,
+            loading: false,
+            data
+          })
+        )
+    }
+
+    render() {
+      return (
+        <div>
+          {
+            this.state.loaded
+              ? <ComposedComponent {...this.state} {...this.props} />
+              : <div>Loading</div>
+          }
+        </div>
+      )
+    }
+  }
+
+// People list is just a presentation component, it gets data from DataComponent
+const PeopleList = ({data}) => (
+  <ol>
+    {data.results.map((person, index) => {
+      const { first, last } = person.name
+      return (
+        <li key={index}>{first} {last}</li>
+      )
+    })}
+  </ol>
+)
+
+const RandomMeUsers = DataComponent(
+  PeopleList,
+  "https://randomuser.me/api?results=10"
+)
+
+
 class App extends Component {
   render() {
     return (
@@ -63,6 +120,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <Resort />
+        <RandomMeUsers />
       </div>
     );
   }
