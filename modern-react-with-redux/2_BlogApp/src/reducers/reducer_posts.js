@@ -40,7 +40,6 @@ export default function(state = {}, action) {
         then drop it, just omit it from the state object and return a new object that does not contain this key anymore
         this does not modify the existing state object, it returns a new state object
       */
-      ..
     default:
       return state;
   }
