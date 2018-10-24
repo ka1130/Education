@@ -21,4 +21,13 @@ const store = createStore(
 
 export const history = syncHistoryWithStore(browserHistory, store);
 
+if (module.hot) {
+  // accept and run a function that will rerquire and swap out the module for us
+  module.hot.accept('./reducers/', () => {
+    // we cannot use the ES6 import here, we need to use require, we require the top-level reducer
+    const nextRootReducer = require('./reducers/index').default;
+    store.replaceReducer(nextRootReducer);
+  });
+}
+
 export default store;

@@ -16,6 +16,8 @@ import { sentry_url } from './data/config';
 
 Raven.config(sentry_url).install();
 
+// console.log(window.doesNotExist.nope);
+
 const router = (
   <Provider store={store}>
     <Router history={history}>
