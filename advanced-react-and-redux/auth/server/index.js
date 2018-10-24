@@ -1,9 +1,9 @@
 // Main starting point for the application - whenerver we start oir app this will be the first place to execute
 // we run it with `node index.js` while in the auth/server directory
-import express from 'express'; 
-import http from 'http';
-import bodyParser from 'body-parser';
-import morgan from 'morgan';
+const express = require ('express'); 
+const http = require ('http');
+const bodyParser = require ('body-parser');
+const morgan  = require ('morgan');
 
 const app = express(); // an instance of express
 
@@ -16,3 +16,4 @@ const app = express(); // an instance of express
 const port = process.env.PORT || 3090;
 const server = http.createServer(app);
 server.listen(port);
+console.log('Server listening on', port);
