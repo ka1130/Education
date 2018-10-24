@@ -7,7 +7,14 @@ function postComments(state=[], action) {
         text: action.comment
       }];
     case 'REMOVE_COMMENT':
-      return state;
+      // we need to return a copy of the state without this comment
+      return [
+        // from the start to the one we want to delete
+        ...state.slice(0, action.i),
+        // omitting the deleted action
+        ...state.slice(action.i + 1) 
+        // we're not passing the second argument so we want the rest of the array, to the end
+      ];
     default:
       return state;
   }
