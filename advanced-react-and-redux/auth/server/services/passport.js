@@ -1,13 +1,13 @@
 const passport = require('passport');
-const User = require('../models/User');
+const User = require('../models/user');
 const config = require('../config');
 /*
   a stretegy is a method of authenticating the user
   Jwt attempts to authenticate the user using the JSON web token
   Jwt strategy is just one plugin to passport, there are many other like authenticate by GH of FB etc.
 */
-const JwtStrategy = require('password-jwt').Strategy;
-const ExtractJwt = require('password-jwt').ExtractJwt;
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 // Setup options for JWT Strategy
 const jwtOptions = {
@@ -43,8 +43,8 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
     } else {
       done(null, false);
     }
-
   });
 });
 
 // Tell passport to use this strategy
+passport.use(jwtLogin);
