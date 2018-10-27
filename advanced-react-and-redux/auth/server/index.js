@@ -8,7 +8,7 @@ const router = require('./router');
 const mongoose = require('mongoose');
 
 // DB setup - we pass an url here; it makes a new database inside of MongoDB called auth
-mongoose.connect('mongodb://localhost:27017/auth');
+mongoose.connect('mongodb://localhost:27017/auth', { useNewUrlParser: true });
 
 // App setup
 app.use(morgan('combined'));
