@@ -12,6 +12,11 @@ function tokenForUser(user) {
   return jwt.encode({ sub: user.id, iat: timestamp }, config.secret);
 }
 
+exports.signin = function(request, response, next) {
+  // user has already their credentials authed, we just need to give the a token
+  response.send({ token: tokenForUser(request.user) });
+}
+
 exports.signup = function(request, response, next) {
   // See if a user with a given email exists
   const email = request.body.email;

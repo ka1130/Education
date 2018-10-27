@@ -4,36 +4,49 @@ const bcrypt = require('bcrypt-nodejs');
 
 // Define our model
 const userSchema = new Schema({
-  // instead of writing just String we pass an object to enforce uniqueness of this value
   email: { type: String, unique: true, lowercase: true },
-  password: String,
+  password: String
 });
 
 // On Save Hook, encrypt password
-// Before saving a model, run this function - this is what pre is doing, it runs sth before the 'save' arg
+// Before saving a model, run this function
 userSchema.pre('save', function(next) {
-  // 'this' is a context, we're getting access to the User model
-  // user is an instance of a User model
+  // get access to the user model
   const user = this;
 
-  // generate a salt, then run callback
-  bcrypt.genSalt(10, function(error, salt) {
-    if (error) return { error: next(error) };
+  // generate a salt then run callback
+  bcrypt.genSalt(10, function(err, salt) {
+    if (err) { return next(err); }
 
     // hash (encrypt) our password using the salt
-    bcrypt.hash(user.password, salt, null, function(error, hash) {
-      if (error) return { error: next(error) };
+    bcrypt.hash(user.password, salt, null, function(err, hash) {
+      if (err) { return next(err); }
 
       // overwrite plain text password with encrypted password
       user.password = hash;
-      // go ahead and save the model
       next();
     });
   });
 });
 
+userSchema.methods.comparePassword = function(candidatePassword, callback) {
+  bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+    if (err) { return callback(err); }
+
+    callback(null, isMatch);
+  });
+}
+
+userSchema.methods.comparePassword = function(candidatePassword, callback) {
+  // this here is a reference to the User model, hashed, ensalted password
+  bcrypt.compare(candidatePassword, this.password, function(error, isMatch) {
+    if (error) { return callback(error) };
+
+    callback(null, isMatch);
+  })
+};
+
 // Create the model class
-// this loads the schema into mongoose, it corresponds to the collection named 'user'
 const ModelClass = mongoose.model('user', userSchema);
 
 // Export the model
