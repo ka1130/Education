@@ -32,9 +32,11 @@ exports.signup = function(request, response, next) {
       return response.status(422).send({ error: 'Email is in use' });
     }
 
-    // If a user with a given email does NOT exist, create and save a user record
-    // create a new instance of our User model and we pass an object with the attributes we want this user to have
-    // it just creates the new user, not saves it
+    /* 
+      If a user with a given email does NOT exist, create and save a user record
+      create a new instance of our User model and we pass an object with the attributes we want this user to have
+      it just creates the new user, not saves it
+    */
     const user = new User({
       email: email,
       password: password
@@ -49,3 +51,10 @@ exports.signup = function(request, response, next) {
     });
   }); 
 }
+
+
+/* 
+  sign in = exchange their email and password for token in the future, they should get the token on sign up and sign in
+  we also want to make sure that the user is authenticated before letting them into any protected resources
+  - only on some routes - we will use a library called password.js
+*/
