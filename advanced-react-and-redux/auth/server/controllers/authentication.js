@@ -1,5 +1,16 @@
+const jwt = require('jwt-simple');
 const User = require('../models/user');
 // this is a class, represents all users, we use it to serach our database for existing emails
+const config = require('../config');
+
+// the below fn takes user model as a single argument
+function tokenForUser(user) {
+  // timestamp of when this token was issued
+  const timestamp = new Date().getTime();
+  // sub (short for subject, who does this token belog to, our subject is this specific user) is a jwt convention
+  // iat is another convention meaning 'issued at time'
+  return jwt.encode({ sub: user.id, iat: timestamp }, config.secret);
+}
 
 exports.signup = function(request, response, next) {
   // See if a user with a given email exists
@@ -34,7 +45,7 @@ exports.signup = function(request, response, next) {
       if (error) { return next(error) };
 
       // Respond to request indicating the user was created
-      response.json({ success: true });
+      response.json({ token: tokenForUser(user) });
     });
   }); 
 }
