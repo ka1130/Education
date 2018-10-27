@@ -11,7 +11,11 @@ const ExtractJwt = require('password-jwt').ExtractJwt;
 
 // Setup options for JWT Strategy
 const jwtOptions = {
-
+  // extract the token from there
+  // look at the requests's header called 'authorization' to find the token
+  jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+  // now we need to pass the secret we used to encode the token
+  secretOrKey: config.secret
 }
 
 /* 
