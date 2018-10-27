@@ -6,6 +6,10 @@ exports.signup = function(request, response, next) {
   const email = request.body.email;
   const password = request.body.password;
 
+  if (!email || !password) {
+    return response.status(422).send({ error: 'You must provide email and password' });
+  }
+
   // we pass our search criteria to this method, the second arg is callback that will run once search is complete
   // if there's no such user, the value of existingUser will be null
   User.findOne({ email: email }, function(error, existingUser) {
