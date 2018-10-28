@@ -38,3 +38,13 @@ it('has a textarea that users can type in', () => {
  // check that the textarea receives the correct value prop => value prop rather than simply value on textarea
   expect(wrapper.find('textarea').prop('value')).toEqual('new comment');
 });
+
+it('clears textarea after form submission', () => {
+  wrapper.find('textarea').simulate('change', {
+    target: { value: 'new comment' }
+  });
+  wrapper.update();
+  wrapper.find('form').simulate('submit');
+  wrapper.update();
+  expect(wrapper.find('textarea').prop('value')).toEqual('');
+});
