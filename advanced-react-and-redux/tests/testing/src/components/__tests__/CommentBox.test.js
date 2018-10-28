@@ -34,4 +34,7 @@ it('has a textarea that users can type in', () => {
     so we need to force the component's update
   */
  wrapper.update();
+
+ // check that the textarea receives the correct value prop => value prop rather than simply value on textarea
+  expect(wrapper.find('textarea').prop('value')).toEqual('new comment');
 });
