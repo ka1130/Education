@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { saveComment } from 'actions';
+import * as actions from 'actions';
 
 class CommentBox extends Component {
   state = { comment: '' }
@@ -29,10 +28,4 @@ class CommentBox extends Component {
   }
 }
 
-const mapStateToProps = state => ({ comments: state.comments });
-
-const mapDispatchToProps = dispatch => (
-  bindActionCreators({ saveComment }, dispatch)
-);
-
-export default connect(mapStateToProps, mapDispatchToProps)(CommentBox);
+export default connect(null, actions)(CommentBox);
