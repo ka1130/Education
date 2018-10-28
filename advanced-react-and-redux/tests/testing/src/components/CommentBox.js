@@ -9,6 +9,8 @@ export default class CommentBox extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    // call an action creator and save the comment
+    
     this.setState({ comment: '' });
   }
 
