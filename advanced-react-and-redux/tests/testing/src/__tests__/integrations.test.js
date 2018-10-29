@@ -23,10 +23,10 @@ it('fetches a list of comments and displays them', (done) => {
   const wrapper = mount(<Root><App /></Root>);
   wrapper.find('.fetch-comments').simulate('click');
   // introduce a little pause for fetching
-  setTimeout(() => {
+  moxios.wait(() => {
     wrapper.update();
     expect(wrapper.find('li').length).toEqual(2);
     done();
     wrapper.unmount();
-  }, 100);
+  });
 });
