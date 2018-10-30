@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "redux": "^4.0.1"
+  },
+  "dependencies": {
+    "redux-promise": "^0.6.0"
+  }
+}
