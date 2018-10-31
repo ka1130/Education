@@ -17,7 +17,6 @@ export function fetchWeather() {
       .then(handleErrors)
       .then(response => response.json())
       .then(json => {
-        console.log(json)
         dispatch(fetchWeatherSuccess(json));
         return json;
       })

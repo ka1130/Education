@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import { fetchWeather } from 'redux/actions';
+
+import Spinner from 'components/App/Spinner';
+import WeatherList from 'components/App/WeatherList';
 
 class App extends Component {
   componentDidMount() {
@@ -10,18 +12,25 @@ class App extends Component {
   }
 
   render() {
-    const city = this.props.city ? this.props.city.name : ''
+    const { error, loading, weather } = this.props;
+    const city = 'Warsaw' // replace with dynamic city name
+
+    if (error) {
+      return <p>{error.message}</p>;
+    }
+
     return (
-      <div>
-        <h3>{city}</h3>
-        <h5>Weather forecast:</h5>
-        {/* <button onClick={this.props.fetchWeather}>Fetch weather</button> */}
-        {/* <ul>{this.renderHourlyWeather()}</ul> */}
-      </div>
+      <>
+        <h2>Your weather for {city}</h2>
+        {
+          loading
+          ? <Spinner />
+          : <WeatherList weather={weather}/>
+        }
+      </>
     );
   }
 }
-
 
 const mapStateToProps = ({ weather }) => weather;
 
