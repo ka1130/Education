@@ -21,7 +21,7 @@ class App extends Component {
 
     return (
       <section className="section">
-        <h2>Your weather for {city}</h2>
+        <h2 className="title">Your weather for {city}</h2>
         {
           loading
           ? <Spinner />
