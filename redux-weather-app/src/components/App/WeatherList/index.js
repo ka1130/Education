@@ -8,7 +8,7 @@ class WeatherList extends Component {
     return (
       <tr key={v4()}>
         <td>{day.dt_txt}</td>
-        <td>{(day.main.temp -273.15).toFixed(2)} °C</td>
+        <td>{(day.main.temp - 273.15).toFixed(2)} °C</td>
         <td>{day.main.pressure} hPa</td>
         <td>{day.main.humidity}%</td>
       </tr>

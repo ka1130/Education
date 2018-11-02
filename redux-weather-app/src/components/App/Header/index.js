@@ -3,10 +3,10 @@ import Nav from 'components/App/Header/Nav';
 
 const Header = props => {
   return (
-    <heaeder>
+    <header>
       <h3>Your weather from {props.city}</h3>
       <Nav />
-    </heaeder>
+    </header>
   );
 }
 
