@@ -1,17 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import Nav from 'components/App/Header/Nav';
 
 const Header = props => {
   return (
-    <header>
-      <h2 className="title">Your weather for {props.city}</h2>
-      <nav>
-        <ul>
-          <li><Link to='/'>Hourly details</Link></li>
-          <li><Link to='/charts'>Charts</Link></li>
-        </ul>
-      </nav>
-    </header>
+    <heaeder>
+      <h3>Your weather from {props.city}</h3>
+      <Nav />
+    </heaeder>
   );
 }
 
