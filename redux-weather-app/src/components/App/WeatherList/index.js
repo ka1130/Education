@@ -21,19 +21,21 @@ class WeatherList extends Component {
     }
 
     return (
-      <table className="table">
-        <thead className="has-background-light">
-          <tr>
-            <th>Time</th>
-            <th>Temperature</th>
-            <th>Pressure </th>
-            <th>Humidity</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.props.weather.list.map(this.renderWeather)}
-        </tbody>
-      </table>
+      <>
+        <table className="table">
+          <thead className="has-background-light">
+            <tr>
+              <th>Time</th>
+              <th>Temperature</th>
+              <th>Pressure </th>
+              <th>Humidity</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.weather.list.map(this.renderWeather)}
+          </tbody>
+        </table>
+      </>
     );
   };
 }

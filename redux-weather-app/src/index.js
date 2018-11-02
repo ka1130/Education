@@ -1,18 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import { logger } from 'redux-logger';
-import thunk from 'redux-thunk';
-import rootReducer from 'redux/reducers';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 
+import Root from 'Root';
+import Header from 'components/App/Header';
 import App from 'components/App';
 
-const store = createStore(rootReducer, applyMiddleware(thunk, logger));
-
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <Root>
+    <HashRouter>
+      <>
+        <Header city="Warsaw"/>
+        <Switch>
+          <Route path="/" component={App} />
+        </Switch>
+      </>
+    </HashRouter>
+  </Root>,
   document.getElementById('root')
 );
