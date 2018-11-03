@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Geocode from 'react-geocode';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchWeather } from 'redux/actions';
@@ -6,8 +8,11 @@ import { fetchWeather } from 'redux/actions';
 import Spinner from 'components/App/Spinner';
 import WeatherList from 'components/App/WeatherList';
 
-class App extends Component {    
+class App extends Component {
   componentDidMount() {
+    // navigator.geolocation.getCurrentPosition(function(position) {
+    //   console.log(position.coords.latitude, position.coords.longitude);
+    // });
     this.props.fetchWeather();
   }
 

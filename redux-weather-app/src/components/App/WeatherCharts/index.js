@@ -16,7 +16,6 @@ class WeatherCharts extends Component {
     const temps = data.list.map(weather => Math.trunc(weather.main.temp - 273.15));
     const pressures = data.list.map(weather => weather.main.pressure);
     const humidities = data.list.map(weather => weather.main.humidity);
-    const { lon, lat } = data.city.coord;
 
     return (
       <tr key={v4()}>

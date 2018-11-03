@@ -1,9 +1,26 @@
 import React, { Component } from 'react';
+// import Geocode from 'react-geocode';
 import { v4 } from 'node-uuid';
 import Spinner from 'components/App/Spinner';
 import 'bulma/css/bulma.css'
 
 class WeatherList extends Component {
+  // componentDidMount() {
+    
+  //   Geocode.setApiKey("AIzaSyDY5kZJmnORrvm1IODYBdB4sYjTOt6_maQ");
+ 
+  //   // Get address from latidude & longitude.
+  //   Geocode.fromLatLng("21", "53").then(
+  //     response => {
+  //       const address = response.results[0].formatted_address;
+  //       console.log(address);
+  //     },
+  //     error => {
+  //       console.error(error);
+  //     }
+  //   );
+  // }
+
   renderWeather = (day) => {
     return (
       <tr key={v4()}>

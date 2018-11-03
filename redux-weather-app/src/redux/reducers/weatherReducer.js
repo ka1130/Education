@@ -20,7 +20,6 @@ export default function data(state = initialState, action) {
       };
 
     case FETCH_WEATHER_SUCCESS:
-    // console.log(action.payload);
       return {
         ...state,
         loading: false,
