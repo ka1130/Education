@@ -13,7 +13,6 @@ class WeatherCharts extends Component {
   }
 
   renderWeather = (data) => {
-    console.log(data);
     const temps = data.list.map(weather => Math.trunc(weather.main.temp - 273.15));
     const pressures = data.list.map(weather => weather.main.pressure);
     const humidities = data.list.map(weather => weather.main.humidity);

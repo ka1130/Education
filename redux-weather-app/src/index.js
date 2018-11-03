@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Switch } from 'react-router-dom';
 
 import Root from 'Root';
 import Header from 'components/App/Header';
@@ -9,7 +9,7 @@ import WeatherCharts from 'components/App/WeatherCharts';
 
 ReactDOM.render(
   <Root>
-    <HashRouter>
+    <BrowserRouter>
       <>
         <Header city="Warsaw"/>
         <Switch>
@@ -17,7 +17,7 @@ ReactDOM.render(
           <Route path="/" component={App} />
         </Switch>
       </>
-    </HashRouter>
+    </BrowserRouter>
   </Root>,
   document.getElementById('root')
 );

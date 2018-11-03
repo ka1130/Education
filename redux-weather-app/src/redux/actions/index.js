@@ -12,35 +12,25 @@ const url = `${ROOT_URL}&q=${city},pl`;
 
 export function fetchWeather() {
   return dispatch => {
-    dispatch(fetchWeatherBegin());
-    return fetch(url)
-      .then(handleErrors)
-      .then(response => response.json())
-      .then(json => {
-        dispatch(fetchWeatherSuccess(json));
-        return json;
-      })
-      .catch(error => dispatch(fetchWeatherFailure(error)));
+    axios.get(url)
+    .then(response => {
+      dispatch(fetchWeatherSuccess(response));
+      return response; 
+    })
+    .catch(error => dispatch(fetchWeatherFailure(error)));
   };
-}
-
-function handleErrors(response) {
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
-  return response;
 }
 
 export const fetchWeatherBegin = () => ({
   type: FETCH_WEATHER_BEGIN
 });
 
-export const fetchWeatherSuccess = weather => ({
+export const fetchWeatherSuccess = response => ({
   type: FETCH_WEATHER_SUCCESS,
-  payload: { weather }
+  payload: response.data
 });
 
 export const fetchWeatherFailure = error => ({
   type: FETCH_WEATHER_FAILURE,
-  payload: { error }
+  payload: error.message
 });
