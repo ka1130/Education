@@ -2,6 +2,7 @@
   "name": "redux-weather-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://ka1130.github.io/redux-weather-app",
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
@@ -23,6 +24,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "browserslist": [
@@ -33,6 +36,7 @@
   ],
   "devDependencies": {
     "eslint-plugin-prettier": "^3.0.0",
+    "gh-pages": "^2.0.1",
     "prettier": "^1.14.3"
   }
 }
