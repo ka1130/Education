@@ -3,24 +3,13 @@ import { v4 } from 'node-uuid';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchWeather } from 'redux/actions/weatherActions';
+import findUserLocation from 'helpers/findUserLocation';
 
 import Chart from 'components/App/WeatherCharts/Chart';
 import Spinner from 'components/App/Spinner';
 
 class WeatherCharts extends Component {
   componentDidMount() {
-    const findUserLocation = new Promise((resolve, reject) => {
-      if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          resolve(position.coords);
-        }, (error) => {
-          if(error.code === error.PERMISSION_DENIED) {
-            console.error("Error detecting location.");
-          }
-        });
-      }
-    })
-
     findUserLocation.then(location => this.props.fetchWeather(location));
   }
 
@@ -44,22 +33,18 @@ class WeatherCharts extends Component {
     }
 
     return (
-      <>
-        <h3>Charts for {this.props.weather.city.name}</h3>
-        <table className="table">
-          <thead className="has-background-light">
-            <tr>
-              <th>Temperature</th>
-              <th>Pressure </th>
-              <th>Humidity</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.renderWeather(this.props.weather)}
-            {/* {this.props.weather.list.map(this.renderWeather)} */}
-          </tbody>
-        </table>
-      </>
+      <table className="table">
+        <thead className="has-background-light">
+          <tr>
+            <th>Temperature</th>
+            <th>Pressure </th>
+            <th>Humidity</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.renderWeather(this.props.weather)}
+        </tbody>
+      </table>
     );
   };
 }

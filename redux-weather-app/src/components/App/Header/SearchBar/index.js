@@ -12,7 +12,6 @@ class SearchBar extends Component {
 
   onFormSubmit = e => {
     e.preventDefault();
-    // // We need to go and fetch weather data
     this.props.fetchWeather(this.state.city);
     this.setState({ city: '' });
   }
@@ -20,8 +19,10 @@ class SearchBar extends Component {
   render() {
     return (
       <form onSubmit={this.onFormSubmit}>
+        <label htmlFor="city">Change city: </label>
         <input
           type="text"
+          id="city"
           value={this.state.city}
           placeholder={this.props.city}
           onChange={this.onInputChange}

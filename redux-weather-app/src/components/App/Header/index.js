@@ -7,7 +7,6 @@ import SearchBar from 'components/App/Header/SearchBar';
 import Nav from 'components/App/Header/Nav';
 
 const Header = props => {
-  console.log(props.weather);
   const cityName = props.weather.city ? props.weather.city.name : '';
   return (
     <header>
