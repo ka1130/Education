@@ -2,7 +2,7 @@
   "name": "redux-weather-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://ka1130.github.io/redux-weather-app",
+  "homepage": "http://ka1130.github.io/Education/redux-weather-app",
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
