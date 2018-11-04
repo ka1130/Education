@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchWeather } from 'redux/actions/weatherActions';
 
+import SearchBar from 'components/App/Header/SearchBar';
 import Spinner from 'components/App/Spinner';
 import WeatherList from 'components/App/WeatherList';
 
@@ -28,13 +29,15 @@ class App extends Component {
 
   render() {
     const { error, loading, weather } = this.props;
+    const cityName = weather.city? weather.city.name : '';
 
     if (error) {
       return <p>{error.message}</p>;
     }
-
+    console.log(weather);
     return (
       <section className="section">
+        <SearchBar city={cityName}/>
         {
           loading
           ? <Spinner />
