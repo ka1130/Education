@@ -1,13 +1,27 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchWeather } from 'redux/actions/weatherActions';
+
+import SearchBar from 'components/App/Header/SearchBar';
 import Nav from 'components/App/Header/Nav';
 
 const Header = props => {
+  console.log(props.weather);
+  const cityName = props.weather.city ? props.weather.city.name : '';
   return (
     <header>
-      <h3>Your weather from {props.city}</h3>
+      <h3>Your weather from {cityName}</h3>
       <Nav />
+      <SearchBar city={cityName} />
     </header>
   );
 }
 
-export default Header;
+const mapStateToProps = ({ weather }) => weather;
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({ fetchWeather }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

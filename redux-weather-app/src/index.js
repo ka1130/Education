@@ -11,7 +11,7 @@ ReactDOM.render(
   <Root>
     <BrowserRouter>
       <>
-        <Header city="Warsaw"/>
+        <Header />
         <Switch>
           <Route path="/charts" component={WeatherCharts} />
           <Route path="/" component={App} />

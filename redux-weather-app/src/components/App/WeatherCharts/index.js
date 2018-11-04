@@ -9,7 +9,19 @@ import Spinner from 'components/App/Spinner';
 
 class WeatherCharts extends Component {
   componentDidMount() {
-    this.props.fetchWeather();
+    const findUserLocation = new Promise((resolve, reject) => {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          resolve(position.coords);
+        }, (error) => {
+          if(error.code === error.PERMISSION_DENIED) {
+            console.error("Error detecting location.");
+          }
+        });
+      }
+    })
+
+    findUserLocation.then(location => this.props.fetchWeather(location));
   }
 
   renderWeather = (data) => {
