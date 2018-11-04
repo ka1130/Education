@@ -10,10 +10,10 @@ class SearchBar extends Component {
     this.setState({ city: e.target.value });
   }
 
-  onFormSubmit(e) {
+  onFormSubmit = e => {
     e.preventDefault();
     // // We need to go and fetch weather data
-    // this.props.fetchWeather(this.state.city);
+    this.props.fetchWeather(this.state.city);
     this.setState({ city: '' });
   }
 

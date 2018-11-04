@@ -11,7 +11,7 @@ const Header = props => {
   const cityName = props.weather.city ? props.weather.city.name : '';
   return (
     <header>
-      <h3>Your weather from {cityName}</h3>
+      <h3>Weather forecast for {cityName}</h3>
       <Nav />
       <SearchBar city={cityName} />
     </header>
