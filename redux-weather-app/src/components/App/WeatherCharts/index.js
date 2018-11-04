@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { v4 } from 'node-uuid';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchWeather } from 'redux/actions';
+import { fetchWeather } from 'redux/actions/weatherActions';
 
 import Chart from 'components/App/WeatherCharts/Chart';
 import Spinner from 'components/App/Spinner';

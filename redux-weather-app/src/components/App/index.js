@@ -3,17 +3,27 @@ import Geocode from 'react-geocode';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchWeather } from 'redux/actions';
+import { fetchWeather } from 'redux/actions/weatherActions';
 
 import Spinner from 'components/App/Spinner';
 import WeatherList from 'components/App/WeatherList';
 
 class App extends Component {
   componentDidMount() {
-    // navigator.geolocation.getCurrentPosition(function(position) {
-    //   console.log(position.coords.latitude, position.coords.longitude);
-    // });
-    this.props.fetchWeather();
+    // make use of reject
+    const findUserLocation = new Promise((resolve, reject) => {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          resolve(position.coords);
+        }, (error) => {
+          if(error.code === error.PERMISSION_DENIED) {
+            console.error("Error detecting location.");
+          }
+        });
+      }
+    })
+
+    findUserLocation.then(location => this.props.fetchWeather(location));
   }
 
   render() {

@@ -5,31 +5,19 @@ import {
   FETCH_WEATHER_FAILURE
 } from 'redux/actions/types';
 
-// 52.285282099999996 21.0279629
-let coords = {
-  lat: 12,
-  lon: 21
-}
-let coords2;
 const googolemapkey = 'AIzaSyDY5kZJmnORrvm1IODYBdB4sYjTOt6_maQ';
-
-navigator.geolocation.getCurrentPosition((position) => {
-  console.log(position.coords);
-  return coords2 = position.coords;
-});
-
-console.log(coords2);
-
 const API_KEY = '1d1ed4c5c279b3103998e234955244b6';
-// const GEOLOCATED_URL =  `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${API_KEY}`
-const ROOT_URL = `https://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}`;
-const city = 'Warsaw';
-const url = `${ROOT_URL}&q=${city},pl`;
-// const url2 = GEOLOCATED_URL;
 
-export function fetchWeather() {
+export function fetchWeather(region) {
+  const { latitude, longitude } = region || {};
+
+  const getDataByCity = `https://api.openweathermap.org/data/2.5/forecast?q=${region}&appid=${API_KEY}`;
+  const getDataByCoords = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`;
+
+  let location = typeof(region) === "object" ? getDataByCoords : getDataByCity;
+
   return dispatch => {
-    axios.get(url)
+    axios.get(location)
     .then(response => {
       dispatch(fetchWeatherSuccess(response));
       return response; 
