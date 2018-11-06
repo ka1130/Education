@@ -5,8 +5,8 @@ import {
   FETCH_WEATHER_FAILURE
 } from 'redux/actions/types';
 
-const googolemapkey = 'AIzaSyDY5kZJmnORrvm1IODYBdB4sYjTOt6_maQ';
-const API_KEY = '1d1ed4c5c279b3103998e234955244b6';
+// rename .env.example with .env and fill in tke keys in order to use them
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 export function fetchWeather(region) {
   const { latitude, longitude } = region || {};
