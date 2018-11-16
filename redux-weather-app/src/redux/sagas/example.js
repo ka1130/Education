@@ -1,5 +1,6 @@
 import { put } from 'redux-saga/effects';
 import * as actionTypes from 'redux/actions/types';
+import * as actions from 'redux/actions/weatherActions';
 import axios from 'axios';
 
 /* 
