@@ -2,7 +2,8 @@ import axios from 'axios';
 import { 
   FETCH_WEATHER_BEGIN,
   FETCH_WEATHER_SUCCESS,
-  FETCH_WEATHER_FAILURE
+  FETCH_WEATHER_FAILURE,
+  EXAMPLE_INITIATE
 } from 'redux/actions/types';
 
 // rename .env.example with .env and fill in tke keys in order to use them
@@ -16,14 +17,17 @@ export function fetchWeather(region) {
 
   let location = typeof(region) === "object" ? getDataByCoords : getDataByCity;
 
-  return dispatch => {
-    axios.get(location)
-    .then(response => {
-      dispatch(fetchWeatherSuccess(response));
-      return response; 
-    })
-    .catch(error => dispatch(fetchWeatherFailure(error)));
-  };
+  // return dispatch => {
+  //   axios.get(location)
+  //   .then(response => {
+  //     dispatch(fetchWeatherSuccess(response));
+  //     return response; 
+  //   })
+  //   .catch(error => dispatch(fetchWeatherFailure(error)));
+  // };
+  return {
+    type: EXAMPLE_INITIATE
+  }
 }
 
 export const fetchWeatherBegin = () => ({

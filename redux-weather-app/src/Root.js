@@ -6,13 +6,13 @@ import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from 'redux/reducers';
-import { exampleSaga } from 'redux/sagas/example';
+import { watchExample } from 'redux/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger, sagaMiddleware));
 
-sagaMiddleware.run(exampleSaga);
+sagaMiddleware.run(watchExample);
 
 export default ({ children }) => {
   return (
