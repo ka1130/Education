@@ -6,13 +6,13 @@ import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from 'redux/reducers';
-import { watchExample } from 'redux/sagas';
+import { fetchWeather } from 'redux/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger, sagaMiddleware));
 
-sagaMiddleware.run(watchExample);
+sagaMiddleware.run(fetchWeather);
 
 export default ({ children }) => {
   return (
