@@ -2,7 +2,6 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { logger } from 'redux-logger';
-import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from 'redux/reducers';
@@ -10,7 +9,7 @@ import { fetchWeather } from 'redux/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(rootReducer, applyMiddleware(thunk, logger, sagaMiddleware));
+const store = createStore(rootReducer, applyMiddleware(logger, sagaMiddleware));
 
 sagaMiddleware.run(fetchWeather);
 

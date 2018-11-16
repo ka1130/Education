@@ -11,6 +11,7 @@ export function* fetchWeatherSaga(action) {
   try {
     const response = yield axios.get(getDataByCity);
     yield put(actions.fetchWeatherSuccess(response));
+    // rewrite to call for test purposes, so that it's easy to mock the function
   } catch(error) {
     yield put(actions.fetchWeatherFailure(error))
   }
