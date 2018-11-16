@@ -3,9 +3,16 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { logger } from 'redux-logger';
 import thunk from 'redux-thunk';
-import rootReducer from 'redux/reducers';
+import createSagaMiddleware from 'redux-saga';
 
-const store = createStore(rootReducer, applyMiddleware(thunk, logger));
+import rootReducer from 'redux/reducers';
+import { exampleSaga } from 'redux/sagas/example';
+
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(rootReducer, applyMiddleware(thunk, logger, sagaMiddleware));
+
+sagaMiddleware.run(exampleSaga);
 
 export default ({ children }) => {
   return (
