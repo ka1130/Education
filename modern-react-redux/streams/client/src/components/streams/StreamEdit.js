@@ -14,12 +14,13 @@ class StreamEdit extends Component {
   }
   
   render() {
-    if(!this.props.stream) return <div>Loading...</div>
+    if (!this.props.stream) return <div>Loading...</div>
 
     return (
       <div>
         <h3>{this.props.stream.title}</h3>
-        <StreamForm onSubmit={this.onSubmit}/>
+        <StreamForm initialValues={this.props.stream} onSubmit={this.onSubmit}/>
+        {/* this prop has to be calles initialValues as per redux-form docs */}
       </div>
     );
   }
