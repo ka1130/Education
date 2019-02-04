@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { fetchStreams } from 'actions';
+
+import styles from './Streams.module.scss';
 
 class StreamList extends Component {
   componentDidMount() {
@@ -34,11 +37,22 @@ class StreamList extends Component {
     });
   }
 
+  renderCreate = () => {
+    if (this.props.isSignedIn) {
+      return (
+        <div className={styles.createBtnWrapper}>
+          <Link to="/streams/create" className="ui button primary">Create Stream</Link>
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
       <div>
         <h2>Streams</h2>
         <div className="ui celled list">{this.renderStreams()}</div>
+        {this.renderCreate()}
       </div>
     );
   }
@@ -47,6 +61,7 @@ class StreamList extends Component {
 const mapStateToProps = state => ({
   streams: Object.values(state.streams),
   currentUserId: state.auth.userId,
+  isSignedIn: state.auth.isSignedIn,
 });
 
 export default connect(mapStateToProps, { fetchStreams })(StreamList);
