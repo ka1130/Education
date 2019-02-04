@@ -1,20 +1,28 @@
 import React, { Component } from 'react';
 import LanguageContext from 'contexts/LanguageContext';
+import ColorContext from 'contexts/ColorContext';
 
 class Button extends Component {
   render() {
     return (
-      <button className="ui primary button">
-        <LanguageContext.Consumer>
-          {(value) => value === 'english' ? 'Submit' : 'Voorleggen'}
-          {/* 
-            child/function passed to the Consumer, it will be called 
-            with whatever current values is inside of the pipe 
-          */}
-        </LanguageContext.Consumer>
-      </button>
+      <ColorContext.Consumer>
+          {(color) => 
+            <button className={`ui ${color} button`}>
+              <LanguageContext.Consumer>
+                {(value) => value === 'english' ? 'Submit' : 'Voorleggen'}
+
+              </LanguageContext.Consumer>
+            </button>
+          }
+      </ColorContext.Consumer>
     );
   }
 }
+/* 
+  child/function passed to the Consumer, it will be called 
+  with whatever current values is inside of the pipe;
+  we can only use a Consumer here, as opposed to this.context
+  because the Button component consumes data from more than one context/Provider
+*/
 
 export default Button;
