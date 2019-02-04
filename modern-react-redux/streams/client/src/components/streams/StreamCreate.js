@@ -27,7 +27,6 @@ class StreamCreate extends Component {
   }
 
   onSubmit = formValues => {
-    console.log(formValues);
     this.props.createStream(formValues);
   }
 
@@ -45,7 +44,6 @@ class StreamCreate extends Component {
 }
 
 const validate = values => {
-  console.log(values);
   const errors = {};
   if (!values.title) {
     errors.title = 'Please enter a title';
