@@ -6,8 +6,8 @@ class Button extends Component {
   // the above has to be named contextType
 
   render() {
-    console.log(this.context);
-    return <button className="ui primary button">Submit</button>;
+    const text = this.context === 'english' ? 'Submit' : 'Voorleggen';
+    return <button className="ui primary button">{text}</button>;
   }
 }
 
