@@ -9,7 +9,6 @@ class StreamList extends Component {
   }
 
   renderStreams() {
-    this.props.streams.map(stream => console.log(stream));
     return this.props.streams.map(stream => {
       return (
         <div className="item" key={stream.id}>
