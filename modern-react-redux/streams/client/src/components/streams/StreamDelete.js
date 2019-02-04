@@ -3,7 +3,6 @@ import Modal from 'components/Modal';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import history from '../../history';
-import _ from 'lodash';
 import { fetchStream, deleteStream } from 'actions';
 
 class StreamDelete extends Component {
