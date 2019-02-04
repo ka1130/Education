@@ -3,6 +3,7 @@ import LanguageContext from 'contexts/LanguageContext';
 
 class Field extends Component {
   static contextType = LanguageContext;
+  // the above has to be named contextType
 
   render() {
     const text = this.context === 'english' ? 'Name' : 'Naam';
