@@ -11,7 +11,7 @@ export class LanguageStore extends Component {
 
   render() {
     return (
-      <Context.Provider value={{ ...this.state, onLanguageChange }}>
+      <Context.Provider value={{ ...this.state, onLanguageChange: this.onLanguageChange }}>
       {/* create a new object, take all the key/values from the current state object
       and add them to this newly created object */}
         {this.props.children}
