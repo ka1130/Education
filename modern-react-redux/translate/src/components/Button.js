@@ -18,7 +18,7 @@ class Button extends Component {
   render() {
     return (
       <ColorContext.Consumer>
-          {color => this.renderButton(color)}
+        {color => this.renderButton(color)}
       </ColorContext.Consumer>
     );
   }
