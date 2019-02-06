@@ -12,13 +12,19 @@ class App extends React.Component {
     );
   }
 
-  render() {
+  renderContent() {
     const { lat, err } = this.state;
+    if (err && !lat) {
+      return `Error: {err.message}`;
+    } else if (!err && lat) {
+      return <SeasonDisplay lat={lat} />;
+    } else {
+      return <Spinner message="Please accept location request" />;    
+    }
+  }
 
-    if (err && !lat) return <div>Error: {err}</div>;
-    if (!err && lat) return <SeasonDisplay lat={lat} />;
-    
-    return <Spinner message="Please accept location request" />;
+  render() {
+    return <div>{this.renderContent()}</div>;
   }
 }
 
