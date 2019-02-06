@@ -9,9 +9,15 @@ const ResourceList = ({ resource }) => {
     setResources(response.data);
   }
 
-  useEffect(() => {
-    fetchResource(resource);
-  }, [resource])
+  useEffect(
+    () => {
+      (async resource => {
+        const response = await axios.get(`https://jsonplaceholder.typicode.com/${resource}`);
+        setResources(response.data);
+      })(resource);
+    }, 
+    [resource]
+  );
 
   console.log(resource)
   console.log(resources)
