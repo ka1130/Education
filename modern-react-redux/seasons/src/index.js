@@ -1,33 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import SeasonDisplay from './SeasonDisplay';
 import Spinner from './Spinner';
 
-class App extends React.Component {
-  state = { lat: null, errorMessage: '' };
+const App = () => {
+  const [lat, setLat] = useState(null);
+  const [err, setErr] = useState('');
 
-  componentDidMount() {
-    window.navigator.geolocation.getCurrentPosition(
-      position => this.setState({ lat: position.coords.latitude }),
-      err => this.setState({ errorMessage: err.message })
+  const fetchLocation = async () => {
+    const response = await window.navigator.geolocation.getCurrentPosition(
+      pos => setLat(pos.coords.latitude),
+      err => setErr(err.message)
     );
+
+    return response;
   }
 
-  renderContent() {
-    if (this.state.errorMessage && !this.state.lat) {
-      return <div>Error: {this.state.errorMessage}</div>;
-    }
+  useEffect(() => {
+    fetchLocation();
+  }, [lat, err]);
 
-    if (!this.state.errorMessage && this.state.lat) {
-      return <SeasonDisplay lat={this.state.lat} />;
-    }
-
+  const renderContent = () => {
+    if (err && !lat) return <div>Error: {err}</div>;
+    if (!err && lat) return <SeasonDisplay lat={lat} />
     return <Spinner message="Please accept location request" />;
   }
 
-  render() {
-    return <div className="border red">{this.renderContent()}</div>;
-  }
+  return (
+    <div className="border red">{renderContent()}</div>
+  )
 }
 
 ReactDOM.render(<App />, document.querySelector('#root'));
