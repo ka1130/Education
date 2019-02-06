@@ -3,7 +3,6 @@ import ResourceList from 'components/ResourceList';
 
 const App = () => {
   const [resource, setResource] = useState('posts');
-  console.log(useState({ foo: 'bar' }));
   return (
     <div>
       <div>
