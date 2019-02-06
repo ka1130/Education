@@ -17,14 +17,17 @@ const App = () => {
   // ^ We didn'd have componentDidUpdate method so we pass an [] 
   // because we only want to call useEffect one time, upon rendering
 
-  const renderContent = () => {
-    if (err && !lat) return <div>Error: {err}</div>;
-    if (!err && lat) return <SeasonDisplay lat={lat} />
-    return <Spinner message="Please accept location request" />;
+  let content;
+  if (err) {
+    content = <div>Error: {err}</div>;
+  } else if (lat) {
+    content = <SeasonDisplay lat={lat} />;
+  } else {
+    content = <Spinner message="Please accept location request" />;
   }
 
   return (
-    <div className="border red">{renderContent()}</div>
+    <div className="border red">{content}</div>
   )
 }
 
