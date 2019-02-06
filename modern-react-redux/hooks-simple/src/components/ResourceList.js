@@ -4,10 +4,10 @@ import axios from 'axios';
 const ResourceList = ({ resource }) => {
   const [ resources, setResources ] = useState([]);
 
-  const fetchResource = async resource => {
-    const response = await axios.get(`https://jsonplaceholder.typicode.com/${resource}`);
-    setResources(response.data);
-  }
+  // const fetchResource = async resource => {
+  //   const response = await axios.get(`https://jsonplaceholder.typicode.com/${resource}`);
+  //   setResources(response.data);
+  // }
 
   useEffect(
     () => {
@@ -20,12 +20,12 @@ const ResourceList = ({ resource }) => {
   );
 
   console.log(resource)
-  console.log(resources)
+  console.log(resources, typeof(resources))
 
   return (
-    <div>
-      {`${resource}, ${resources.length}`}
-    </div>
+    <ul>
+      { resources.map(record => <li key={record.id}>{record.title}</li>) }
+    </ul>
   );
 }
 
