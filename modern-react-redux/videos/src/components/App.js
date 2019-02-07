@@ -8,12 +8,12 @@ import "./App.css";
 class App extends React.Component {
   state = { videos: [], video: null, term: "cats" };
 
-  async componentDidMount() {
+  fetchVideos = async term => {
     const response = await axios.get(
       `https://www.googleapis.com/youtube/v3/search`,
       {
         params: {
-          q: this.state.term,
+          q: term,
           part: "snippet",
           maxResults: 5,
           key: process.env.REACT_APP_YT_API_KEY
@@ -21,23 +21,15 @@ class App extends React.Component {
       }
     );
     this.setState({ videos: response.data.items });
+  };
+
+  async componentDidMount() {
+    this.fetchVideos(this.state.term);
   }
 
-  onSearch = async term => {
+  onSearch = term => {
     this.setState({ term });
-    const response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search`,
-      {
-        params: {
-          q: this.state.term,
-          part: "snippet",
-          maxResults: 5,
-          key: process.env.REACT_APP_YT_API_KEY
-        }
-      }
-    );
-    this.setState({ videos: response.data.items });
-    console.log(this.state.videos);
+    this.fetchVideos(this.state.term);
   };
 
   render() {
