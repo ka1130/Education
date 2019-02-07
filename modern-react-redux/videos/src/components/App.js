@@ -1,56 +1,55 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SearchBar from "components/SearchBar";
 import VideoDetail from "components/VideoDetail";
 import VideoList from "components/VideoList";
 import "./App.css";
 
-class App extends React.Component {
-  state = { videos: [], selectedVideo: null, term: "cats" };
+const fetchVideos = term => {
+  const [videos, setVideos] = useState();
 
-  fetchVideos = async term => {
-    const response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search`,
-      {
-        params: {
-          q: term,
-          part: "snippet",
-          maxResults: 5,
-          key: process.env.REACT_APP_YT_API_KEY
-        }
-      }
-    );
-    this.setState({
-      videos: response.data.items,
-      selectedVideo: response.data.items[0].id.videoId
-    });
+  useEffect(
+    () => {
+      (async term => {
+        const response = await axios.get(
+          `https://www.googleapis.com/youtube/v3/search`,
+          {
+            params: {
+              q: term,
+              part: "snippet",
+              maxResults: 5,
+              key: process.env.REACT_APP_YT_API_KEY
+            }
+          }
+        );
+        setVideos(response.data.items);
+      })(term);
+    },
+    [term]
+  );
+  return videos;
+};
+
+const App = () => {
+  const [term, setTerm] = useState("cats");
+  let videos = fetchVideos(term);
+
+  const onSearch = term => {
+    setTerm(term);
   };
 
-  componentDidMount() {
-    this.fetchVideos(this.state.term);
-  }
+  console.log(term);
 
-  onSearch = term => {
-    this.setState({ term });
-    this.fetchVideos(this.state.term);
-  };
-
-  selectVideo = id => this.setState({ selectedVideo: id });
-
-  render() {
-    return (
-      <div className="ui container">
-        <SearchBar onSearch={this.onSearch} />
-        <div className="video-content">
-          <VideoDetail selectedVideo={this.state.selectedVideo} />
-          <VideoList
-            videos={this.state.videos}
-            selectVideo={this.selectVideo}
-          />
-        </div>
+  return (
+    <div className="ui container">
+      <SearchBar onSearch={onSearch} />
+      <div className="video-content">
+        {/* <VideoDetail selectedVideo={selectedVideo} /> */}
+        <VideoList videos={videos} />
+        {/* <VideoList videos={videos} selectVideo={selectVideo} /> */}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default App;

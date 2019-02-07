@@ -3,9 +3,10 @@ import "./VideoList.css";
 import VideoItem from "components/VideoItem";
 
 const VideoList = props => {
+  const videos = props.videos ? props.videos : [];
   return (
     <div className="ui list video-list">
-      {props.videos.map(video => (
+      {videos.map(video => (
         <div className="" key={video.id.videoId}>
           <VideoItem video={video} selectVideo={props.selectVideo} />
         </div>
