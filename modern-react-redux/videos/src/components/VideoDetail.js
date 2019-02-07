@@ -5,9 +5,12 @@ import "./VideoDetail.css";
 const VideoDetail = props => {
   const [selectedVideo, setSelectedVideo] = useState(props.selectedVideo);
 
-  useEffect(() => {
-    setSelectedVideo(props.selectedVideo);
-  });
+  useEffect(
+    () => {
+      setSelectedVideo(props.selectedVideo);
+    },
+    [props.selectedVideo]
+  );
 
   const opts = {
     origin: "https://localhost:3000",
