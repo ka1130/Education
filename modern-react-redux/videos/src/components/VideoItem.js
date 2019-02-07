@@ -9,8 +9,6 @@ class VideoItem extends React.Component {
 
   render() {
     const opts = {
-      // height: "390",
-      // width: "640",
       origin: "https://localhost:3000",
       playerVars: {
         autoplay: 0
