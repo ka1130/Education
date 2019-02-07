@@ -6,7 +6,9 @@ const VideoList = props => {
   return (
     <div className="ui list video-list">
       {props.videos.map(video => (
-        <VideoItem video={video} key={video.id.videoId} />
+        <div className="" key={video.id.videoId}>
+          <VideoItem video={video} selectVideo={props.selectVideo} />
+        </div>
       ))}
     </div>
   );

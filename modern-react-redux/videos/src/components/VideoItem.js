@@ -3,6 +3,10 @@ import YouTube from "react-youtube";
 import "./VideoItem.css";
 
 class VideoItem extends React.Component {
+  selectVideo(id) {
+    this.props.selectVideo(id);
+  }
+
   render() {
     const opts = {
       // height: "390",
@@ -14,11 +18,16 @@ class VideoItem extends React.Component {
     };
 
     return (
-      <YouTube
-        videoId={this.props.video.id.videoId}
-        opts={opts}
-        className="videoItem"
-      />
+      <div>
+        <YouTube
+          videoId={this.props.video.id.videoId}
+          opts={opts}
+          className="videoItem"
+        />
+        <button onClick={() => this.selectVideo(this.props.video.id.videoId)}>
+          Select video
+        </button>
+      </div>
     );
   }
 }

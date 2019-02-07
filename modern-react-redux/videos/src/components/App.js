@@ -6,7 +6,7 @@ import VideoList from "components/VideoList";
 import "./App.css";
 
 class App extends React.Component {
-  state = { videos: [], video: null, term: "cats" };
+  state = { videos: [], selectedVideo: null, term: "cats" };
 
   fetchVideos = async term => {
     const response = await axios.get(
@@ -20,10 +20,14 @@ class App extends React.Component {
         }
       }
     );
-    this.setState({ videos: response.data.items });
+    this.setState({
+      videos: response.data.items,
+      selectedVideo: response.data.items[0]
+    });
+    console.log(this.state);
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     this.fetchVideos(this.state.term);
   }
 
@@ -32,13 +36,20 @@ class App extends React.Component {
     this.fetchVideos(this.state.term);
   };
 
+  selectVideo = id => {
+    console.log(`video selected: ${id}`);
+  };
+
   render() {
     return (
       <div className="ui container">
         <SearchBar onSearch={this.onSearch} />
         <div className="video-content">
-          <VideoDetail />
-          <VideoList videos={this.state.videos} />
+          <VideoDetail selectedVideo={this.state.selectedVideo} />
+          <VideoList
+            videos={this.state.videos}
+            selectVideo={this.selectVideo}
+          />
         </div>
       </div>
     );
