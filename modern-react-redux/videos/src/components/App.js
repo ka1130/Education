@@ -35,6 +35,13 @@ const App = () => {
   let videos = fetchVideos(term);
   const [selectedVideo, setSelectedVideo] = useState("");
 
+  useEffect(
+    () => {
+      setSelectedVideo(videos ? videos[0].id.videoId : "");
+    },
+    [videos]
+  );
+
   const onSearch = term => {
     setTerm(term);
   };
