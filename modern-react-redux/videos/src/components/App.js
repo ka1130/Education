@@ -33,20 +33,22 @@ const fetchVideos = term => {
 const App = () => {
   const [term, setTerm] = useState("cats");
   let videos = fetchVideos(term);
+  const [selectedVideo, setSelectedVideo] = useState("");
 
   const onSearch = term => {
     setTerm(term);
   };
 
-  console.log(term);
+  const selectVideo = videoId => {
+    setSelectedVideo(videoId);
+  };
 
   return (
     <div className="ui container">
       <SearchBar onSearch={onSearch} />
       <div className="video-content">
-        {/* <VideoDetail selectedVideo={selectedVideo} /> */}
-        <VideoList videos={videos} />
-        {/* <VideoList videos={videos} selectVideo={selectVideo} /> */}
+        <VideoDetail selectedVideo={selectedVideo} />
+        <VideoList videos={videos} selectVideo={selectVideo} />
       </div>
     </div>
   );

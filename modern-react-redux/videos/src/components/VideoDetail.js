@@ -3,14 +3,11 @@ import YouTube from "react-youtube";
 import "./VideoDetail.css";
 
 const VideoDetail = props => {
-  const [selectedVideo, setSelectedVideo] = useState(props.selectedVideo);
+  const [selectedVideo, setSelectedVideo] = useState("");
 
-  useEffect(
-    () => {
-      setSelectedVideo(props.selectedVideo);
-    },
-    [props.selectedVideo]
-  );
+  useEffect(() => {
+    setSelectedVideo(props.selectedVideo);
+  });
 
   const opts = {
     origin: "https://localhost:3000",
@@ -19,16 +16,9 @@ const VideoDetail = props => {
     }
   };
 
-  let videoId;
-  if (selectedVideo) {
-    videoId = selectedVideo;
-  } else {
-    videoId = "";
-  }
-
   return (
     <div className="video-detail">
-      <YouTube videoId={videoId} opts={opts} />
+      <YouTube videoId={selectedVideo} opts={opts} />
     </div>
   );
 };
