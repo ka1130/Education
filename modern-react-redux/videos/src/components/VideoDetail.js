@@ -9,13 +9,10 @@ class VideoDetail extends React.Component {
     if (prevProps.selectedVideo !== this.props.selectedVideo) {
       this.setState({ selectedVideo: this.props.selectedVideo });
     }
-    console.log(this.state.selectedVideo);
   }
 
   render() {
     const opts = {
-      // height: "390",
-      // width: "640",
       origin: "https://localhost:3000",
       playerVars: {
         autoplay: 0
@@ -24,7 +21,7 @@ class VideoDetail extends React.Component {
 
     let videoId;
     if (this.props.selectedVideo) {
-      videoId = this.props.selectedVideo.id.videoId;
+      videoId = this.props.selectedVideo;
     } else {
       videoId = "";
     }

@@ -36,9 +36,7 @@ class App extends React.Component {
     this.fetchVideos(this.state.term);
   };
 
-  selectVideo = id => {
-    console.log(`video selected: ${id}`);
-  };
+  selectVideo = id => this.setState({ selectedVideo: id });
 
   render() {
     return (
