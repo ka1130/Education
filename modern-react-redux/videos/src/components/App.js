@@ -5,10 +5,14 @@ import VideoList from "components/VideoList";
 import "./App.css";
 
 class App extends React.Component {
+  onSearch = term => {
+    console.log(term);
+  };
+
   render() {
     return (
       <div className="ui container">
-        <SearchBar />
+        <SearchBar onSearch={this.onSearch} />
         <div className="video-content">
           <VideoDetail />
           <VideoList />
