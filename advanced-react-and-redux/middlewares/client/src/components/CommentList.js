@@ -4,7 +4,6 @@ import { fetchComments } from "actions";
 
 class CommentList extends Component {
   componentDidMount() {
-    console.log("CommentList component", this.props.comments);
     this.props.fetchComments();
   }
 
@@ -12,7 +11,6 @@ class CommentList extends Component {
     this.props.comments.map((comment, index) => <li key={index}>{comment}</li>);
 
   render() {
-    console.log(this.props.comments);
     return (
       <div>
         <h4>Comment List</h4>
