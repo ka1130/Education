@@ -1,22 +1,22 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-import { connect } from 'react-redux'
-import * as actions from 'actions'
+import { connect } from "react-redux";
+import * as actions from "actions";
 
-import requireAuth from 'components/requireAuth'
+import requireAuth from "components/requireAuth";
 
 class CommentBox extends Component {
-  state = { comment: '' }
+  state = { comment: "" };
 
   handleChange = e => {
-    this.setState({ comment: e.target.value })
-  }
+    this.setState({ comment: e.target.value });
+  };
 
   handleSubmit = e => {
-    e.preventDefault()
-    this.props.saveComment(this.state.comment)
-    this.setState({ comment: '' })
-  }
+    e.preventDefault();
+    this.props.saveComment(this.state.comment);
+    this.setState({ comment: "" });
+  };
 
   render() {
     return (
@@ -28,15 +28,12 @@ class CommentBox extends Component {
             <button>Submit comment</button>
           </div>
         </form>
-        <button onClick={this.props.fetchComments} className="fetch-comments">
-          Fetch comments
-        </button>
       </>
-    )
+    );
   }
 }
 
 export default connect(
   null,
   actions
-)(requireAuth(CommentBox))
+)(requireAuth(CommentBox));

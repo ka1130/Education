@@ -4,6 +4,7 @@ import { fetchComments } from "actions";
 
 class CommentList extends Component {
   componentDidMount() {
+    console.log("CommentList component", this.props.comments);
     this.props.fetchComments();
   }
 

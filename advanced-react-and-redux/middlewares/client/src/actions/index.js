@@ -1,4 +1,5 @@
 import axios from "axios";
+import history from "../history";
 import { SAVE_COMMENT, FETCH_COMMENTS, CHANGE_AUTH } from "actions/types";
 
 export const saveComment = comment => async dispatch => {
@@ -6,6 +7,7 @@ export const saveComment = comment => async dispatch => {
     title: comment
   });
   dispatch({ type: SAVE_COMMENT, payload: response.data });
+  history.push("/");
 };
 
 export const fetchComments = () => async dispatch => {

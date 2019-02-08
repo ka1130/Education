@@ -1,15 +1,16 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { BrowserRouter, Route } from 'react-router-dom'
-import Root from 'Root'
+import React from "react";
+import ReactDOM from "react-dom";
+import { Router, Route } from "react-router-dom";
+import Root from "Root";
+import history from "./history";
 
-import App from './components/App'
+import App from "./components/App";
 
 ReactDOM.render(
   <Root>
-    <BrowserRouter>
+    <Router history={history}>
       <Route path="/" component={App} />
-    </BrowserRouter>
+    </Router>
   </Root>,
-  document.getElementById('root')
-)
+  document.getElementById("root")
+);
