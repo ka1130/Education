@@ -1,6 +1,6 @@
 import React from "react";
 import "./VideoList.css";
-import VideoItem from "components/VideoItem";
+import VideoItem from "components/App/VideoList/VideoItem";
 
 const VideoList = props => {
   const videos = props.videos ? props.videos : [];

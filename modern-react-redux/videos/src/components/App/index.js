@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import fetchVideos from "helpers/fetchVideos";
-import SearchBar from "components/SearchBar";
-import VideoDetail from "components/VideoDetail";
-import VideoList from "components/VideoList";
+import SearchBar from "components/App/SearchBar";
+import VideoDetail from "components/App/VideoDetail";
+import VideoList from "components/App/VideoList";
 import "./App.css";
 
 const App = () => {
