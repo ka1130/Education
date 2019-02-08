@@ -4,6 +4,6 @@ import stateSchema from "./stateSchema";
 export default ({ dispatch, getState }) => next => action => {
   next(action);
   if (!tv4.validate(getState(), stateSchema)) {
-    alert("Invalid state schema detected");
+    console.warn("Invalid state schema detected");
   }
 };
