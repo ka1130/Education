@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import yt from "api/yt";
 
 export default term => {
   const [videos, setVideos] = useState();
@@ -7,17 +7,11 @@ export default term => {
   useEffect(
     () => {
       (async term => {
-        const response = await axios.get(
-          `https://www.googleapis.com/youtube/v3/search`,
-          {
-            params: {
-              q: term,
-              part: "snippet",
-              maxResults: 5,
-              key: process.env.REACT_APP_YT_API_KEY
-            }
+        const response = await yt.get("/v3/search", {
+          params: {
+            q: term
           }
-        );
+        });
         setVideos(response.data.items);
       })(term);
     },
