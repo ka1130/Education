@@ -2,7 +2,9 @@ import axios from "axios";
 import { SAVE_COMMENT, FETCH_COMMENTS, CHANGE_AUTH } from "actions/types";
 
 export const saveComment = comment => async dispatch => {
-  const response = await axios.post("http://localhost:3001/comments", comment);
+  const response = await axios.post("http://localhost:3001/comments", {
+    title: comment
+  });
   dispatch({ type: SAVE_COMMENT, payload: response.data });
 };
 
