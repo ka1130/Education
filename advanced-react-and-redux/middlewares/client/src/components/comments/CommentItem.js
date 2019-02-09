@@ -33,8 +33,8 @@ class CommentItem extends Component {
         </div>
         <img className="ui avatar image" src={faker.image.avatar()} alt="" />
         <div className="content">
-          <p className="header">{faker.name.findName()}</p>
-          <div className="description">{comment.name}</div>
+          <p className="header">{comment.name}</p>
+          <div className="description">{comment.body}</div>
         </div>
       </div>
     );

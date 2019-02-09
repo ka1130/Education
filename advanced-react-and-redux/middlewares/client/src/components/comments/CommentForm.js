@@ -22,14 +22,14 @@ class CommentForm extends Component {
         onSubmit={this.props.handleSubmit(this.onSubmit)}
       >
         <Field
-          name="Comment name"
+          name="name"
           label="Comment name"
           component={this.renderInput}
           pal
           // placeholder/value with previous name
         />
         <Field
-          name="Comment body"
+          name="body"
           component={this.renderInput}
           label="Comment body"
           // placeholder/value with previous body
@@ -43,5 +43,20 @@ class CommentForm extends Component {
     );
   }
 }
+
+const validate = formValues => {
+  const errors = {};
+  if (!formValues.name) {
+    errors.name = "Please enter a comment's name";
+  }
+
+  if (!formValues.body) {
+    errors.body = "Please enter a comment's body";
+  }
+
+  if (!formValues.email) {
+    errors.email = "Please enter a comment's email";
+  }
+};
 
 export default reduxForm({ form: "CommentForm" })(CommentForm);
