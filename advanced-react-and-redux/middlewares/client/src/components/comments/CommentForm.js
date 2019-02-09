@@ -2,11 +2,22 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 
 class CommentForm extends Component {
+  renderError = ({ error, touched }) => {
+    if (touched && error) {
+      return (
+        <div className="ui error message">
+          <div className="header">{error}</div>
+        </div>
+      );
+    }
+  };
+
   renderInput = ({ input, meta, label }) => {
     return (
       <div className="field">
         <label>{label}</label>
-        <input type="text" {...input} />
+        <input type="text" {...input} autoComplete="off" />
+        {this.renderError(meta)}
       </div>
     );
   };
@@ -18,7 +29,7 @@ class CommentForm extends Component {
   render() {
     return (
       <form
-        className="ui form"
+        className="ui form error"
         onSubmit={this.props.handleSubmit(this.onSubmit)}
       >
         <Field
@@ -34,7 +45,7 @@ class CommentForm extends Component {
           label="Comment body"
           // placeholder/value with previous body
         />
-        <Field name="Email" component={this.renderInput} label="Email" />
+        <Field name="email" component={this.renderInput} label="Email" />
         {/*  placeholder/value with previous email */}
         <button type="submit" className="ui button primary">
           Submit
@@ -55,8 +66,11 @@ const validate = formValues => {
   }
 
   if (!formValues.email) {
+    //properly valudate email with a regex here
     errors.email = "Please enter a comment's email";
   }
+
+  return errors;
 };
 
-export default reduxForm({ form: "CommentForm" })(CommentForm);
+export default reduxForm({ form: "CommentForm", validate })(CommentForm);
