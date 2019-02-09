@@ -1,12 +1,12 @@
 import axios from "axios";
 import history from "../history";
-import { SAVE_COMMENT, FETCH_COMMENTS, CHANGE_AUTH } from "actions/types";
+import { CREATE_COMMENT, FETCH_COMMENTS, CHANGE_AUTH } from "actions/types";
 
-export const saveComment = comment => async dispatch => {
+export const createComment = comment => async dispatch => {
   const response = await axios.post("http://localhost:3001/comments", {
     name: comment
   });
-  dispatch({ type: SAVE_COMMENT, payload: response.data });
+  dispatch({ type: CREATE_COMMENT, payload: response.data });
   history.push("/");
 };
 
