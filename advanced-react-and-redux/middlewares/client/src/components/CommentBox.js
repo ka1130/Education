@@ -10,15 +10,17 @@ class CommentBox extends Component {
 
   handleChange = e => {
     this.setState({ comment: e.target.value });
+    // enable other fields like body and email
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.saveComment(this.state.comment);
+    this.props.createComment(this.state.comment);
     this.setState({ comment: "" });
   };
 
   render() {
+    console.log(this.props);
     return (
       <>
         <form onSubmit={this.handleSubmit}>

@@ -1,4 +1,4 @@
-import axios from "axios";
+import comments from "apis/comments";
 import history from "../history";
 import {
   CREATE_COMMENT,
@@ -9,30 +9,28 @@ import {
 } from "actions/types";
 
 export const createComment = comment => async dispatch => {
-  const response = await axios.post("http://localhost:3001/comments", {
-    name: comment
+  console.log(comment);
+  const response = await comments.post("/comments", {
+    name: comment.name
   });
   dispatch({ type: CREATE_COMMENT, payload: response.data });
   history.push("/");
 };
 
 export const editComment = (id, formValues) => async dispatch => {
-  const response = await axios.patch(
-    `http://localhost:3001/comments/${id}`,
-    formValues
-  );
+  const response = await comments.patch(`/comments/${id}`, formValues);
   dispatch({ type: EDIT_COMMENT, payload: response.data });
   history.push("/");
 };
 
 export const deleteComment = id => async dispatch => {
-  const response = await axios.delete(`http://localhost:3001/comments/${id}`);
+  await comments.delete(`/comments/${id}`);
   dispatch({ type: DELETE_COMMENT, payload: id });
   history.push("/");
 };
 
 export const fetchComments = () => async dispatch => {
-  const response = await axios.get("http://localhost:3001/comments");
+  const response = await comments.get("/comments");
   dispatch({ type: FETCH_COMMENTS, payload: response.data });
 };
 

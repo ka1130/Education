@@ -34,6 +34,7 @@ class CommentList extends Component {
     ));
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <h4>Comment List</h4>
