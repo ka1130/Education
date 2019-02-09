@@ -24,6 +24,7 @@ export const editComment = (id, formValues) => async dispatch => {
 };
 
 export const deleteComment = id => async dispatch => {
+  console.log(id);
   await comments.delete(`/comments/${id}`);
   dispatch({ type: DELETE_COMMENT, payload: id });
   history.push("/");

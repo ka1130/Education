@@ -6,7 +6,6 @@ import { fetchComments } from "actions";
 class CommentList extends Component {
   componentDidMount() {
     this.props.fetchComments();
-    console.log(this.props.auth);
   }
 
   renderButtons = comment => {
@@ -25,16 +24,21 @@ class CommentList extends Component {
     }
   };
 
-  renderComments = () =>
-    this.props.comments.map(comment => (
-      <li key={comment.id}>
-        <p>{comment.name}</p>
-        {this.renderButtons(comment)}
-      </li>
-    ));
+  renderComments = () => {
+    console.log(this.props.comments);
+    // delete the below conditional after fixing the problem
+    // with rendering the list after deleting a comment
+    if (this.props.comments.map) {
+      return this.props.comments.map(comment => (
+        <li key={comment.id}>
+          <p>{comment.name}</p>
+          {this.renderButtons(comment)}
+        </li>
+      ));
+    }
+  };
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <h4>Comment List</h4>

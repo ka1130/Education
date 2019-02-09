@@ -16,8 +16,7 @@ export default function(state = [], action) {
       return [...state, action.payload];
     //check if correct^
     case DELETE_COMMENT:
-      return _.omit(state, action.payload);
-    //check if correct^
+      return [...state].filter(elem => elem.id !== action.payload);
     default:
       return state;
   }

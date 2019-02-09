@@ -5,6 +5,9 @@ import * as actions from "actions";
 
 import CommentBox from "./CommentBox";
 import CommentList from "./CommentList";
+import CommentEdit from "./CommentEdit";
+import CommentShow from "./CommentShow";
+import CommentDelete from "./CommentDelete";
 import NotAuthedWarning from "./NotAuthedWarning";
 import LoginForm from "./LoginForm";
 
@@ -40,6 +43,9 @@ class App extends Component {
       <div>
         {this.renderHeader()}
         <Route path="/comments/new" component={CommentBox} />
+        <Route path="/comments/delete/:id" component={CommentDelete} />
+        <Route path="/comments/edit/:id" component={CommentEdit} />
+        <Route path="/comments/show/:id" component={CommentShow} />
         <Route path="/not-authed" component={NotAuthedWarning} />
         <Route path="/login" component={LoginForm} />
         <Route exact path="/" component={CommentList} />
