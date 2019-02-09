@@ -1,11 +1,14 @@
 import React, { Component } from "react";
+import faker from "faker";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchComments } from "actions";
+import CommentItem from "components/comments/CommentItem";
 
 class CommentList extends Component {
   componentDidMount() {
     this.props.fetchComments();
+    console.log(faker.image.avatar());
   }
 
   renderButtons = comment => {
@@ -25,17 +28,19 @@ class CommentList extends Component {
 
   renderComments = () =>
     this.props.comments.map(comment => (
-      <li key={comment.id}>
-        <p>{comment.name}</p>
-        {this.renderButtons(comment)}
-      </li>
+      <CommentItem comment={comment} key={comment.id} />
+      // <div key={comment.id} className="item">
+      //   <p>{comment.name}</p>
+
+      //   {this.renderButtons(comment)}
+      // </div>
     ));
 
   render() {
     return (
-      <div>
+      <div className="ui segment">
         <h4>Comment List</h4>
-        <ul>{this.renderComments()}</ul>
+        <div className="ui relaxed divided list">{this.renderComments()}</div>
       </div>
     );
   }

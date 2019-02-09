@@ -19,7 +19,7 @@ class App extends Component {
           Home
         </Link>
         <Link to="/comments/new" className="item">
-          Post A Comment
+          Post a comment
         </Link>
         {this.renderButton()}
       </div>
