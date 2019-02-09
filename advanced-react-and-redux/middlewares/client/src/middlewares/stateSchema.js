@@ -11,7 +11,7 @@ export default {
       type: "boolean",
       title: "The Auth Schema",
       default: false,
-      examples: [true]
+      examples: [false]
     },
     comments: {
       $id: "#/properties/comments",
@@ -19,11 +19,19 @@ export default {
       title: "The Comments Schema",
       items: {
         $id: "#/properties/comments/items",
-        type: "string",
+        type: "object",
         title: "The Items Schema",
-        default: "",
-        examples: ["sunt", "qui est esse"],
-        pattern: "^(.*)$"
+        required: ["name"],
+        properties: {
+          name: {
+            $id: "#/properties/comments/items/properties/name",
+            type: "string",
+            title: "The Name Schema",
+            default: "",
+            examples: ["lorem"],
+            pattern: "^(.*)$"
+          }
+        }
       }
     }
   }
