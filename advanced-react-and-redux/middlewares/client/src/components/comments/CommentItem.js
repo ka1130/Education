@@ -7,7 +7,10 @@ class CommentItem extends Component {
     if (this.props.auth) {
       return (
         <React.Fragment>
-          <Link to={`/comments/edit/${comment.id}`} className="ui mini button">
+          <Link
+            to={`/comments/edit/${comment.id}`}
+            className="ui mini basic button"
+          >
             Edit
           </Link>
           <Link

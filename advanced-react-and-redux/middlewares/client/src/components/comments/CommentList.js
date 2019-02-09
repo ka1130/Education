@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import faker from "faker";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchComments } from "actions";
 import CommentItem from "components/comments/CommentItem";
