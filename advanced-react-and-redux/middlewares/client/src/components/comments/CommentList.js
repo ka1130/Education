@@ -15,7 +15,6 @@ class CommentList extends Component {
           <Link to={`/comments/edit/${comment.id}`} className="">
             Edit comment
           </Link>
-          {/* this.props.match.params -> add in root / Router */}
           <Link to={`/comments/delete/${comment.id}`} className="">
             Delete comment
           </Link>

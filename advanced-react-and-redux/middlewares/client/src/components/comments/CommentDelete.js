@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteComment } from "actions/index";
-import history from "../history";
-import Modal from "./Modal";
+import history from "../../history";
+import Modal from "components/Modal";
 
 class CommentDelete extends Component {
   renderActions = () => {

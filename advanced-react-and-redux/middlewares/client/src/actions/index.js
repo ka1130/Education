@@ -9,9 +9,8 @@ import {
 } from "actions/types";
 
 export const createComment = comment => async dispatch => {
-  console.log(comment);
   const response = await comments.post("/comments", {
-    name: comment.name
+    name: comment
   });
   dispatch({ type: CREATE_COMMENT, payload: response.data });
   history.push("/");
@@ -24,7 +23,6 @@ export const editComment = (id, formValues) => async dispatch => {
 };
 
 export const deleteComment = id => async dispatch => {
-  console.log(id);
   await comments.delete(`/comments/${id}`);
   dispatch({ type: DELETE_COMMENT, payload: id });
   history.push("/");

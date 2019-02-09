@@ -3,11 +3,11 @@ import { Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "actions";
 
-import CommentBox from "./CommentBox";
-import CommentList from "./CommentList";
-import CommentEdit from "./CommentEdit";
-import CommentShow from "./CommentShow";
-import CommentDelete from "./CommentDelete";
+import CommentBox from "components/comments/CommentBox";
+import CommentList from "components/comments/CommentList";
+import CommentEdit from "components/comments/CommentEdit";
+import CommentShow from "components/comments/CommentShow";
+import CommentDelete from "components/comments/CommentDelete";
 import NotAuthedWarning from "./NotAuthedWarning";
 import LoginForm from "./LoginForm";
 
