@@ -1,4 +1,3 @@
-import _ from "lodash";
 import {
   CREATE_COMMENT,
   EDIT_COMMENT,

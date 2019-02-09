@@ -3,7 +3,7 @@ import { Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "actions";
 
-import CommentBox from "components/comments/CommentBox";
+import CommentCreate from "components/comments/CommentCreate";
 import CommentList from "components/comments/CommentList";
 import CommentEdit from "components/comments/CommentEdit";
 import CommentShow from "components/comments/CommentShow";
@@ -14,35 +14,45 @@ import LoginForm from "./LoginForm";
 class App extends Component {
   renderHeader() {
     return (
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/comments/new">Post A Comment</Link>
-        </li>
-        <li>{this.renderButton()}</li>
-      </ul>
+      <div className="ui text menu">
+        <Link to="/" className="item">
+          Home
+        </Link>
+        <Link to="/comments/new" className="item">
+          Post A Comment
+        </Link>
+        {this.renderButton()}
+      </div>
     );
   }
 
   renderButton() {
     if (this.props.auth) {
       return (
-        <button onClick={() => this.props.changeAuth(false)}>Sign Out</button>
+        <button
+          className="ui button right floated item"
+          onClick={() => this.props.changeAuth(false)}
+        >
+          Sign Out
+        </button>
       );
     } else {
       return (
-        <button onClick={() => this.props.changeAuth(true)}>Sign In</button>
+        <button
+          className="ui button right floated item"
+          onClick={() => this.props.changeAuth(true)}
+        >
+          Sign In
+        </button>
       );
     }
   }
 
   render() {
     return (
-      <div>
+      <div className="ui container">
         {this.renderHeader()}
-        <Route path="/comments/new" component={CommentBox} />
+        <Route path="/comments/new" component={CommentCreate} />
         <Route path="/comments/delete/:id" component={CommentDelete} />
         <Route path="/comments/edit/:id" component={CommentEdit} />
         <Route path="/comments/show/:id" component={CommentShow} />
