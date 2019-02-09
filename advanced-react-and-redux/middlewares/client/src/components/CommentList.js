@@ -24,19 +24,13 @@ class CommentList extends Component {
     }
   };
 
-  renderComments = () => {
-    console.log(this.props.comments);
-    // delete the below conditional after fixing the problem
-    // with rendering the list after deleting a comment
-    if (this.props.comments.map) {
-      return this.props.comments.map(comment => (
-        <li key={comment.id}>
-          <p>{comment.name}</p>
-          {this.renderButtons(comment)}
-        </li>
-      ));
-    }
-  };
+  renderComments = () =>
+    this.props.comments.map(comment => (
+      <li key={comment.id}>
+        <p>{comment.name}</p>
+        {this.renderButtons(comment)}
+      </li>
+    ));
 
   render() {
     return (
