@@ -13,8 +13,9 @@ class CommentForm extends Component {
   };
 
   renderInput = ({ input, meta, label }) => {
+    const className = `field ${meta.error && meta.touched ? "error" : ""}`;
     return (
-      <div className="field">
+      <div className={className}>
         <label>{label}</label>
         <input type="text" {...input} autoComplete="off" />
         {this.renderError(meta)}
