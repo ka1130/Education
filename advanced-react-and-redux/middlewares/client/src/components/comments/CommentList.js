@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import uuidv4 from "uuid/v1";
 import { fetchComments } from "actions";
 import CommentItem from "components/comments/CommentItem";
 
@@ -10,7 +11,7 @@ class CommentList extends Component {
 
   renderComments = () =>
     this.props.comments.map(comment => (
-      <CommentItem comment={comment} key={comment.id} auth={this.props.auth} />
+      <CommentItem comment={comment} key={uuidv4()} auth={this.props.auth} />
     ));
 
   render() {

@@ -75,8 +75,7 @@ const validate = formValues => {
     errors.body = "Please enter a comment's body";
   }
 
-  if (!formValues.email) {
-    //properly valudate email with a regex here
+  if (!formValues.email || formValues.email.indexOf("@") < 0) {
     errors.email = "Please enter a comment's email";
   }
 
