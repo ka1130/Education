@@ -14,7 +14,7 @@ export const createComment = comment => async dispatch => {
   history.push("/");
 };
 
-export const editComment = (id, formValues) => async dispatch => {
+export const editComment = (formValues, id) => async dispatch => {
   const response = await comments.patch(`/comments/${id}`, formValues);
   dispatch({ type: EDIT_COMMENT, payload: response.data });
   history.push("/");

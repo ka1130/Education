@@ -7,7 +7,6 @@ import requireAuth from "components/requireAuth";
 
 class CommentCreate extends Component {
   handleSubmit = formValues => {
-    console.log(formValues);
     this.props.createComment(formValues);
   };
 

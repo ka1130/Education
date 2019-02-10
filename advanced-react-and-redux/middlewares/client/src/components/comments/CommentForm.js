@@ -12,12 +12,17 @@ class CommentForm extends Component {
     }
   };
 
-  renderInput = ({ input, meta, label }) => {
+  renderInput = ({ input, meta, label, placeholder }) => {
     const className = `field ${meta.error && meta.touched ? "error" : ""}`;
     return (
       <div className={className}>
         <label>{label}</label>
-        <input type="text" {...input} autoComplete="off" />
+        <input
+          type="text"
+          {...input}
+          autoComplete="off"
+          placeholder={placeholder}
+        />
         {this.renderError(meta)}
       </div>
     );
@@ -28,6 +33,7 @@ class CommentForm extends Component {
   };
 
   render() {
+    const { comment } = this.props;
     return (
       <form
         className="ui form error"
@@ -37,16 +43,20 @@ class CommentForm extends Component {
           name="name"
           label="Comment name"
           component={this.renderInput}
-          // placeholder/value with previous name
+          placeholder={comment ? comment.name : ""}
         />
         <Field
           name="body"
           component={this.renderInput}
           label="Comment body"
-          // placeholder/value with previous body
+          placeholder={comment ? comment.body : ""}
         />
-        <Field name="email" component={this.renderInput} label="Email" />
-        {/*  placeholder/value with previous email */}
+        <Field
+          name="email"
+          component={this.renderInput}
+          label="Email"
+          placeholder={comment ? comment.email : ""}
+        />
         <button type="submit" className="ui button primary">
           Submit
         </button>
