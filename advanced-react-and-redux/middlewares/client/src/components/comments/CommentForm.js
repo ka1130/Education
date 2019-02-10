@@ -24,7 +24,7 @@ class CommentForm extends Component {
   };
 
   onSubmit = formValues => {
-    console.log(formValues);
+    this.props.onSubmit(formValues);
   };
 
   render() {
@@ -37,7 +37,6 @@ class CommentForm extends Component {
           name="name"
           label="Comment name"
           component={this.renderInput}
-          pal
           // placeholder/value with previous name
         />
         <Field

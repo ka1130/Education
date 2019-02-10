@@ -9,9 +9,7 @@ import {
 } from "actions/types";
 
 export const createComment = comment => async dispatch => {
-  const response = await comments.post("/comments", {
-    name: comment
-  });
+  const response = await comments.post("/comments", comment);
   dispatch({ type: CREATE_COMMENT, payload: response.data });
   history.push("/");
 };

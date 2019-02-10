@@ -1,41 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actions from "actions";
+import { createComment } from "actions";
 
 import CommentForm from "components/comments/CommentForm";
 import requireAuth from "components/requireAuth";
 
 class CommentCreate extends Component {
-  state = { comment: "" };
-
-  handleChange = e => {
-    this.setState({ comment: e.target.value });
-    // enable other fields like body and email
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.createComment(this.state.comment);
-    this.setState({ comment: "" });
+  handleSubmit = formValues => {
+    console.log(formValues);
+    this.props.createComment(formValues);
   };
 
   render() {
-    return (
-      <>
-        <CommentForm />
-        <form onSubmit={this.handleSubmit}>
-          <h4>Add a Comment</h4>
-          <textarea value={this.state.comment} onChange={this.handleChange} />
-          <div>
-            <button>Submit comment</button>
-          </div>
-        </form>
-      </>
-    );
+    return <CommentForm onSubmit={this.handleSubmit} />;
   }
 }
 
 export default connect(
   null,
-  actions
+  { createComment }
 )(requireAuth(CommentCreate));
