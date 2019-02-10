@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import faker from "faker";
 import { fetchSingleComment } from "actions";
 
 class CommentShow extends Component {
@@ -9,16 +10,30 @@ class CommentShow extends Component {
   }
 
   render() {
-    console.log(this.props.singleComment);
-    return <div>CommentShow</div>;
+    const comment = this.props.singleComment;
+    return (
+      <div className="ui comments">
+        <div className="comment">
+          <span className="avatar">
+            <img src={faker.image.avatar()} alt="" />
+          </span>
+          <div className="content">
+            <span className="author">{comment.name}</span>
+            <div className="metadata">
+              <div className="date">{comment.email}</div>
+            </div>
+            <div className="text">
+              <p>{comment.body}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   singleComment: state.singleComment
-  // comment: state.comments.find(
-  //   comment => comment.id === parseInt(ownProps.match.params.id)
-  // )
 });
 
 export default connect(
