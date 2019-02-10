@@ -4,29 +4,6 @@ import { connect } from "react-redux";
 import GoogleAuth from "components/GoogleAuth";
 
 class Header extends Component {
-  // change logic below!
-  // renderButton() {
-  //   if (this.props.auth) {
-  //     return (
-  //       <button
-  //         className="ui button right floated item"
-  //         // onClick={() => this.props.changeAuth(false)}
-  //       >
-  //         Sign Out
-  //       </button>
-  //     );
-  //   } else {
-  //     return (
-  //       <button
-  //         className="ui button right floated item"
-  //         // onClick={() => this.props.changeAuth(true)}
-  //       >
-  //         Sign In
-  //       </button>
-  //     );
-  //   }
-  // }
-
   render() {
     return (
       <div className="ui text menu">

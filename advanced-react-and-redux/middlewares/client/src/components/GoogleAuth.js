@@ -7,8 +7,7 @@ class GoogleAuth extends Component {
     window.gapi.load("client:auth2", () => {
       window.gapi.client
         .init({
-          client_id:
-            "275445952914-vdkc68kpunob9acnocv397muok29blqd.apps.googleusercontent.com",
+          client_id: process.env.REACT_APP_GOOGLE_API_KEY,
           scope: "email"
         })
         .then(() => {
@@ -56,7 +55,7 @@ class GoogleAuth extends Component {
   }
 
   render() {
-    return <div className="item">{this.renderAuthButton()}</div>;
+    return <div className="right floated item">{this.renderAuthButton()}</div>;
   }
 }
 
