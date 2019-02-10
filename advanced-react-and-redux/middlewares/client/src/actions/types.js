@@ -1,6 +1,9 @@
 export const CREATE_COMMENT = "CREATE_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
+
 export const FETCH_COMMENTS = "FETCH_COMMENTS";
 export const FETCH_SINGLE_COMMENT = "FETCH_SINGLE_COMMENT";
-export const CHANGE_AUTH = "CHANGE_AUTH";
+
+export const SIGN_IN = "SIGN_IN";
+export const SIGN_OUT = "SIGN_OUT";

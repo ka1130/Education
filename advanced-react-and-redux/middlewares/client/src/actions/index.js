@@ -6,7 +6,8 @@ import {
   DELETE_COMMENT,
   FETCH_COMMENTS,
   FETCH_SINGLE_COMMENT,
-  CHANGE_AUTH
+  SIGN_IN,
+  SIGN_OUT
 } from "actions/types";
 
 export const createComment = comment => async dispatch => {
@@ -37,9 +38,15 @@ export const fetchComments = () => async dispatch => {
   dispatch({ type: FETCH_COMMENTS, payload: response.data });
 };
 
-export const changeAuth = isLoggedIn => {
+export const signIn = userId => {
   return {
-    type: CHANGE_AUTH,
-    payload: isLoggedIn
+    type: SIGN_IN,
+    payload: userId
+  };
+};
+
+export const signOut = () => {
+  return {
+    type: SIGN_OUT
   };
 };

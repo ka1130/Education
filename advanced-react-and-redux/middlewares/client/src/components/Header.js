@@ -1,31 +1,31 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { changeAuth } from "actions";
 import GoogleAuth from "components/GoogleAuth";
 
 class Header extends Component {
-  renderButton() {
-    if (this.props.auth) {
-      return (
-        <button
-          className="ui button right floated item"
-          onClick={() => this.props.changeAuth(false)}
-        >
-          Sign Out
-        </button>
-      );
-    } else {
-      return (
-        <button
-          className="ui button right floated item"
-          onClick={() => this.props.changeAuth(true)}
-        >
-          Sign In
-        </button>
-      );
-    }
-  }
+  // change logic below!
+  // renderButton() {
+  //   if (this.props.auth) {
+  //     return (
+  //       <button
+  //         className="ui button right floated item"
+  //         // onClick={() => this.props.changeAuth(false)}
+  //       >
+  //         Sign Out
+  //       </button>
+  //     );
+  //   } else {
+  //     return (
+  //       <button
+  //         className="ui button right floated item"
+  //         // onClick={() => this.props.changeAuth(true)}
+  //       >
+  //         Sign In
+  //       </button>
+  //     );
+  //   }
+  // }
 
   render() {
     return (
@@ -36,7 +36,6 @@ class Header extends Component {
         <Link to="/comments/new" className="item">
           Post a comment
         </Link>
-        {/* {this.renderButton()} */}
         <GoogleAuth />
       </div>
     );
@@ -45,7 +44,4 @@ class Header extends Component {
 
 const mapStateToProps = state => ({ auth: state.auth });
 
-export default connect(
-  mapStateToProps,
-  { changeAuth }
-)(Header);
+export default connect(mapStateToProps)(Header);
