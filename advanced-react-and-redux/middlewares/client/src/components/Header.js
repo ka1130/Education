@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { changeAuth } from "actions";
+import GoogleAuth from "components/GoogleAuth";
 
 class Header extends Component {
   renderButton() {
@@ -35,7 +36,8 @@ class Header extends Component {
         <Link to="/comments/new" className="item">
           Post a comment
         </Link>
-        {this.renderButton()}
+        {/* {this.renderButton()} */}
+        <GoogleAuth />
       </div>
     );
   }
