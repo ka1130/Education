@@ -26,6 +26,11 @@ export const deleteComment = id => async dispatch => {
   history.push("/");
 };
 
+export const fetchSingleComment = id => async dispatch => {
+  const response = await comments.get(`/comments/${id}`);
+  dispatch({ type: "FETCH_SINGLE_COMMENT", payload: response.data });
+};
+
 export const fetchComments = () => async dispatch => {
   const response = await comments.get("/comments");
   dispatch({ type: FETCH_COMMENTS, payload: response.data });

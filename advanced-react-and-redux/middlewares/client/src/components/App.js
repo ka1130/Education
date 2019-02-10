@@ -55,7 +55,7 @@ class App extends Component {
         <Route path="/comments/new" component={CommentCreate} />
         <Route path="/comments/delete/:id" component={CommentDelete} />
         <Route path="/comments/edit/:id" component={CommentEdit} />
-        <Route path="/comments/show/:id" component={CommentShow} />
+        <Route path="/comments/:id" component={CommentShow} />
         <Route path="/not-authed" component={NotAuthedWarning} />
         <Route path="/login" component={LoginForm} />
         <Route exact path="/" component={CommentList} />

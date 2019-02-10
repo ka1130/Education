@@ -13,7 +13,6 @@ export default function(state = [], action) {
       return [...state, action.payload];
     case EDIT_COMMENT:
       return [...state, action.payload];
-    //check if correct^, probably not!
     case DELETE_COMMENT:
       return [...state].filter(elem => elem.id !== action.payload);
     default:
