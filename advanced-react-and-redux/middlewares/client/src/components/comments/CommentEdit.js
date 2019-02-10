@@ -11,9 +11,7 @@ class CommentEdit extends Component {
 
   handleSubmit = formValues => {
     const { id } = this.props.match.params;
-    console.log(formValues);
-    console.log(id);
-    // this.props.editComment(formValues, id);
+    this.props.editComment(formValues, id);
   };
 
   render() {
