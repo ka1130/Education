@@ -35,6 +35,7 @@ class CommentItem extends Component {
         <div className="content">
           <p className="header">{comment.name}</p>
           <div className="description">{comment.body}</div>
+          <Link to={`/comments/${comment.id}`}>See comment</Link>
         </div>
       </div>
     );
