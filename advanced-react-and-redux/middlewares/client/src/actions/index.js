@@ -5,6 +5,7 @@ import {
   EDIT_COMMENT,
   DELETE_COMMENT,
   FETCH_COMMENTS,
+  FETCH_SINGLE_COMMENT,
   CHANGE_AUTH
 } from "actions/types";
 
@@ -28,7 +29,7 @@ export const deleteComment = id => async dispatch => {
 
 export const fetchSingleComment = id => async dispatch => {
   const response = await comments.get(`/comments/${id}`);
-  dispatch({ type: "FETCH_SINGLE_COMMENT", payload: response.data });
+  dispatch({ type: FETCH_SINGLE_COMMENT, payload: response.data });
 };
 
 export const fetchComments = () => async dispatch => {
