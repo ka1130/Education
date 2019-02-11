@@ -1,4 +1,4 @@
-import { takeEvery, call, fork, put } from "redux-saga/effects";
+import { takeEvery, call, fork, put, takeLatest } from "redux-saga/effects";
 // call => call sequentially, waiting for a promise to resolve for instance
 import * as actions from "actions/users";
 import * as api from "api/users";
@@ -28,6 +28,23 @@ function* watchGetUsersRequest() {
   yield takeEvery(actions.Types.GET_USERS_REQUEST, getUsers);
 }
 
-const usersSagas = [fork(watchGetUsersRequest)];
+function* createUser(action) {
+  try {
+    yield call(api.createUser, {
+      firstName: action.payload.firstName,
+      lastName: action.payload.lastName
+    });
+    yield call(getUsers);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+function* watchCreateUserRequest(user) {
+  yield takeLatest(actions.Types.CREATE_USER_REQUEST, createUser);
+  //2nd arg is createUser worker saga
+}
+
+const usersSagas = [fork(watchGetUsersRequest), fork(watchCreateUserRequest)];
 
 export default usersSagas;
