@@ -8,6 +8,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props.users);
     return <div>App</div>;
   }
 }

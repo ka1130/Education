@@ -8,10 +8,8 @@ import {
 
 export function* fetchUsers(action) {
   try {
-    console.log("trying");
-    const data = yield call(getUsers);
-    console.log(data);
-    yield put({ type: FETCH_USERS_SUCCESS, data });
+    const response = yield call(getUsers);
+    yield put({ type: FETCH_USERS_SUCCESS, payload: response.data });
   } catch (error) {
     yield put({ type: FETCH_USERS_ERROR, error });
   }
