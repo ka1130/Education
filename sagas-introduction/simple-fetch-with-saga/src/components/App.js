@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchUsers } from "actions";
 
+import CommentsList from "components/CommentsList";
+
 class App extends Component {
   componentDidMount() {
     this.props.fetchUsers();
@@ -12,7 +14,13 @@ class App extends Component {
   }
 
   render() {
-    return <div>{this.renderUsersList()}</div>;
+    return (
+      <div>
+        <h3>Users</h3>
+        <ul>{this.renderUsersList()}</ul>
+        <CommentsList />
+      </div>
+    );
   }
 }
 

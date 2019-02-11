@@ -6,7 +6,7 @@ import {
   FETCH_USERS_ERROR
 } from "actions/types";
 
-export function* fetchUsers(action) {
+export function* fetchUsers() {
   try {
     const response = yield call(getUsers);
     yield put({ type: FETCH_USERS_SUCCESS, payload: response.data });
