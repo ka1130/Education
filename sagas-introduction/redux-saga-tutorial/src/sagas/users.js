@@ -1,4 +1,4 @@
-import { takeEvery, call, fork } from "redux-saga/effects";
+import { takeEvery, call, fork, put } from "redux-saga/effects";
 // call => call sequentially, waiting for a promise to resolve for instance
 import * as actions from "actions/users";
 import * as api from "api/users";
@@ -13,6 +13,8 @@ function* getUsers() {
       so there's no callbacks at all 
     */
     console.log(result);
+    //now we need to dispatch a success action, using 'put' effect
+    yield put(actions.getUsersSuccess({ items: result.data.data }));
   } catch (e) {
     console.log(e);
   }

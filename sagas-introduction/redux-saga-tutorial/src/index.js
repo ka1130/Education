@@ -5,6 +5,7 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "sagas";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import reducers from "reducers";
 import App from "components/App";
