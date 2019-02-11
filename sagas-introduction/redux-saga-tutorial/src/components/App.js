@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { getUsersRequest } from "actions/users";
 import UsersList from "components/UsersList";
+import NewUserForm from "components/NewUserForm";
 
 class App extends React.Component {
   componentDidMount() {
@@ -14,6 +15,7 @@ class App extends React.Component {
     return (
       <div style={{ margin: "0 auto", padding: "20px", maxWidth: "600px" }}>
         <UsersList users={users.items} />
+        <NewUserForm />
       </div>
     );
   }

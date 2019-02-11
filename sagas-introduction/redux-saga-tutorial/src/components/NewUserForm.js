@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, FormGroup, Label, Input } from "reactstrap";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 class NewUserForm extends Component {
   state = { firstName: "", lastName: "" };
@@ -26,6 +26,7 @@ class NewUserForm extends Component {
             placeholder="First Name"
             onChange={this.handleFirstNameChange}
             value={this.state.firstName}
+            required
           />
         </FormGroup>
         <FormGroup>
@@ -34,7 +35,13 @@ class NewUserForm extends Component {
             placeholder="Last Name"
             onChange={this.handleLastNameChange}
             value={this.state.lastName}
+            required
           />
+        </FormGroup>
+        <FormGroup>
+          <Button block outline type="submit" color="primary">
+            Create
+          </Button>
         </FormGroup>
       </Form>
     );
