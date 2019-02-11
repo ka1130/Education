@@ -10,12 +10,16 @@ class App extends React.Component {
     console.log(this.props);
   }
 
+  handleSubmit = ({ firstName, lastName }) => {
+    console.log(firstName, lastName);
+  };
+
   render() {
     const { users } = this.props;
     return (
       <div style={{ margin: "0 auto", padding: "20px", maxWidth: "600px" }}>
+        <NewUserForm onSubmit={this.handleSubmit} />
         <UsersList users={users.items} />
-        <NewUserForm />
       </div>
     );
   }

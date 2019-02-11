@@ -6,7 +6,11 @@ class NewUserForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(e);
+    this.props.onSubmit({
+      firstName: this.state.firstName,
+      lastName: this.state.lastName
+    });
+    this.setState({ firstName: "", lastName: "" });
   };
 
   handleFirstNameChange = e => {
