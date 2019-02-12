@@ -13,7 +13,6 @@ import {
 
 function* hello() {
   console.log("hello saga");
-  console.log(put({ type: "ACTION_FROM_WORKER" }));
   yield put({ type: "ACTION_FROM_WORKER" });
 }
 
@@ -21,9 +20,16 @@ function* workerSaga() {
   console.log("login only once");
 }
 
+function* byebyeSaga() {
+  console.log("bye bye");
+}
+
 function* watcherSaga() {
   yield take("LOGIN");
   yield call(workerSaga);
+  yield take("LOGOUT");
+  // ^ example of running sagas in a predefined sequence
+  yield call(byebyeSaga);
 }
 
 export default function* rootSaga() {
