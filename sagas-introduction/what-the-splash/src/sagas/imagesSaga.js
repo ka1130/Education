@@ -11,7 +11,7 @@ function* handleImagesLoad() {
     const images = yield call(fetchImages, page);
     yield put(setImages(images));
   } catch (error) {
-    yield put(setError(error));
+    yield put(setError(error.toString()));
   }
 
   // 'call' is a blocking effect, it will suspend the saga until the call has succeeded
