@@ -1,37 +1,14 @@
-import {
-  all,
-  takeEvery,
-  put,
-  takeLatest,
-  take,
-  call
-} from "redux-saga/effects";
-// effects are just returning objects; these objects are passed back
-// to the saga middleware which acts upon them accordingly
+import { all, put, take, call, takeEvery } from "redux-saga/effects";
+import { IMAGES } from "../constants";
 
-//watcher saga -> listens for actions -> invokes worker saga
-
-function* hello() {
-  console.log("hello saga");
-  yield put({ type: "ACTION_FROM_WORKER" });
+function* handleImagesLoad() {
+  console.log("fetching images from unsplash");
 }
 
-function* workerSaga() {
-  console.log("login only once");
+function* watcherSaga() {}
+
+function* rootSaga() {
+  yield takeEvery(IMAGES.LOAD, handleImagesLoad);
 }
 
-function* byebyeSaga() {
-  console.log("bye bye");
-}
-
-function* watcherSaga() {
-  yield take("LOGIN");
-  yield call(workerSaga);
-  yield take("LOGOUT");
-  // ^ example of running sagas in a predefined sequence
-  yield call(byebyeSaga);
-}
-
-export default function* rootSaga() {
-  yield all([hello(), watcherSaga()]);
-}
+export default rootSaga;
