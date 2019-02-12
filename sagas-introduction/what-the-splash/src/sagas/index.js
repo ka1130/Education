@@ -1,4 +1,11 @@
-import { all, takeEvery } from "redux-saga/effects";
+import {
+  all,
+  takeEvery,
+  put,
+  takeLatest,
+  take,
+  call
+} from "redux-saga/effects";
 // effects are just returning objects; these objects are passed back
 // to the saga middleware which acts upon them accordingly
 
@@ -6,14 +13,17 @@ import { all, takeEvery } from "redux-saga/effects";
 
 function* hello() {
   console.log("hello saga");
+  console.log(put({ type: "ACTION_FROM_WORKER" }));
+  yield put({ type: "ACTION_FROM_WORKER" });
 }
 
 function* workerSaga() {
-  console.log("hello from worker saga");
+  console.log("login only once");
 }
 
 function* watcherSaga() {
-  yield takeEvery("HELLO", workerSaga);
+  yield take("LOGIN");
+  yield call(workerSaga);
 }
 
 export default function* rootSaga() {
