@@ -1,5 +1,11 @@
 import React from "react";
-import { Button, Typography, withStyles } from "@material-ui/core";
+import {
+  AppBar,
+  Button,
+  Toolbar,
+  Typography,
+  withStyles
+} from "@material-ui/core";
 
 const styles = {
   app: {
@@ -10,6 +16,13 @@ const styles = {
 const App = props => {
   return (
     <div className={props.classes.app}>
+      <AppBar position="static" color="inherit">
+        <Toolbar>
+          <Typography variant="title" color="inherit">
+            Hello there
+          </Typography>
+        </Toolbar>
+      </AppBar>
       <Button variant="contained" color="primary">
         click
       </Button>
