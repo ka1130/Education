@@ -5,7 +5,7 @@ const App = () => {
   return (
     <div className="full-screen">
       <div>
-        <h1>React Page </h1>
+        <h1>React Page 22</h1>
         <br />
         <a
           className="button-line"

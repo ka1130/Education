@@ -8,6 +8,9 @@ module.exports = {
     path: path.join(__dirname, "dist"),
     filename: "bundle.js"
   },
+  resolve: {
+    modules: [path.join(__dirname, "src/"), "node_modules/"]
+  },
   module: {
     rules: [
       {
