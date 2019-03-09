@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#first {
+  background-color: teal;
+}
+
+#second {
+  background-color: blue;
+}
+
+#third {
+  background-color: crimson;
+}
+
+body {
+  font-size: 24px;
+  line-height: 60px;
+  text-align: center;
+  color: white;
+  background-image: url("../img/webpack.png");
+  background-size: 400px;
+  background-repeat: repeat-x repeat-y;
+}
+
+p {
+  margin: 100px;
+}
