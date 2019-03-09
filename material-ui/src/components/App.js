@@ -2,6 +2,7 @@ import React from "react";
 import "./App.scss";
 
 const App = () => {
+  console.log(React);
   return (
     <div className="full-screen">
       <div>
