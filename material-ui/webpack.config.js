@@ -32,7 +32,24 @@ module.exports = {
       },
       {
         test: /.(css|scss)$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+        // [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
       },
       {
         test: /.(jpg|jpeg|png|gif|mp3|svg)$/,
