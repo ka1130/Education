@@ -18,18 +18,16 @@ const App = () => {
   console.log("ok");
   return (
     <>
-      {/* <CssBaseline /> */}
-      <Grid container alignItems="center">
-        <Grid container item xs={12} spacing={0}>
-          <Header />
+      <CssBaseline />
+      <Grid container item xs={12} spacing={0}>
+        <Header />
+      </Grid>
+      <Grid container item xs={12} spacing={0}>
+        <Grid item xs={3}>
+          <Sidebar />
         </Grid>
-        <Grid container item xs={12} spacing={0}>
-          {/* <Grid item xs={3}>
-            <Sidebar />
-          </Grid>
-          <Grid item xs={9}>
-            <MainContent />
-          </Grid> */}
+        <Grid item xs={9}>
+          <MainContent />
         </Grid>
       </Grid>
     </>

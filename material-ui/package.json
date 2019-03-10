@@ -25,6 +25,7 @@
     "node-sass": "^4.11.0",
     "override-material-ui-css": "^1.1.4",
     "sass-loader": "^7.1.0",
+    "uuidv4": "^3.0.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1"
