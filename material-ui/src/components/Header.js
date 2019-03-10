@@ -34,7 +34,7 @@ const Header = () => {
             </div>
           </Grid>
           <Grid item xs={4} />
-          <Grid item xs={2}>
+          <Grid item xs={2} className="account">
             <Button color="inherit">Lorem Ipsum</Button>
             <IconButton color="inherit">
               <AccountCircle />
