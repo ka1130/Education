@@ -8,7 +8,7 @@
 }
 
 #second {
-  background-color: blue;
+  background-color: orange;
 }
 
 #third {
@@ -22,7 +22,6 @@ body {
   color: white;
   background-image: url("../img/webpack.png");
   background-size: 400px;
-  background-repeat: repeat-x repeat-y;
 }
 
 p {
