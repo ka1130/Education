@@ -18,10 +18,17 @@
   }
 }
 
-.list-panel {
-  margin-top: 2rem;
-
-  &__heading {
-    font-size: 1.5rem;
+.sidebar {
+  & > * {
+    position: static;
   }
+}
+
+.list-panel {
+  // margin-top: 2rem;
+  margin-top: 20px;
+
+  // &__heading {
+  //   font-size: 1.5rem;
+  // }
 }

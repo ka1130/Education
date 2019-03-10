@@ -33,8 +33,8 @@ const Header = () => {
               <InputBase placeholder="Search…" className="searchbar--input" />
             </div>
           </Grid>
-          <Grid item xs={4} />
-          <Grid item xs={2} className="account">
+          <Grid item xs={3} />
+          <Grid item xs={3} className="account">
             <Button color="inherit">Lorem Ipsum</Button>
             <IconButton color="inherit">
               <AccountCircle />

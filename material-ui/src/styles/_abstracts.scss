@@ -1,19 +1,10 @@
-// variables, mixins, resets etc.
-*,
-*:before,
-*:after {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
-}
-
 html {
-  font-size: 62.5%; // === 10px
+  // font-size: 62.5%; // === 10px
 }
 
 body {
   box-sizing: border-box;
-  & * {
-    font-size: 1.25rem;
-  }
+  // & * {
+  //   font-size: 1.25rem;
+  // }
 }
