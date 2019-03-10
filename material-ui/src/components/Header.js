@@ -29,6 +29,10 @@ const Header = () => {
               <InputBase placeholder="Search…" className="searchbar--input" />
             </div>
           </Grid>
+          <Grid item xs={3} />
+          <Grid item xs={3}>
+            <Button color="inherit">Lorem Ipsum</Button>
+          </Grid>
         </Toolbar>
       </AppBar>
     </OverrideMaterialUICss>
