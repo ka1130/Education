@@ -77,7 +77,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/proj/dist/";
+/******/ 	__webpack_require__.p = "";
 /******/
 /******/
 /******/ 	// Load entry module and return exports
@@ -104,7 +104,7 @@ eval("\nvar content = __webpack_require__(/*! !../node_modules/css-loader/dist/c
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("module.exports = \"/proj/dist/myPrefix.webpack.png\";\n\n//# sourceURL=webpack:///./img/webpack.png?");
+eval("module.exports = \"/proj/dist/images/myPrefix.webpack.png\";\n\n//# sourceURL=webpack:///./img/webpack.png?");
 
 /***/ }),
 
