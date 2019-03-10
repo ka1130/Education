@@ -1,4 +1,3 @@
-var p = document.createElement("p");
-p.innerText = "FIRST.jsssss";
-p.setAttribute("id", "first");
-document.body.appendChild(p);
+import $ from "jquery";
+
+$("body").append('<p id="first">FIRST.js by jquery</p>');
