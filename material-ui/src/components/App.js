@@ -1,11 +1,19 @@
 import React from "react";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Grid from "@material-ui/core/Grid";
+
+import Header from "components/Header";
 
 const App = () => {
   return (
-    <div>
-      <h1 className="full-screen">React Page</h1>
-      <h2>TEST</h2>
-    </div>
+    <>
+      <CssBaseline />
+      <Grid container spacing={16} justify="center" alignItems="center">
+        <Grid item xs={12}>
+          <Header />
+        </Grid>
+      </Grid>
+    </>
   );
 };
 

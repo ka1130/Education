@@ -38,15 +38,11 @@ module.exports = {
           },
           {
             loader: "css-loader",
-            options: {
-              sourceMap: true
-            }
+            options: { sourceMap: true }
           },
           {
             loader: "sass-loader",
-            options: {
-              sourceMap: true
-            }
+            options: { sourceMap: true }
           }
         ]
         // [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
@@ -71,9 +67,6 @@ module.exports = {
       filename: "index.html",
       template: path.join(__dirname, "src", "index.html")
     }),
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
-    })
+    new MiniCssExtractPlugin()
   ]
 };
