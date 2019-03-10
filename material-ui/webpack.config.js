@@ -1,4 +1,6 @@
 const path = require("path");
+const webpack = require("webpack");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -7,6 +9,13 @@ module.exports = {
   output: {
     path: path.join(__dirname, "dist"),
     filename: "bundle.js"
+  },
+  mode: "development",
+  devtool: "inline-source-map",
+  devServer: {
+    contentBase: "./dist",
+    port: 3030,
+    hot: true
   },
   resolve: {
     modules: [path.join(__dirname, "src/"), "node_modules/"]
@@ -24,9 +33,6 @@ module.exports = {
       {
         test: /.(css|scss)$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
-        /* The order of your loaders file matters a lot, because webpack processes the loaders 
-        from right to left. So using the test for css files for example, 
-        it will run sass-loader first, then css-loader and finally MiniCssExtractPlugin. */
       },
       {
         test: /.(jpg|jpeg|png|gif|mp3|svg)$/,
@@ -42,6 +48,8 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: path.join(__dirname, "src", "index.html")
