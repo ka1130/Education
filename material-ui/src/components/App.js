@@ -9,7 +9,7 @@ const App = () => {
     <>
       <CssBaseline />
       <Grid container spacing={16} justify="center" alignItems="center">
-        <Grid item xs={12}>
+        <Grid container item xs={12} spacing={16}>
           <Header />
         </Grid>
       </Grid>
