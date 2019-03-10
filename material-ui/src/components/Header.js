@@ -7,7 +7,11 @@ import {
   InputBase,
   Toolbar
 } from "@material-ui/core";
-import { Menu as MenuIcon, Search as SearchIcon } from "@material-ui/icons";
+import {
+  AccountCircle,
+  Menu as MenuIcon,
+  Search as SearchIcon
+} from "@material-ui/icons";
 import { OverrideMaterialUICss } from "override-material-ui-css";
 
 const Header = () => {
@@ -29,9 +33,12 @@ const Header = () => {
               <InputBase placeholder="Search…" className="searchbar--input" />
             </div>
           </Grid>
-          <Grid item xs={3} />
-          <Grid item xs={3}>
+          <Grid item xs={4} />
+          <Grid item xs={2}>
             <Button color="inherit">Lorem Ipsum</Button>
+            <IconButton color="inherit">
+              <AccountCircle />
+            </IconButton>
           </Grid>
         </Toolbar>
       </AppBar>
