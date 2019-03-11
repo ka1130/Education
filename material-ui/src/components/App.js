@@ -7,30 +7,18 @@ import MainContent from "components/MainContent";
 import Sidebar from "components/Sidebar";
 
 const App = () => {
-  var docWidth = document.documentElement.offsetWidth;
-
-  [].forEach.call(document.querySelectorAll("*"), function(el) {
-    if (el.offsetWidth > docWidth) {
-      console.log(el);
-    }
-  });
-
-  console.log("ok");
   return (
-    <>
-      <CssBaseline />
-      <Grid container item xs={12} spacing={0}>
+    <Grid container spacing={0}>
+      <Grid item xs={12}>
         <Header />
       </Grid>
-      <Grid container item xs={12} spacing={0}>
-        <Grid item xs={3}>
-          <Sidebar />
-        </Grid>
-        <Grid item xs={9}>
-          <MainContent />
-        </Grid>
+      <Grid item xs={3}>
+        <Sidebar />
       </Grid>
-    </>
+      <Grid item xs={9}>
+        <MainContent />
+      </Grid>
+    </Grid>
   );
 };
 

@@ -17,7 +17,7 @@ import { OverrideMaterialUICss } from "override-material-ui-css";
 const Header = () => {
   return (
     <OverrideMaterialUICss>
-      <AppBar position="static">
+      <AppBar position="static" className="app-header">
         <Toolbar>
           <Grid item xs={1}>
             <IconButton color="inherit">

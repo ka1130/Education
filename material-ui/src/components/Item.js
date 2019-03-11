@@ -10,7 +10,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 const Item = props => {
   const { item, index } = props;
   return (
-    <ExpansionPanel className="list-panel">
+    <ExpansionPanel>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
         <Typography className="list-panel__heading">
           {`${item.title} ${index}`}
