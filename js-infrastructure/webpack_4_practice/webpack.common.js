@@ -1,5 +1,4 @@
 const path = require("path");
-const webpack = require("webpack");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -9,7 +8,6 @@ module.exports = {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist")
   },
-  mode: "development",
   devServer: {
     contentBase: "./dist",
     // ^ tells the server where to find bundled file
@@ -46,7 +44,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: "index.html",
