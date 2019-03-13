@@ -1,4 +1,7 @@
 const path = require("path");
+const webpack = require("webpack");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./js/entry.js",
@@ -7,6 +10,12 @@ module.exports = {
     path: path.resolve(__dirname, "dist")
   },
   mode: "development",
+  devServer: {
+    contentBase: "./dist",
+    // ^ tells the server where to find bundled file
+    port: 3030,
+    hot: true
+  },
   module: {
     rules: [
       {
@@ -27,6 +36,7 @@ module.exports = {
         options: {
           name: "[name].[ext]",
           outputPath: "image/"
+          // publicPath: "/webpack_4_practice/dist/image"
         }
       },
       {
@@ -34,5 +44,14 @@ module.exports = {
         loader: "file-loader"
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      filename: "index.html",
+      template: "./template.html",
+      favicon: "./favicon.ico"
+    })
+  ]
 };
