@@ -16,6 +16,11 @@ module.exports = merge(common, {
     ]
   },
   optimization: {
+    splitChunks: {
+      chunks: "all"
+      // to share common files, so as not to bundle i.e. jquery multiple times
+      // handy if we have more than one entry points
+    },
     minimizer: [
       // we now need to handle minimazion by ourselves now with the use of UglifyJS
       // new UglifyJsPlugin(),

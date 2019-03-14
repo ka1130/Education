@@ -6,6 +6,7 @@ module.exports = {
   entry: "./js/entry.js",
   output: {
     filename: "bundle.js",
+    chunkFilename: "[name].shared.js",
     path: path.resolve(__dirname, "dist")
   },
   devServer: {
