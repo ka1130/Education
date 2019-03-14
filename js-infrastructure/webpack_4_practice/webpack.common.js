@@ -17,10 +17,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"]
-      },
-      {
         test: /\.mp4$/,
         loader: "file-loader",
         options: {
