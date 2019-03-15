@@ -23,8 +23,8 @@ module.exports = merge(common, {
     },
     minimizer: [
       // we now need to handle minimazion by ourselves now with the use of UglifyJS
-      // new UglifyJsPlugin(),
-      new OptimizeCssAssetsPlugin()
+      new OptimizeCssAssetsPlugin(),
+      new UglifyJsPlugin()
     ]
   },
   plugins: [

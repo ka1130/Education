@@ -3,9 +3,12 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./js/entry.js",
+  entry: {
+    page: "./js/entry.js",
+    card: "./js/card.js"
+  },
   output: {
-    filename: "bundle.js",
+    // filename: "bundle.[name].js",
     chunkFilename: "[name].shared.js",
     path: path.resolve(__dirname, "dist")
   },

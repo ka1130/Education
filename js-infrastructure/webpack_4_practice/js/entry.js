@@ -25,7 +25,7 @@ function append_video() {
   $(video).appendTo("#video_box");
 }
 
-$("#video_btn").click(() => {
+$("#video_btn").click(function() {
   if ($("#video").length) {
     // video has been loaded, do nothing now
   } else {
