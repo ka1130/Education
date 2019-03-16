@@ -11,6 +11,10 @@ module.exports = {
     publicPath: "/",
     filename: "bundle.js"
   },
+  resolve: {
+    modules: [path.join(__dirname, "src/"), "node_modules/"]
+    // the above is responsible for setting absolute paths
+  },
   module: {
     rules: [
       {

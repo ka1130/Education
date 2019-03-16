@@ -1,8 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
-const title = "My Minimal React Webpack Babel Setup";
+import App from "components/App";
+import reducers from "redux/reducers";
 
-ReactDOM.render(<div>{title}</div>, document.getElementById("app"));
+ReactDOM.render(
+  <Provider store={createStore(reducers)}>
+    <App />
+  </Provider>,
+  document.getElementById("app")
+);
 
 module.hot.accept();
