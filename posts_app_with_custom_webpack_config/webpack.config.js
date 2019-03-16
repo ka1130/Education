@@ -1,0 +1,29 @@
+const path = require("path");
+const webpack = require("webpack");
+
+module.exports = {
+  entry: {
+    myEntry: "./src/index.js"
+    // the above alias will be used to name bundled files
+  },
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
+    filename: "bundle.js"
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: ["babel-loader"]
+      }
+    ]
+  },
+  plugins: [new webpack.HotModuleReplacementPlugin()],
+  mode: "development",
+  devServer: {
+    contentBase: "./dist",
+    hot: true
+  }
+};
