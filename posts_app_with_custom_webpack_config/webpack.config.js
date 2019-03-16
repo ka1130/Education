@@ -36,6 +36,7 @@ module.exports = {
   mode: "development",
   devServer: {
     contentBase: "./dist",
+    watchContentBase: true,
     hot: true
   }
 };
