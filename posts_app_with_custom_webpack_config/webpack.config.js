@@ -11,6 +11,7 @@ module.exports = {
     publicPath: "/",
     filename: "bundle.js"
   },
+  devtool: "inline-source-map",
   resolve: {
     extensions: [".js", ".jsx"],
     modules: [path.join(__dirname, "src/"), "node_modules/"]
