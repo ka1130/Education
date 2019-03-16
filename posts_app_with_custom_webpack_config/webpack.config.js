@@ -12,6 +12,7 @@ module.exports = {
     filename: "bundle.js"
   },
   resolve: {
+    extensions: [".js", ".jsx"],
     modules: [path.join(__dirname, "src/"), "node_modules/"]
     // the above is responsible for setting absolute paths
   },
