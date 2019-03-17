@@ -7,10 +7,11 @@ export const fetchPosts = () => async dispatch => {
   dispatch({ type: FETCH_POSTS, payload: response.data });
 };
 
-export const fetchPostsAndUsers = () => async dispatch => {
-  console.log("about ot fetch posts");
+export const fetchPostsAndUsers = () => async (dispatch, getState) => {
   await dispatch(fetchPosts());
-  console.log("fetched posts");
+  const userIds = _.uniq(_.map(getState().posts, "userId"));
+  // ^ find just uniq userIds keys on the posts arr
+  userIds.forEach(id => dispatch(fetchUser(id)));
 };
 
 export const fetchUser = id => async dispatch => {
