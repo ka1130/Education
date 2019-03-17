@@ -9,9 +9,15 @@ export const fetchPosts = () => async dispatch => {
 
 export const fetchPostsAndUsers = () => async (dispatch, getState) => {
   await dispatch(fetchPosts());
-  const userIds = _.uniq(_.map(getState().posts, "userId"));
-  // ^ find just uniq userIds keys on the posts arr
-  userIds.forEach(id => dispatch(fetchUser(id)));
+  // const userIds = _.uniq(_.map(getState().posts, "userId"));
+  // // ^ find just uniq userIds keys on the posts arr
+  // userIds.forEach(id => dispatch(fetchUser(id)));
+
+  _.chain(getState().posts)
+    .map('userId')
+    .uniq()
+    .forEach(id => dispatch(fetchUser(id))
+    .value() // to execute the chained functions
 };
 
 export const fetchUser = id => async dispatch => {
