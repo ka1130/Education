@@ -14,10 +14,11 @@ export const fetchPostsAndUsers = () => async (dispatch, getState) => {
   // userIds.forEach(id => dispatch(fetchUser(id)));
 
   _.chain(getState().posts)
-    .map('userId')
+    .map("userId")
     .uniq()
-    .forEach(id => dispatch(fetchUser(id))
-    .value() // to execute the chained functions
+    .forEach(id => dispatch(fetchUser(id)))
+    .value(); // to execute the chained functions
+  // this chained fns do the same thing as the commented out lines above
 };
 
 export const fetchUser = id => async dispatch => {
