@@ -15,8 +15,9 @@ class StreamCreate extends React.Component {
   renderInput = ({ input, label, meta }) => {
     // label is a custom prop that we gave to the Field element
     // it will show up as prop here
+    const className = `field ${meta.error && meta.touched ? "error" : ""}`;
     return (
-      <div className="field">
+      <div className={className}>
         <label>{label}</label>
         <input {...input} autoComplete="off" />
         {this.renderError(meta)}
