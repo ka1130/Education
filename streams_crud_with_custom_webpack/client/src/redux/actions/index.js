@@ -1,7 +1,9 @@
 import streams from "apis/streams";
 import * as constants from "redux/actions/constants";
 
-export const createStream = formValues => async dispatch => {
+export const createStream = formValues => async (dispatch, getState) => {
+  console.log(getState());
+  // const { userId } = getState().auth
   const response = await streams.post("/streams", formValues);
   dispatch({ type: constants.CREATE_STREAM, payload: response.data });
 };
