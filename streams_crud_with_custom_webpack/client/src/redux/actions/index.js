@@ -28,5 +28,5 @@ export const fetchAllStreams = () => async dispatch => {
   dispatch({ type: constants.FETCH_ALL_STREAMS, payload: response.data });
 };
 
-export const signIn = () => ({ type: constants.SIGN_IN });
+export const signIn = userId => ({ type: constants.SIGN_IN, payload: userId });
 export const signOut = () => ({ type: constants.SIGN_OUT });
