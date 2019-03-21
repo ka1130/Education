@@ -2,10 +2,10 @@ import streams from "apis/streams";
 import * as constants from "redux/actions/constants";
 
 export const createStream = formValues => async (dispatch, getState) => {
-  console.log(getState());
-  // const { userId } = getState().auth
-  const response = await streams.post("/streams", formValues);
+  const { userId } = getState().auth;
+  const response = await streams.post("/streams", { ...formValues, userId });
   dispatch({ type: constants.CREATE_STREAM, payload: response.data });
+  // do some programatic navigation to get the user back to the root route
 };
 
 export const editStream = (id, formValues) => async dispatch => {
