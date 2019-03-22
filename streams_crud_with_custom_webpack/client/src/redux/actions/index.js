@@ -1,11 +1,13 @@
 import streams from "apis/streams";
 import * as constants from "redux/actions/constants";
+import { history } from "customHistory";
 
 export const createStream = formValues => async (dispatch, getState) => {
   const { userId } = getState().auth;
   const response = await streams.post("/streams", { ...formValues, userId });
   dispatch({ type: constants.CREATE_STREAM, payload: response.data });
   // do some programatic navigation to get the user back to the root route
+  history.push("/");
 };
 
 export const editStream = (id, formValues) => async dispatch => {
