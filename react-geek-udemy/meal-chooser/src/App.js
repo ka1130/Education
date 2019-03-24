@@ -20,14 +20,14 @@ class App extends Component {
   }
 
   onMealSelect = (item, dataEntry) => {
-    this.setState({
-      [dataEntry[0]]: item.value
-    });
+    if (this.state[dataEntry[0]] === item.value) {
+      this.setState({ [dataEntry[0]]: "" });
+    } else {
+      this.setState({
+        [dataEntry[0]]: item.value
+      });
+    }
   };
-
-  deselect(elem) {
-    this.setState({ [elem[0]]: "" });
-  }
 
   render() {
     return (
@@ -43,7 +43,6 @@ class App extends Component {
               <h5>{elem[0].toUpperCase()}</h5>
               <EnhancedCheckboxGroup
                 items={elem[1]}
-                onDeselect={() => this.deselect(elem)}
                 onSelect={selectedItem => this.onMealSelect(selectedItem, elem)}
               />
             </div>

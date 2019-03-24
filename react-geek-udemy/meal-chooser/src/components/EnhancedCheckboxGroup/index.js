@@ -8,15 +8,14 @@ export default class EnhancedCheckboxGroup extends React.Component {
   };
 
   setSelected(selectedItem) {
-    this.setState({ selectedItem });
+    if (selectedItem !== this.state.selectedItem) {
+      this.setState({ selectedItem });
+    } else {
+      this.setState({ selectedItem: null });
+    }
+
     this.props.onSelect(this.props.items[selectedItem]);
   }
-
-  deselect = i => {
-    console.log(i);
-    this.setState({ selectedItem: null });
-    this.props.onDeselect(i);
-  };
 
   render() {
     return (
@@ -27,7 +26,6 @@ export default class EnhancedCheckboxGroup extends React.Component {
             item={item}
             selected={this.state.selectedItem === i}
             onSelect={() => this.setSelected(i)}
-            onDeselect={() => this.deselect(i)}
           />
         ))}
       </div>

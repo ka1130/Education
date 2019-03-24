@@ -12,7 +12,7 @@ export default ({ item, selected, onSelect, onDeselect }) => {
         value={item.value}
         id={item.id}
         checked={selected}
-        onChange={selected ? onDeselect : onSelect}
+        onChange={onSelect}
       />
       <label>{item.label}</label>
     </div>
