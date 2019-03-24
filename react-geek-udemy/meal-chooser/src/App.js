@@ -38,23 +38,21 @@ class App extends Component {
         </p>
         <p className="meal-info">{this.renderMealInfo()}</p>
         <div className="container">
-          {Object.entries(data).map((elem, i) => {
-            console.log(elem);
-            return (
-              <div className="column" key={i}>
-                <h5>{elem[0].toUpperCase()}</h5>
-                <EnhancedCheckboxGroup
-                  items={elem[1]}
-                  onDeselect={() => this.deselect(elem)}
-                  onSelect={selectedItem =>
-                    this.onMealSelect(selectedItem, elem)
-                  }
-                />
-              </div>
-            );
-          })}
+          {Object.entries(data).map((elem, i) => (
+            <div className="column" key={i}>
+              <h5>{elem[0].toUpperCase()}</h5>
+              <EnhancedCheckboxGroup
+                items={elem[1]}
+                onDeselect={() => this.deselect(elem)}
+                onSelect={selectedItem => this.onMealSelect(selectedItem, elem)}
+              />
+            </div>
+          ))}
         </div>
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          onClick={() => this.setState({ dbl: !this.state.dbl })}
+        />
         <label>Double portion</label>
       </main>
     );
