@@ -1,0 +1,8 @@
+.selected {
+  background-color: cadetblue;
+  color: white;
+}
+
+.enhanced-checkbox-container {
+  padding: 10px;
+}
