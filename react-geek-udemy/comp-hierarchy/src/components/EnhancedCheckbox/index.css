@@ -1,0 +1,8 @@
+input {
+  margin: 10px;
+}
+
+.selected {
+  background-color: cadetblue;
+  color: white;
+}
