@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: "./index.js",
@@ -29,7 +30,7 @@ module.exports = {
       }
     ]
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [new webpack.HotModuleReplacementPlugin(), new Dotenv()],
   mode: "development",
   devServer: {
     contentBase: "./",
