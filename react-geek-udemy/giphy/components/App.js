@@ -1,8 +1,12 @@
 import React from "react";
+import SearchForm from "components/SearchForm";
 
 const App = () => {
-  console.log(process.env.REACT_APP_API_KEY);
-  return <div>App</div>;
+  return (
+    <div>
+      <SearchForm onSearchSubmit={() => console.log(term)} />
+    </div>
+  );
 };
 
 export default App;
