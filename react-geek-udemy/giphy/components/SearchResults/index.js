@@ -12,6 +12,6 @@ const SearchResults = ({ results }) => {
   );
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({ results: state.search.results });
 
-export default connect(null)(SearchResults);
+export default connect(mapStateToProps)(SearchResults);
