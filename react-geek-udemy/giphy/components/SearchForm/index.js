@@ -1,29 +1,23 @@
 import React from "react";
 
-class SearchForm extends React.Component {
-  constructor(props) {
-    super(props);
+const SearchForm = ({ onSearchSubmit }) => {
+  let searchField = null;
 
-    this.giphysRef = null;
-  }
-
-  onSubmit(e, bar) {
+  const searchSubmitted = e => {
     e.preventDefault();
-    this.props.onSearchSubmit(bar);
-  }
+    onSearchSubmit(searchField.value);
+  };
 
-  render() {
-    return (
-      <form onSubmit={e => this.onSubmit(e, this.giphysRef.value)}>
-        <input
-          type="text"
-          placeholder="Find me giphys"
-          ref={el => (this.giphysRef = el)}
-        />
-        <button>Submit</button>
-      </form>
-    );
-  }
-}
+  return (
+    <form onSubmit={searchSubmitted}>
+      <input
+        type="text"
+        placeholder="Find me giphys"
+        ref={el => (searchField = el)}
+      />
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
 
 export default SearchForm;
