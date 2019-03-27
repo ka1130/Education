@@ -5,7 +5,7 @@ import SearchResults from "components/SearchResults";
 const App = () => {
   return (
     <div>
-      <SearchForm onSearchSubmit={term => console.log(term)} />
+      <SearchForm />
       <SearchResults />
     </div>
   );

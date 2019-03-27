@@ -5,11 +5,9 @@ import { searchError, searchSuccess } from "actions/search";
 
 const apiKey = process.env.REACT_APP_API_KEY;
 
-function* doSearch(searchPerformed) {
+function* doSearch(action) {
   try {
-    console.log(searchPerformed, searchPerformed.searchTerm);
-    const { searchTerm } = searchPerformed;
-    console.log(searchTerm);
+    const searchTerm = action.payload;
     const searchResults = yield call(
       axios.get("https://api.giphy.com/v1/gifs/search", {
         params: {
@@ -19,10 +17,10 @@ function* doSearch(searchPerformed) {
         }
       })
     );
-    // the object returned will be the evaluated value ton be called by the next yield
     console.log(searchResults);
     yield put(searchSuccess(searchResults.data.data));
   } catch (e) {
+    console.log("error", e);
     yield put(searchError());
   }
 }
