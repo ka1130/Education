@@ -1,16 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import createSagaMiddleware from "redux-saga";
+
 import rootReducer from "reducers";
 import { searchSuccess } from "actions/search";
+import searchSaga from "sagas/search";
 
 import App from "components/App";
 
+const sagas = createSagaMiddleware();
+// create generator instance
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeEnhancers(applyMiddleware(sagas))
 );
+
+sagas.run(searchSaga);
 
 const results = [
   {

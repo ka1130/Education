@@ -5,8 +5,8 @@ import SearchResult from "components/SearchResult";
 const SearchResults = ({ results }) => {
   return (
     <div>
-      {results.map(result => (
-        <SearchResult result={result} />
+      {results.map((result, i) => (
+        <SearchResult result={result} key={i} />
       ))}
     </div>
   );
