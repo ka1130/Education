@@ -9,13 +9,15 @@ function* doSearch(action) {
   try {
     const searchTerm = action.payload;
     const searchResults = yield call(
-      axios.get("https://api.giphy.com/v1/gifs/search", {
+      axios.get,
+      "https://api.giphy.com/v1/gifs/search",
+      {
         params: {
           apiKey,
           q: searchTerm,
           limit: 25
         }
-      })
+      }
     );
     console.log(searchResults);
     yield put(searchSuccess(searchResults.data.data));
