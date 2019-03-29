@@ -1,12 +1,11 @@
 import React from "react";
-// import { withRouter } from "react-router-dom";
-// import { connect } from "react-redux";
-
 import Navigation from "components/Navigation";
+import styles from "./App.css";
 
 const App = ({ children }) => {
   return (
     <div>
+      <h1 className={styles.header}>Giphy Master</h1>
       <Navigation />
       {children}
     </div>

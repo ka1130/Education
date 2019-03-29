@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-// import { push } from 'react-router-redux'
-// action creator function from a push action
 import { push } from "connected-react-router";
 import NavigationItem from "components/NavigationItem";
+import styles from "./Navigation.css";
 
 const pages = [
   { path: "/", title: "Search" },
@@ -11,14 +10,19 @@ const pages = [
   { path: "/random", title: "Random" }
 ];
 
-const Navigation = ({ navigate, pages }) => {
+const Navigation = ({ navigate, pages, currentPath }) => {
   const items = pages.map(({ path, title }) => (
-    <NavigationItem key={path} path={path} onClick={navigate}>
+    <NavigationItem
+      key={path}
+      path={path}
+      onClick={navigate}
+      isCurrent={path === currentPath}
+    >
       {title}
     </NavigationItem>
   ));
 
-  return <div>{items}</div>;
+  return <div className={styles.container}>{items}</div>;
 };
 
 const mapDispatchToProps = dispatch => {
@@ -27,8 +31,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const mapStateToProps = () => {
-  return { pages };
+const mapStateToProps = state => {
+  return { pages, currentPath: state.router.location.pathname };
 };
 
 export default connect(

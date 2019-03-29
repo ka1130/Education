@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { searchPerformed } from "actions/search";
+import styles from "./SearchForm.css";
 
 const SearchForm = ({ onSearchSubmit }) => {
   let searchField = null;
@@ -11,13 +12,16 @@ const SearchForm = ({ onSearchSubmit }) => {
   };
 
   return (
-    <form onSubmit={searchSubmitted}>
+    <form onSubmit={searchSubmitted} className={styles.container}>
       <input
         type="text"
         placeholder="Find me giphys"
         ref={el => (searchField = el)}
+        className={styles.searchField}
       />
-      <button type="submit">Submit</button>
+      <button type="submit" className={styles.button}>
+        Submit
+      </button>
     </form>
   );
 };
