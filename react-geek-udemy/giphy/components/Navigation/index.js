@@ -5,7 +5,11 @@ import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import NavigationItem from "components/NavigationItem";
 
-const pages = [{ path: "/", title: "Search" }];
+const pages = [
+  { path: "/", title: "Search" },
+  { path: "/trending", title: "Trending" },
+  { path: "/random", title: "Random" }
+];
 
 const Navigation = ({ navigate, pages }) => {
   const items = pages.map(({ path, title }) => (
