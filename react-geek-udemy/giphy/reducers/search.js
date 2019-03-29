@@ -1,7 +1,8 @@
-import { SEARCH_PERFORMED, SEARCH_SUCCESS, SEARCH_ERROR } from "actions/types";
+import { PERFORM_SEARCH, SEARCH_SUCCESS, SEARCH_ERROR } from "actions/types";
 
 const initialState = {
-  results: []
+  results: [],
+  currentOffset: 0
 };
 
 function searchResultsTransformer(rawResult) {

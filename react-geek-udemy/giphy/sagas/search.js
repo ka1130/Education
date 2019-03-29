@@ -1,11 +1,15 @@
 import axios from "axios";
-import { put, call, takeLatest } from "redux-saga/effects";
+import { put, call, takeLatest, select } from "redux-saga/effects";
+// select selects parts of global state on the store
 import { SEARCH_PERFORMED } from "actions/types";
 import { searchError, searchSuccess } from "actions/search";
 
 const apiKey = process.env.REACT_APP_API_KEY;
 
+const selectSearchState = state => state.search;
+
 function* doSearch(action) {
+  const { currentOffset } = yield select(selectSearchState);
   try {
     const searchTerm = action.payload;
     const searchResults = yield call(
@@ -15,7 +19,8 @@ function* doSearch(action) {
         params: {
           apiKey,
           q: searchTerm,
-          limit: 50
+          limit: 50,
+          offset: currentOffset
         }
       }
     );

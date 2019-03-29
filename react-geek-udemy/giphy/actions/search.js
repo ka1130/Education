@@ -1,9 +1,16 @@
-import { SEARCH_PERFORMED, SEARCH_SUCCESS, SEARCH_ERROR } from "actions/types";
+import {
+  PERFORM_SEARCH,
+  SEARCH_SUCCESS,
+  SEARCH_ERROR,
+  NEW_SEARCH
+} from "actions/types";
+
+export const performSearch = () => ({ type: PERFORM_SEARCH });
 
 export const searchError = () => ({ type: SEARCH_ERROR });
 
-export const searchPerformed = searchTerm => ({
-  type: SEARCH_PERFORMED,
+export const newSearch = searchTerm => ({
+  type: NEW_SEARCH,
   payload: searchTerm
 });
 
