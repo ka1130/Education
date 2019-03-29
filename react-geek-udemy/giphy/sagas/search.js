@@ -15,7 +15,7 @@ function* doSearch(action) {
         params: {
           apiKey,
           q: searchTerm,
-          limit: 25
+          limit: 50
         }
       }
     );
