@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const Dotenv = require("dotenv-webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: "./index.js",
@@ -27,10 +28,34 @@ module.exports = {
             plugins: ["@babel/plugin-transform-runtime"]
           }
         }
+      },
+      {
+        test: /.(css|scss)$/,
+        use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: true,
+              modules: true,
+              localIdentName: "[local]___[hash:base64:5]"
+            }
+          },
+          {
+            loader: "sass-loader",
+            options: { sourceMap: true }
+          }
+        ]
       }
     ]
   },
-  plugins: [new webpack.HotModuleReplacementPlugin(), new Dotenv()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new Dotenv(),
+    new MiniCssExtractPlugin()
+  ],
   mode: "development",
   devServer: {
     contentBase: "./",

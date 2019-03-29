@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import SearchResult from "components/SearchResult";
+import styles from "./SearchResults.css";
 
 const SearchResults = ({ results }) => {
   return (
-    <div>
+    <div className={styles.container}>
       {results.map((result, i) => (
         <SearchResult result={result} key={i} />
       ))}

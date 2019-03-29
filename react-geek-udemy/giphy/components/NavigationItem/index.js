@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./NavigationItem.css";
 
 const NavigationItem = ({ path, onClick, children }) => {
   return (
