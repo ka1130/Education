@@ -34,6 +34,8 @@ module.exports = {
   mode: "development",
   devServer: {
     contentBase: "./",
-    hot: true
+    hot: true,
+    historyApiFallback: true
+    // to make react-router work and not serve other pages from various routes
   }
 };

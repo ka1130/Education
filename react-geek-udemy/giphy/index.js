@@ -1,28 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware, compose } from "redux";
-import createSagaMiddleware from "redux-saga";
+import { Router, Route } from "react-router";
+import { ConnectedRouter } from "connected-react-router";
 
-import rootReducer from "reducers";
-import searchSaga from "sagas/search";
+import configureStore, { history } from "./configureStore";
 
 import App from "components/App";
 
-const sagas = createSagaMiddleware();
-// create generator instance
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(sagas))
-);
-
-sagas.run(searchSaga);
+const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ConnectedRouter history={history}>
+      <App>{/* <Route exact path="/" component={SearchPage} /> */}</App>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById("app")
 );

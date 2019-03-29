@@ -19,7 +19,6 @@ function* doSearch(action) {
         }
       }
     );
-    console.log(searchResults);
     yield put(searchSuccess(searchResults.data.data));
   } catch (e) {
     console.log("error", e);

@@ -6,7 +6,6 @@ const SearchForm = ({ onSearchSubmit }) => {
   let searchField = null;
 
   const searchSubmitted = e => {
-    console.log(searchField.value);
     e.preventDefault();
     onSearchSubmit(searchField.value);
   };
