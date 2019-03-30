@@ -1,7 +1,47 @@
 import React from "react";
+import { connect } from "react-redux";
+import SearchResults from "components/SearchResults";
+import InfiniteScroll from "components/InfiniteScroll";
+import { newSearch, performSearch } from "actions/search";
 
-const TrendingPage = () => {
-  return <div>Trending</div>;
-};
+class TrendingPage extends React.Component {
+  componentDidMount() {
+    this.props.onSearchSubmit();
+  }
 
-export default TrendingPage;
+  render() {
+    const { onInfiniteScroll, isLoading, isActive } = this.props;
+    return (
+      <div>
+        <h3>Trending</h3>
+        <InfiniteScroll
+          isLoading={isLoading}
+          onTrigger={() => onInfiniteScroll()}
+          isActive={isActive}
+        >
+          <SearchResults />
+        </InfiniteScroll>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  isLoading: state.search.isLoading,
+  isActive: state.search.isActive
+});
+
+const mapDispatchToProps = dispatch => ({
+  onSearchSubmit: searchTerm => {
+    dispatch(newSearch(searchTerm));
+    dispatch(performSearch());
+  },
+  onInfiniteScroll: () => {
+    dispatch(performSearch());
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TrendingPage);

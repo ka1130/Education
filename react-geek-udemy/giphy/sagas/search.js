@@ -10,14 +10,16 @@ const selectSearchState = state => state.search;
 
 function* doSearch() {
   const { currentOffset, searchTerm } = yield select(selectSearchState);
+  const search = searchTerm ? "search" : "trending";
+
   try {
     const searchResults = yield call(
       axios.get,
-      "https://api.giphy.com/v1/gifs/search",
+      `https://api.giphy.com/v1/gifs/${search}`,
       {
         params: {
           apiKey,
-          q: searchTerm,
+          q: searchTerm || "",
           limit: 50,
           offset: currentOffset
         }
