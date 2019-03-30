@@ -1,4 +1,5 @@
 import React from "react";
+import Spinner from "components/Spinner";
 
 export default class InifiniteScroll extends React.Component {
   constructor(props) {
@@ -29,7 +30,7 @@ export default class InifiniteScroll extends React.Component {
     return (
       <div ref={el => (this.container = el)}>
         {children}
-        {isLoading && <div>Loading...</div>}
+        {isLoading && <Spinner />}
       </div>
     );
   }
