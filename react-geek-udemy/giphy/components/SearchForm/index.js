@@ -1,6 +1,6 @@
 import React from "react";
-import { connect } from "react-redux";
-import { searchPerformed } from "actions/search";
+// import { connect } from "react-redux";
+// import { newSearch } from "actions/search";
 import styles from "./SearchForm.css";
 
 const SearchForm = ({ onSearchSubmit }) => {
@@ -26,13 +26,15 @@ const SearchForm = ({ onSearchSubmit }) => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onSearchSubmit: searchTerm => dispatch(searchPerformed(searchTerm))
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     onSearchSubmit: searchTerm => dispatch(newSearch(searchTerm))
+//   };
+// };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(SearchForm);
+export default SearchForm;
+
+// export default connect(
+//   null,
+//   mapDispatchToProps
+// )(SearchForm);
