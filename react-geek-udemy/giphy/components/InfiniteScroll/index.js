@@ -16,11 +16,11 @@ export default class InifiniteScroll extends React.Component {
   }
 
   scrollListener = () => {
-    const { isLoading, onTrigger } = this.props;
+    const { isLoading, onTrigger, isActive } = this.props;
     const viewportHeight = document.documentElement.clientHeight;
     const { bottom } = this.container.getBoundingClientRect();
 
-    if (!isLoading && bottom <= viewportHeight) {
+    if (isActive && !isLoading && bottom <= viewportHeight) {
       onTrigger();
     }
   };

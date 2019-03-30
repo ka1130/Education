@@ -5,13 +5,19 @@ import SearchResults from "components/SearchResults";
 import InfiniteScroll from "components/InfiniteScroll";
 import { newSearch, performSearch } from "actions/search";
 
-const SearchPage = ({ onSearchSubmit, onInfiniteScroll, isLoading }) => {
+const SearchPage = ({
+  onSearchSubmit,
+  onInfiniteScroll,
+  isLoading,
+  isActive
+}) => {
   return (
     <div>
       <SearchForm onSearchSubmit={onSearchSubmit} />
       <InfiniteScroll
         isLoading={isLoading}
         onTrigger={() => onInfiniteScroll()}
+        isActive={isActive}
       >
         <SearchResults />
       </InfiniteScroll>
@@ -19,7 +25,10 @@ const SearchPage = ({ onSearchSubmit, onInfiniteScroll, isLoading }) => {
   );
 };
 
-const mapStateToProps = state => ({ isLoading: state.search.isLoading });
+const mapStateToProps = state => ({
+  isLoading: state.search.isLoading,
+  isActive: state.search.isActive
+});
 
 const mapDispatchToProps = dispatch => ({
   onSearchSubmit: searchTerm => {

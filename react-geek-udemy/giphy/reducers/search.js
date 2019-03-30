@@ -4,12 +4,14 @@ import {
   SEARCH_ERROR,
   NEW_SEARCH
 } from "actions/types";
+import { LOCATION_CHANGE } from "connected-react-router";
 
 const initialState = {
   results: [],
   currentOffset: 0,
   searchTerm: null,
-  isLoading: false
+  isLoading: false,
+  isActive: false
 };
 
 function searchResultsTransformer(rawResult) {
@@ -30,7 +32,10 @@ export default (state = initialState, action) => {
           ...state.results,
           ...action.payload.map(searchResultsTransformer)
         ],
-        isLoading: false
+        isLoading: false,
+        isActive: action.payload.length === 50
+        // if it's less then results are exhausted, there are no more images
+        // and we should disactivate the infinite scroll
       };
     case NEW_SEARCH:
       return {
@@ -50,6 +55,8 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: false
       };
+    case LOCATION_CHANGE:
+      return initialState;
     default:
       return state;
   }
