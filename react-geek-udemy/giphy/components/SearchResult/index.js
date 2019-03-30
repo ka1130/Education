@@ -1,10 +1,10 @@
 import React from "react";
 
-const SearchResult = ({ result }) => {
+const SearchResult = ({ result, onClick }) => {
   const { thumbnail } = result;
   return (
     <div>
-      <img src={thumbnail} />
+      <img src={thumbnail} onClick={onClick} />
     </div>
   );
 };

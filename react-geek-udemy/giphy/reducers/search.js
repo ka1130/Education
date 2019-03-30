@@ -43,7 +43,6 @@ export default (state = initialState, action) => {
         results: [],
         currentOffset: 0,
         searchTerm: action.payload
-        // isLoading: false
       };
     case PERFORM_SEARCH:
       return {
@@ -57,6 +56,7 @@ export default (state = initialState, action) => {
       };
     case LOCATION_CHANGE:
       return initialState;
+    // reset state when user changes the route
     default:
       return state;
   }
