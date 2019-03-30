@@ -13,7 +13,6 @@ class TrendingPage extends React.Component {
     const { onInfiniteScroll, isLoading, isActive } = this.props;
     return (
       <div>
-        <h3>Trending</h3>
         <InfiniteScroll
           isLoading={isLoading}
           onTrigger={() => onInfiniteScroll()}

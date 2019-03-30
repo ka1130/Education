@@ -4,6 +4,7 @@ import createSagaMiddleware from "redux-saga";
 import { routerMiddleware } from "connected-react-router";
 import createRootReducer from "./reducers";
 import searchSaga from "sagas/search";
+import randomSaga from "sagas/random";
 
 export const history = createBrowserHistory();
 
@@ -20,6 +21,7 @@ export default function configureStore(preloadedState) {
   );
 
   sagas.run(searchSaga);
+  sagas.run(randomSaga);
 
   return store;
 }
