@@ -8,6 +8,15 @@ const Greeting = () => {
     document.title = `${name.value} ${surname.value}`;
   });
 
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  });
+
   return (
     <form className="ui form">
       <div className="field">
@@ -17,6 +26,10 @@ const Greeting = () => {
       <div className="field">
         <label>Last Name</label>
         <input type="text" {...surname} />
+      </div>
+      <div className="field">
+        <label>Width: </label>
+        <span>{width}</span>
       </div>
     </form>
   );
