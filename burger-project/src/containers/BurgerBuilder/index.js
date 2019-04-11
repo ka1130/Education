@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import Burger from "components/Burger";
 
 const BurgerBuilder = props => {
   return (
     <>
-      <div>Burger</div>
+      <Burger />
       <div>Build Controls</div>
     </>
   );
