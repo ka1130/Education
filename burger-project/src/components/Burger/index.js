@@ -7,9 +7,14 @@ const Burger = ({ ingredients }) => {
   const renderContent = obj => {
     const sum = Object.values(obj).reduce((total, amount) => total + amount);
     if (!sum) return <p>Start adding ingredients</p>;
-    return Object.keys(obj).map(el => (
-      <BurgerIngredient key={uuidv4()} type={el} />
-    ));
+
+    if (Object.values(obj).some(el => el < 0)) return;
+
+    return Object.entries(obj).map(entry =>
+      Array.from(Array(entry[1])).map(() => (
+        <BurgerIngredient key={uuidv4()} type={entry[0]} />
+      ))
+    );
   };
 
   return (
