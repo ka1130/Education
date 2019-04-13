@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Burger from "components/Burger";
 import BuildControls from "components/Burger/BuildControls";
 import Modal from "components/UI/Modal";
+import OrderSummary from "components/Burger/OrderSummary";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -55,7 +56,9 @@ const BurgerBuilder = () => {
 
   return (
     <>
-      <Modal />
+      <Modal>
+        <OrderSummary ingredients={ingredients} />
+      </Modal>
       <Burger ingredients={ingredients} purchasable={purchasable} />
       <BuildControls
         onIngredientAdd={handleIngredientAdd}
