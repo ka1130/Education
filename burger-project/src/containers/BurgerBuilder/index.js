@@ -21,32 +21,47 @@ const BurgerBuilder = () => {
   const [price, setPrice] = useState(4);
   const [purchasable, setPurchasable] = useState(false);
 
+  const handlePurchasable = ingredients => {
+    const totalIngredients = Object.values(ingredients).reduce(
+      (total, amount) => total + amount
+    );
+    if (totalIngredients > 0) {
+      setPurchasable(true);
+    } else {
+      setPurchasable(false);
+    }
+  };
+
   const handleIngredientAdd = type => {
-    setIngredients({ ...ingredients, [type]: ingredients[type] + 1 });
+    console.log({ [type]: ingredients[type] });
+    const newIngredients = { ...ingredients, [type]: ingredients[type] + 1 };
+    setIngredients(newIngredients);
     setPrice(INGREDIENT_PRICES[type] + price);
-    console.log("new price: ", price);
+    handlePurchasable(newIngredients);
   };
 
   const handleIngredientRemove = type => {
+    const newIngredients = { ...ingredients, [type]: ingredients[type] - 1 };
     if (ingredients[type] === 0) return;
-    setIngredients({ ...ingredients, [type]: ingredients[type] - 1 });
+    setIngredients(newIngredients);
     setPrice(INGREDIENT_PRICES[type] - price);
-    console.log("new price: ", price);
+    handlePurchasable(newIngredients);
   };
 
-  console.log(ingredients);
   const disabledInfo = { ...ingredients };
   for (let key in disabledInfo) {
     disabledInfo[key] = disabledInfo[key] <= 0;
   }
+
   return (
     <>
-      <Burger ingredients={ingredients} />
+      <Burger ingredients={ingredients} purchasable={purchasable} />
       <BuildControls
         onIngredientAdd={handleIngredientAdd}
         onIngredientRemove={handleIngredientRemove}
         disabled={disabledInfo}
         price={price}
+        purchasable={purchasable}
       />
     </>
   );
