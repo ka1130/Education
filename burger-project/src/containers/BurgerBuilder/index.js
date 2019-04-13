@@ -15,11 +15,11 @@ const initialIngredients = {
   cheese: 0,
   meat: 0
 };
-const basePrice = 4;
 
-const BurgerBuilder = props => {
+const BurgerBuilder = () => {
   const [ingredients, setIngredients] = useState(initialIngredients);
-  const [price, setPrice] = useState(basePrice);
+  const [price, setPrice] = useState(4);
+  const [purchasable, setPurchasable] = useState(false);
 
   const handleIngredientAdd = type => {
     setIngredients({ ...ingredients, [type]: ingredients[type] + 1 });
@@ -46,6 +46,7 @@ const BurgerBuilder = props => {
         onIngredientAdd={handleIngredientAdd}
         onIngredientRemove={handleIngredientRemove}
         disabled={disabledInfo}
+        price={price}
       />
     </>
   );

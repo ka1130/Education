@@ -9,9 +9,17 @@ const controls = [
   { type: "bacon", label: "Bacon" }
 ];
 
-const BuildControls = ({ onIngredientAdd, onIngredientRemove, disabled }) => {
+const BuildControls = ({
+  onIngredientAdd,
+  onIngredientRemove,
+  disabled,
+  price
+}) => {
   return (
     <div className={styles.buildControls}>
+      <p>
+        Current Price: <strong>{price.toFixed(2)}</strong>
+      </p>
       {controls.map(ctrl => (
         <BuildControl
           key={ctrl.label}
@@ -21,6 +29,7 @@ const BuildControls = ({ onIngredientAdd, onIngredientRemove, disabled }) => {
           disabled={disabled[ctrl.type]}
         />
       ))}
+      <button className={styles.orderButton}>ORDER NOW</button>
     </div>
   );
 };
