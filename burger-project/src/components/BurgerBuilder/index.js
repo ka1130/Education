@@ -3,12 +3,12 @@ import Burger from "components/Burger";
 import BuildControls from "components/Burger/BuildControls";
 import Modal from "components/UI/Modal";
 
-const INGREDIENT_PRICES = {
-  salad: 0.5,
-  cheese: 0.4,
-  meat: 1.3,
-  bacon: 0.7
-};
+const INGREDIENT_PRICES = new Map([
+  ["salad", 0.5],
+  ["cheese", 0.4],
+  ["meat", 1.3],
+  ["bacon", 0, 7]
+]);
 
 const initialIngredients = {
   salad: 0,
@@ -36,7 +36,7 @@ const BurgerBuilder = () => {
   const handleIngredientAdd = type => {
     const newIngredients = { ...ingredients, [type]: ingredients[type] + 1 };
     setIngredients(newIngredients);
-    setPrice(price + INGREDIENT_PRICES[type]);
+    setPrice(price + INGREDIENT_PRICES.get(type));
     handlePurchasable(newIngredients);
   };
 
@@ -44,7 +44,7 @@ const BurgerBuilder = () => {
     const newIngredients = { ...ingredients, [type]: ingredients[type] - 1 };
     if (ingredients[type] === 0) return;
     setIngredients(newIngredients);
-    setPrice(price - INGREDIENT_PRICES[type]);
+    setPrice(price - INGREDIENT_PRICES.get(type));
     handlePurchasable(newIngredients);
   };
 
