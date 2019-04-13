@@ -18,7 +18,6 @@ const initialIngredients = {
 };
 
 const BurgerBuilder = () => {
-  console.log(Modal);
   const [ingredients, setIngredients] = useState(initialIngredients);
   const [price, setPrice] = useState(4);
   const [purchasable, setPurchasable] = useState(false);
@@ -35,10 +34,9 @@ const BurgerBuilder = () => {
   };
 
   const handleIngredientAdd = type => {
-    console.log({ [type]: ingredients[type] });
     const newIngredients = { ...ingredients, [type]: ingredients[type] + 1 };
     setIngredients(newIngredients);
-    setPrice(INGREDIENT_PRICES[type] + price);
+    setPrice(price + INGREDIENT_PRICES[type]);
     handlePurchasable(newIngredients);
   };
 
@@ -46,7 +44,7 @@ const BurgerBuilder = () => {
     const newIngredients = { ...ingredients, [type]: ingredients[type] - 1 };
     if (ingredients[type] === 0) return;
     setIngredients(newIngredients);
-    setPrice(INGREDIENT_PRICES[type] - price);
+    setPrice(price - INGREDIENT_PRICES[type]);
     handlePurchasable(newIngredients);
   };
 
