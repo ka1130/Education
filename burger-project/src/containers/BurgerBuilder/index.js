@@ -28,19 +28,24 @@ const BurgerBuilder = props => {
   };
 
   const handleIngredientRemove = type => {
-    console.log("removing", type);
+    if (ingredients[type] === 0) return;
     setIngredients({ ...ingredients, [type]: ingredients[type] - 1 });
     setPrice(INGREDIENT_PRICES[type] - price);
     console.log("new price: ", price);
   };
 
   console.log(ingredients);
+  const disabledInfo = { ...ingredients };
+  for (let key in disabledInfo) {
+    disabledInfo[key] = disabledInfo[key] <= 0;
+  }
   return (
     <>
       <Burger ingredients={ingredients} />
       <BuildControls
         onIngredientAdd={handleIngredientAdd}
         onIngredientRemove={handleIngredientRemove}
+        disabled={disabledInfo}
       />
     </>
   );
