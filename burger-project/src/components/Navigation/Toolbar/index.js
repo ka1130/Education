@@ -7,7 +7,9 @@ const Toolbar = () => {
   return (
     <header className={styles.toolbar}>
       <div>MENU</div>
-      <Logo />
+      <div className={styles.logo}>
+        <Logo />
+      </div>
       <NavigationItems />
     </header>
   );
