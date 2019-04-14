@@ -1,7 +1,6 @@
 import React from "react";
 import Backdrop from "components/UI/Backdrop";
 import Logo from "components/Logo";
-// import Modal from "components/UI/Modal";
 import NavigationItems from "components/Navigation/NavigationItems";
 import styles from "./SideDrawer.module.scss";
 

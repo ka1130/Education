@@ -1,7 +1,7 @@
 import React from "react";
 
-const DrawerToggle = ({ onSideDrawerOpen }) => {
-  return <div onClick={onSideDrawerOpen}>MENU</div>;
+const DrawerToggle = ({ onSideDrawerToggle }) => {
+  return <div onClick={onSideDrawerToggle}>MENU</div>;
 };
 
 export default DrawerToggle;

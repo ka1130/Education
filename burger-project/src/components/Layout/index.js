@@ -7,16 +7,15 @@ import styles from "./Layout.module.css";
 const Layout = ({ children }) => {
   const [sideDrawerVisible, setSideDrawerVisible] = useState(false);
 
-  const handleSideDrawerClose = () => setSideDrawerVisible(false);
-
-  const handleSideDrawerOpen = () => setSideDrawerVisible(true);
-
-  // const handleSideDrawerOpen = () => setSideDrawerVisible(true);
+  const handleSideDrawerToggle = () => setSideDrawerVisible(!sideDrawerVisible);
 
   return (
     <Aux>
-      <Toolbar onSideDrawerOpen={handleSideDrawerOpen} />
-      <SideDrawer visible={sideDrawerVisible} onClose={handleSideDrawerClose} />
+      <Toolbar onSideDrawerToggle={handleSideDrawerToggle} />
+      <SideDrawer
+        visible={sideDrawerVisible}
+        onClose={handleSideDrawerToggle}
+      />
       <main className={styles.content}>{children}</main>
     </Aux>
   );
