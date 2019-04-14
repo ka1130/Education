@@ -54,6 +54,8 @@ const BurgerBuilder = () => {
 
   const handleModalClose = () => setPurchasing(false);
 
+  const handlePurchaseContinue = () => console.log("continue purchase");
+
   const disabledInfo = { ...ingredients };
   for (let key in disabledInfo) {
     disabledInfo[key] = disabledInfo[key] <= 0;
@@ -62,7 +64,11 @@ const BurgerBuilder = () => {
   return (
     <>
       <Modal isOpen={purchasing} onModalClose={handleModalClose}>
-        <OrderSummary ingredients={ingredients} />
+        <OrderSummary
+          ingredients={ingredients}
+          onModalClose={handleModalClose}
+          onPurchaseContinue={handlePurchaseContinue}
+        />
       </Modal>
       <Burger ingredients={ingredients} purchasable={purchasable} />
       <BuildControls
