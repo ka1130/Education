@@ -68,6 +68,7 @@ const BurgerBuilder = () => {
           ingredients={ingredients}
           onModalClose={handleModalClose}
           onPurchaseContinue={handlePurchaseContinue}
+          price={price}
         />
       </Modal>
       <Burger ingredients={ingredients} purchasable={purchasable} />
