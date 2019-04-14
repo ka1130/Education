@@ -22,6 +22,7 @@ const BurgerBuilder = () => {
   const [ingredients, setIngredients] = useState(initialIngredients);
   const [price, setPrice] = useState(4);
   const [purchasable, setPurchasable] = useState(false);
+  const [purchasing, setPurchasing] = useState(false);
 
   const handlePurchasable = ingredients => {
     const totalIngredients = Object.values(ingredients).reduce(
@@ -49,6 +50,10 @@ const BurgerBuilder = () => {
     handlePurchasable(newIngredients);
   };
 
+  const handleOrderClick = () => setPurchasing(true);
+
+  const handleModalClose = () => setPurchasing(false);
+
   const disabledInfo = { ...ingredients };
   for (let key in disabledInfo) {
     disabledInfo[key] = disabledInfo[key] <= 0;
@@ -56,7 +61,7 @@ const BurgerBuilder = () => {
 
   return (
     <>
-      <Modal>
+      <Modal isOpen={purchasing} onModalClose={handleModalClose}>
         <OrderSummary ingredients={ingredients} />
       </Modal>
       <Burger ingredients={ingredients} purchasable={purchasable} />
@@ -66,6 +71,7 @@ const BurgerBuilder = () => {
         disabled={disabledInfo}
         price={price}
         purchasable={purchasable}
+        onOrderClick={handleOrderClick}
       />
     </>
   );

@@ -12,6 +12,7 @@ const controls = [
 const BuildControls = ({
   onIngredientAdd,
   onIngredientRemove,
+  onOrderClick,
   disabled,
   price,
   purchasable
@@ -30,8 +31,11 @@ const BuildControls = ({
           disabled={disabled[ctrl.type]}
         />
       ))}
-      <button className={styles.orderButton} disabled={!purchasable}>
-        {/* this button is not being rerendered as expected! */}
+      <button
+        className={styles.orderButton}
+        disabled={!purchasable}
+        onClick={onOrderClick}
+      >
         ORDER NOW
       </button>
     </div>
