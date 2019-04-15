@@ -9,7 +9,6 @@ class StreamCreate extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <h3>Create a Stream</h3>

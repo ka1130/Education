@@ -13,6 +13,10 @@ export const createStream = formValues => async (dispatch, getState) => {
 export const editStream = (id, formValues) => async dispatch => {
   const response = await streams.patch(`/streams/${id}`, formValues);
   dispatch({ type: constants.EDIT_STREAM, payload: response.data });
+  streams.interceptors.request.use(request => {
+    console.log(request);
+    return request;
+  });
   history.push("/");
 };
 
