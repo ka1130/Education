@@ -2,6 +2,30 @@ import streams from "apis/streams";
 import * as constants from "redux/actions/constants";
 import { history } from "customHistory";
 
+const intercept = () => {
+  streams.interceptors.request.use(
+    request => {
+      console.log(request);
+      return request;
+    },
+    error => {
+      console.error(error);
+      return Promise.reject(error);
+    }
+  );
+
+  streams.interceptors.response.use(
+    response => {
+      console.log(response);
+      return response;
+    },
+    error => {
+      console.error(error);
+      return Promise.reject(error);
+    }
+  );
+};
+
 export const createStream = formValues => async (dispatch, getState) => {
   const { userId } = getState().auth;
   const response = await streams.post("/streams", { ...formValues, userId });
@@ -13,10 +37,7 @@ export const createStream = formValues => async (dispatch, getState) => {
 export const editStream = (id, formValues) => async dispatch => {
   const response = await streams.patch(`/streams/${id}`, formValues);
   dispatch({ type: constants.EDIT_STREAM, payload: response.data });
-  streams.interceptors.request.use(request => {
-    console.log(request);
-    return request;
-  });
+  intercept();
   history.push("/");
 };
 

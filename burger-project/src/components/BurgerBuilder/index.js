@@ -3,6 +3,8 @@ import Burger from "components/Burger";
 import BuildControls from "components/Burger/BuildControls";
 import Modal from "components/UI/Modal";
 import OrderSummary from "components/Burger/OrderSummary";
+import Spinner from "components/UI/Spinner";
+import orders from "apis/orders";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -23,6 +25,7 @@ const BurgerBuilder = () => {
   const [price, setPrice] = useState(4);
   const [purchasable, setPurchasable] = useState(false);
   const [purchasing, setPurchasing] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handlePurchasable = ingredients => {
     const totalIngredients = Object.values(ingredients).reduce(
@@ -54,22 +57,57 @@ const BurgerBuilder = () => {
 
   const handleModalClose = () => setPurchasing(false);
 
-  const handlePurchaseContinue = () => console.log("continue purchase");
+  const handlePurchaseContinue = () => {
+    setLoading(true);
+    const order = {
+      ingredients,
+      price,
+      customer: {
+        name: "John Doe",
+        address: {
+          street: "Dawning Street 1",
+          zipCode: "00111",
+          country: "Hawaii"
+        },
+        email: "test@test.com"
+      },
+      deliveryMethod: "fastest"
+    };
+
+    orders
+      .post("/orders.json", order) // .json ext is needed for Firestore
+      .then(response => {
+        setLoading(false);
+      })
+      .catch(error => {
+        setLoading(false);
+      });
+  };
 
   const disabledInfo = { ...ingredients };
   for (let key in disabledInfo) {
     disabledInfo[key] = disabledInfo[key] <= 0;
   }
 
-  return (
-    <>
-      <Modal isOpen={purchasing} onModalClose={handleModalClose}>
+  const renderSummary = () => {
+    if (loading) {
+      return (
         <OrderSummary
           ingredients={ingredients}
           onModalClose={handleModalClose}
           onPurchaseContinue={handlePurchaseContinue}
           price={price}
         />
+      );
+    } else {
+      return <Spinner />;
+    }
+  };
+
+  return (
+    <>
+      <Modal isOpen={purchasing} onModalClose={handleModalClose}>
+        {renderSummary()}
       </Modal>
       <Burger ingredients={ingredients} purchasable={purchasable} />
       <BuildControls
