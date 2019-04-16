@@ -4,6 +4,7 @@ import BuildControls from "components/Burger/BuildControls";
 import Modal from "components/UI/Modal";
 import OrderSummary from "components/Burger/OrderSummary";
 import Spinner from "components/UI/Spinner";
+import withErrorHandler from "components/hoc/withErrorHandler";
 import orders from "apis/orders";
 
 const INGREDIENT_PRICES = {
@@ -122,4 +123,4 @@ const BurgerBuilder = () => {
   );
 };
 
-export default BurgerBuilder;
+export default withErrorHandler(BurgerBuilder);
