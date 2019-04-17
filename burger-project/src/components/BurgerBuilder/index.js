@@ -76,7 +76,7 @@ const BurgerBuilder = () => {
     };
 
     orders
-      .post("/orders.json", order) // .json ext is needed for Firestore
+      .post("/orders", order) // .json ext is needed for Firestore
       .then(response => {
         setLoading(false);
       })
@@ -123,4 +123,4 @@ const BurgerBuilder = () => {
   );
 };
 
-export default withErrorHandler(BurgerBuilder);
+export default withErrorHandler(BurgerBuilder, orders);
