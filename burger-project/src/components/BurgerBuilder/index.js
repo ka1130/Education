@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Burger from "components/Burger";
 import BuildControls from "components/Burger/BuildControls";
 import Modal from "components/UI/Modal";
+import Spinner from "components/UI/Spinner";
 import OrderSummary from "components/Burger/OrderSummary";
 import orders from "apis/orders";
 
@@ -24,6 +25,7 @@ const BurgerBuilder = () => {
   const [price, setPrice] = useState(4);
   const [purchasable, setPurchasable] = useState(false);
   const [purchasing, setPurchasing] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handlePurchasable = ingredients => {
     const totalIngredients = Object.values(ingredients).reduce(
@@ -57,6 +59,7 @@ const BurgerBuilder = () => {
 
   const handlePurchaseContinue = () => {
     console.log("continue purchase");
+    setLoading(true);
     const order = {
       customer: {
         address: {
@@ -76,11 +79,11 @@ const BurgerBuilder = () => {
       .post("orders.json", order)
       .then(response => {
         console.log(response);
-        // setLoading(false);
+        setLoading(false);
       })
       .catch(error => {
         console.log("error", error);
-        // setLoading(false);
+        setLoading(false);
       });
   };
 
@@ -89,15 +92,31 @@ const BurgerBuilder = () => {
     disabledInfo[key] = disabledInfo[key] <= 0;
   }
 
-  return (
-    <>
-      <Modal isOpen={purchasing} onModalClose={handleModalClose}>
+  const renderModalContent = () => {
+    if (!loading) {
+      return (
         <OrderSummary
           ingredients={ingredients}
           onModalClose={handleModalClose}
           onPurchaseContinue={handlePurchaseContinue}
           price={price}
         />
+      );
+    } else {
+      return <Spinner />;
+    }
+  };
+
+  return (
+    <>
+      <Modal isOpen={purchasing} onModalClose={handleModalClose}>
+        {renderModalContent()}
+        {/* <OrderSummary
+          ingredients={ingredients}
+          onModalClose={handleModalClose}
+          onPurchaseContinue={handlePurchaseContinue}
+          price={price}
+        /> */}
       </Modal>
       <Burger ingredients={ingredients} purchasable={purchasable} />
       <BuildControls
