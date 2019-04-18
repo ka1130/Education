@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Burger from "components/Burger";
 import BuildControls from "components/Burger/BuildControls";
 import Modal from "components/UI/Modal";
-import OrderSummary from "components/Burger/OrderSummary";
 import Spinner from "components/UI/Spinner";
+import OrderSummary from "components/Burger/OrderSummary";
 import withErrorHandler from "components/hoc/withErrorHandler";
 import orders from "apis/orders";
 
@@ -61,26 +61,27 @@ const BurgerBuilder = () => {
   const handlePurchaseContinue = () => {
     setLoading(true);
     const order = {
-      ingredients,
-      price,
       customer: {
-        name: "John Doe",
         address: {
-          street: "Dawning Street 1",
-          zipCode: "00111",
-          country: "Hawaii"
+          country: "Poland",
+          street: "Budowlana 1",
+          zipCode: "00111"
         },
-        email: "test@test.com"
+        email: "lorem@example.pl",
+        name: "Jasio Kowalski"
       },
-      deliveryMethod: "fastest"
+      deliveryMethod: "fastest",
+      ingredients,
+      price
     };
 
     orders
-      .post("/orders", order) // .json ext is needed for Firestore
+      .post("orders.json", order)
       .then(response => {
         setLoading(false);
       })
       .catch(error => {
+        setPurchasing(false);
         setLoading(false);
       });
   };
@@ -90,8 +91,8 @@ const BurgerBuilder = () => {
     disabledInfo[key] = disabledInfo[key] <= 0;
   }
 
-  const renderSummary = () => {
-    if (loading) {
+  const renderModalContent = () => {
+    if (!loading) {
       return (
         <OrderSummary
           ingredients={ingredients}
@@ -108,7 +109,7 @@ const BurgerBuilder = () => {
   return (
     <>
       <Modal isOpen={purchasing} onModalClose={handleModalClose}>
-        {renderSummary()}
+        {renderModalContent()}
       </Modal>
       <Burger ingredients={ingredients} purchasable={purchasable} />
       <BuildControls
