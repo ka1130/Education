@@ -3,6 +3,7 @@ import Burger from "components/Burger";
 import BuildControls from "components/Burger/BuildControls";
 import Modal from "components/UI/Modal";
 import OrderSummary from "components/Burger/OrderSummary";
+import orders from "apis/orders";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -54,7 +55,34 @@ const BurgerBuilder = () => {
 
   const handleModalClose = () => setPurchasing(false);
 
-  const handlePurchaseContinue = () => console.log("continue purchase");
+  const handlePurchaseContinue = () => {
+    console.log("continue purchase");
+    const order = {
+      customer: {
+        address: {
+          country: "Poland",
+          street: "Budowlana 1",
+          zipCode: "00111"
+        },
+        email: "lorem@example.pl",
+        name: "Jasio Kowalski"
+      },
+      deliveryMethod: "fastest",
+      ingredients,
+      price
+    };
+
+    orders
+      .post("orders.json", order)
+      .then(response => {
+        console.log(response);
+        // setLoading(false);
+      })
+      .catch(error => {
+        console.log("error", error);
+        // setLoading(false);
+      });
+  };
 
   const disabledInfo = { ...ingredients };
   for (let key in disabledInfo) {
