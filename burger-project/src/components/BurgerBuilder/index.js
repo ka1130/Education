@@ -4,6 +4,7 @@ import BuildControls from "components/Burger/BuildControls";
 import Modal from "components/UI/Modal";
 import Spinner from "components/UI/Spinner";
 import OrderSummary from "components/Burger/OrderSummary";
+import withErrorHandler from "components/hoc/withErrorHandler";
 import orders from "apis/orders";
 
 const INGREDIENT_PRICES = {
@@ -58,7 +59,6 @@ const BurgerBuilder = () => {
   const handleModalClose = () => setPurchasing(false);
 
   const handlePurchaseContinue = () => {
-    console.log("continue purchase");
     setLoading(true);
     const order = {
       customer: {
@@ -76,13 +76,12 @@ const BurgerBuilder = () => {
     };
 
     orders
-      .post("orders.json", order)
+      .post("orders", order)
       .then(response => {
-        console.log(response);
         setLoading(false);
       })
       .catch(error => {
-        console.log("error", error);
+        setPurchasing(false);
         setLoading(false);
       });
   };
@@ -111,12 +110,6 @@ const BurgerBuilder = () => {
     <>
       <Modal isOpen={purchasing} onModalClose={handleModalClose}>
         {renderModalContent()}
-        {/* <OrderSummary
-          ingredients={ingredients}
-          onModalClose={handleModalClose}
-          onPurchaseContinue={handlePurchaseContinue}
-          price={price}
-        /> */}
       </Modal>
       <Burger ingredients={ingredients} purchasable={purchasable} />
       <BuildControls
@@ -131,4 +124,4 @@ const BurgerBuilder = () => {
   );
 };
 
-export default BurgerBuilder;
+export default withErrorHandler(BurgerBuilder, orders);
