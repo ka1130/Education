@@ -14,19 +14,19 @@ const INGREDIENT_PRICES = {
   bacon: 0.7
 };
 
-const initialIngredients = {
-  salad: 0,
-  bacon: 0,
-  cheese: 0,
-  meat: 0
-};
-
 const BurgerBuilder = () => {
-  const [ingredients, setIngredients] = useState(initialIngredients);
+  const [ingredients, setIngredients] = useState(null);
   const [price, setPrice] = useState(4);
   const [purchasable, setPurchasable] = useState(false);
   const [purchasing, setPurchasing] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const response = await orders.get("ingredients.json");
+      setIngredients(response.data);
+    })();
+  }, []);
 
   const handlePurchasable = ingredients => {
     const totalIngredients = Object.values(ingredients).reduce(
@@ -78,6 +78,7 @@ const BurgerBuilder = () => {
     orders
       .post("orders.json", order)
       .then(response => {
+        setPurchasing(false);
         setLoading(false);
       })
       .catch(error => {
@@ -92,7 +93,7 @@ const BurgerBuilder = () => {
   }
 
   const renderModalContent = () => {
-    if (!loading) {
+    if (!loading && ingredients) {
       return (
         <OrderSummary
           ingredients={ingredients}
@@ -106,20 +107,32 @@ const BurgerBuilder = () => {
     }
   };
 
+  const renderBurgerContents = () => {
+    if (ingredients) {
+      return (
+        <>
+          <Burger ingredients={ingredients} purchasable={purchasable} />
+          <BuildControls
+            onIngredientAdd={handleIngredientAdd}
+            onIngredientRemove={handleIngredientRemove}
+            disabled={disabledInfo}
+            price={price}
+            purchasable={purchasable}
+            onOrderClick={handleOrderClick}
+          />
+        </>
+      );
+    } else {
+      return <Spinner />;
+    }
+  };
+
   return (
     <>
       <Modal isOpen={purchasing} onModalClose={handleModalClose}>
         {renderModalContent()}
       </Modal>
-      <Burger ingredients={ingredients} purchasable={purchasable} />
-      <BuildControls
-        onIngredientAdd={handleIngredientAdd}
-        onIngredientRemove={handleIngredientRemove}
-        disabled={disabledInfo}
-        price={price}
-        purchasable={purchasable}
-        onOrderClick={handleOrderClick}
-      />
+      {renderBurgerContents()}
     </>
   );
 };
