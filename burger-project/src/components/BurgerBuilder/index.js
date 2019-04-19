@@ -25,6 +25,7 @@ const BurgerBuilder = () => {
     (async () => {
       const response = await orders.get("ingredients.json");
       setIngredients(response.data);
+      handlePurchasable(response.data);
     })();
   }, []);
 
