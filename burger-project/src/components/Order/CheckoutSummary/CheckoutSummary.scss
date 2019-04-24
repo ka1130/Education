@@ -1,0 +1,17 @@
+.wrapper {
+  text-align: center;
+  width: 80%;
+  margin: auto;
+}
+
+.burger {
+  width: 300px;
+  height: 300px;
+  margin: auto;
+}
+
+@media (min-width: 600px) {
+  .wrapper {
+    width: 500px;
+  }
+}
