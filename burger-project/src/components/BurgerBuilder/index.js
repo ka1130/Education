@@ -14,7 +14,7 @@ const INGREDIENT_PRICES = {
   bacon: 0.7
 };
 
-const BurgerBuilder = () => {
+const BurgerBuilder = props => {
   const [ingredients, setIngredients] = useState(null);
   const [price, setPrice] = useState(4);
   const [purchasable, setPurchasable] = useState(false);
@@ -22,6 +22,7 @@ const BurgerBuilder = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    console.log(props);
     (async () => {
       const response = await orders.get("ingredients.json");
       setIngredients(response.data);
@@ -60,32 +61,32 @@ const BurgerBuilder = () => {
   const handleModalClose = () => setPurchasing(false);
 
   const handlePurchaseContinue = () => {
-    setLoading(true);
-    const order = {
-      customer: {
-        address: {
-          country: "Poland",
-          street: "Budowlana 1",
-          zipCode: "00111"
-        },
-        email: "lorem@example.pl",
-        name: "Jasio Kowalski"
-      },
-      deliveryMethod: "fastest",
-      ingredients,
-      price
-    };
-
-    orders
-      .post("orders.json", order)
-      .then(response => {
-        setPurchasing(false);
-        setLoading(false);
-      })
-      .catch(error => {
-        setPurchasing(false);
-        setLoading(false);
-      });
+    // setLoading(true);
+    // const order = {
+    //   customer: {
+    //     address: {
+    //       country: "Poland",
+    //       street: "Budowlana 1",
+    //       zipCode: "00111"
+    //     },
+    //     email: "lorem@example.pl",
+    //     name: "Jasio Kowalski"
+    //   },
+    //   deliveryMethod: "fastest",
+    //   ingredients,
+    //   price
+    // };
+    // orders
+    //   .post("orders.json", order)
+    //   .then(response => {
+    //     setPurchasing(false);
+    //     setLoading(false);
+    //   })
+    //   .catch(error => {
+    //     setPurchasing(false);
+    //     setLoading(false);
+    //   });
+    props.history.push("/checkout", ingredients);
   };
 
   const disabledInfo = { ...ingredients };
