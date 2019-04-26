@@ -12,7 +12,7 @@ const CheckoutSummary = ({
     <div className={styles.wrapper}>
       <h2>We hope it tastes good!</h2>
       <div className={styles.burger}>
-        <Burger ingredients={ingredients} />
+        <Burger ingredients={ingredients} purchasable={true} />
         <Button btnType="danger" onClick={onCheckoutCancel}>
           CANCEL
         </Button>
