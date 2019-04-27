@@ -61,32 +61,8 @@ const BurgerBuilder = props => {
   const handleModalClose = () => setPurchasing(false);
 
   const handlePurchaseContinue = () => {
-    // setLoading(true);
-    // const order = {
-    //   customer: {
-    //     address: {
-    //       country: "Poland",
-    //       street: "Budowlana 1",
-    //       zipCode: "00111"
-    //     },
-    //     email: "lorem@example.pl",
-    //     name: "Jasio Kowalski"
-    //   },
-    //   deliveryMethod: "fastest",
-    //   ingredients,
-    //   price
-    // };
-    // orders
-    //   .post("orders.json", order)
-    //   .then(response => {
-    //     setPurchasing(false);
-    //     setLoading(false);
-    //   })
-    //   .catch(error => {
-    //     setPurchasing(false);
-    //     setLoading(false);
-    //   });
-    props.history.push("/checkout", ingredients);
+    console.log("from purchase continue", ingredients);
+    props.history.push("/checkout", { ingredients, price });
   };
 
   const disabledInfo = { ...ingredients };

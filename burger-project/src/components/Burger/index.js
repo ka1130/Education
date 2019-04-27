@@ -3,7 +3,8 @@ import uuidv4 from "uuid/v4";
 import BurgerIngredient from "components/Burger/BurgerIngredient";
 import styles from "./Burger.module.css";
 
-const Burger = ({ ingredients, purchasable }) => {
+const Burger = props => {
+  const { ingredients, purchasable } = props;
   console.log("ingredients", ingredients);
   const renderContent = obj => {
     if (!purchasable) return <p>Start adding ingredients</p>;
