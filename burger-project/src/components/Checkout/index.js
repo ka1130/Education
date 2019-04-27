@@ -5,19 +5,18 @@ import ContactData from "components/Checkout/ContactData";
 
 const handleCheckoutCancel = history => history.goBack();
 
-const handleCheckoutContinue = history => {
-  history.replace("/checkout/contact-data");
+const handleCheckoutContinue = (history, ingredients) => {
+  history.replace("/checkout/contact-data", ingredients);
 };
 
 const Checkout = props => {
   const { history, location, match } = props;
   const ingredients = location.state;
-  console.log(ingredients, "from checkout");
   return (
     <div>
       <CheckoutSummary
         ingredients={ingredients}
-        onCheckoutContinue={() => handleCheckoutContinue(history)}
+        onCheckoutContinue={() => handleCheckoutContinue(history, ingredients)}
         onCheckoutCancel={() => handleCheckoutCancel(history)}
       />
       <Route path={`${match.path}/contact-data`} component={ContactData} />

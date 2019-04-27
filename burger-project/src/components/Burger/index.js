@@ -4,8 +4,10 @@ import BurgerIngredient from "components/Burger/BurgerIngredient";
 import styles from "./Burger.module.css";
 
 const Burger = ({ ingredients, purchasable }) => {
+  console.log("ingredients", ingredients);
   const renderContent = obj => {
     if (!purchasable) return <p>Start adding ingredients</p>;
+    console.log("obj", obj);
     return Object.entries(obj).map(entry =>
       Array.from(Array(entry[1])).map(() => (
         <BurgerIngredient key={uuidv4()} type={entry[0]} />
