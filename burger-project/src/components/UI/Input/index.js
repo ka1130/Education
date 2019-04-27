@@ -1,4 +1,5 @@
 import React from "react";
+import uuidv4 from "uuid/v4";
 import styles from "./Input.module.scss";
 
 const Input = ({ label, elementType, elementConfig, value }) => {
@@ -30,6 +31,16 @@ const Input = ({ label, elementType, elementConfig, value }) => {
             {...elementConfig}
             value={value}
           />
+        );
+      case "select":
+        return (
+          <select className={styles.input} value={value}>
+            {elementConfig.options.map(el => (
+              <option key={uuidv4()} value={el.value}>
+                {el.displayValue}
+              </option>
+            ))}
+          </select>
         );
       default:
         return (
