@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "components/UI/Button";
+import Spinner from "components/UI/Spinner";
 import orders from "apis/orders";
 import styles from "./ContactData.module.scss";
 
@@ -13,9 +14,7 @@ const initialContactData = {
 };
 
 const ContactData = props => {
-  const ingredients = props.history.location.state;
-  console.log("from contact data ingredients", ingredients);
-  console.log("from contact data props", props);
+  const { ingredients, price } = props.history.location.state;
   const [contactData, setContactData] = useState(initialContactData);
   const [loading, setLoading] = useState(false);
 
@@ -33,8 +32,8 @@ const ContactData = props => {
         name: "Jasio Kowalski"
       },
       deliveryMethod: "fastest",
-      ingredients
-      // price
+      ingredients,
+      price
     };
     orders
       .post("orders.json", order)
@@ -46,6 +45,8 @@ const ContactData = props => {
       });
     console.log(ingredients);
   };
+
+  if (loading) return <Spinner />;
 
   return (
     <div className={styles.wrapper}>

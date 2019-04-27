@@ -61,7 +61,6 @@ const BurgerBuilder = props => {
   const handleModalClose = () => setPurchasing(false);
 
   const handlePurchaseContinue = () => {
-    console.log("from purchase continue", ingredients);
     props.history.push("/checkout", { ingredients, price });
   };
 
