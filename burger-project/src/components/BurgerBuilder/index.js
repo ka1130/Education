@@ -22,7 +22,6 @@ const BurgerBuilder = props => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    console.log(props);
     (async () => {
       const response = await orders.get("ingredients.json");
       setIngredients(response.data);
