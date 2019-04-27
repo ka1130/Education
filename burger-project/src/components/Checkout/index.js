@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import CheckoutSummary from "components/Order/CheckoutSummary";
+import CheckoutSummary from "components/CheckoutSummary";
 import ContactData from "components/Checkout/ContactData";
 
 const handleCheckoutCancel = history => history.goBack();
