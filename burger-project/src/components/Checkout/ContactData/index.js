@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "components/UI/Button";
 import Spinner from "components/UI/Spinner";
+import Input from "components/UI/Input";
 import orders from "apis/orders";
 import styles from "./ContactData.module.scss";
 
@@ -52,10 +53,10 @@ const ContactData = ({ history }) => {
     <div className={styles.wrapper}>
       <h4>Enter your contact data</h4>
       <form>
-        <input type="text" name="name" placeholder="Enter your name" />
-        <input type="email" name="email" placeholder="Enter your email" />
-        <input type="text" name="street" placeholder="Street" />
-        <input type="text" name="code" placeholder="Postal code" />
+        <Input type="text" name="name" placeholder="Enter your name" />
+        <Input type="email" name="email" placeholder="Enter your email" />
+        <Input type="text" name="street" placeholder="Street" />
+        <Input type="text" name="code" placeholder="Postal code" />
         <Button btnType="success" onClick={handleOrder}>
           ORDER
         </Button>

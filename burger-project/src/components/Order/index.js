@@ -1,18 +1,18 @@
 import React from "react";
+import uuidv4 from "uuid/v4";
 import styles from "./Order.module.scss";
 
 const Order = ({ order }) => {
   const { ingredients, price } = order;
-  console.log(ingredients);
   return (
     <div className={styles.wrapper}>
       <ul className={styles.list}>
         {Object.entries(ingredients).map(ing => (
-          <li>{`${ing[0]} (${ing[1]})`}</li>
+          <li key={uuidv4()}>{`${ing[0]} (${ing[1]})`}</li>
         ))}
       </ul>
       <p>
-        Price: <strong>USD {price}</strong>
+        Price: <strong>USD {price.toFixed(2)}</strong>
       </p>
     </div>
   );
