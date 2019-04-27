@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Order.module.scss";
 
-const Order = () => {
+const Order = ({ order }) => {
+  const { ingredients, price } = order;
+  console.log(ingredients);
   return (
     <div className={styles.wrapper}>
-      <p>Ingredients: Salad(1)</p>
+      <ul className={styles.list}>
+        {Object.entries(ingredients).map(ing => (
+          <li>{`${ing[0]} (${ing[1]})`}</li>
+        ))}
+      </ul>
       <p>
-        Price: <strong>USD 5.4</strong>
+        Price: <strong>USD {price}</strong>
       </p>
     </div>
   );
