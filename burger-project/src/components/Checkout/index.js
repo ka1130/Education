@@ -15,7 +15,6 @@ const handleCheckoutContinue = (history, ingredients, price) => {
 const Checkout = props => {
   const { history, match } = props;
   const { ingredients, price } = props.history.location.state;
-  console.log(ingredients);
   return (
     <div>
       <CheckoutSummary

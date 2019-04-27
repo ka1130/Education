@@ -13,8 +13,8 @@ const initialContactData = {
   }
 };
 
-const ContactData = props => {
-  const { ingredients, price } = props.history.location.state;
+const ContactData = ({ history }) => {
+  const { ingredients, price } = history.location.state;
   const [contactData, setContactData] = useState(initialContactData);
   const [loading, setLoading] = useState(false);
 
@@ -39,11 +39,11 @@ const ContactData = props => {
       .post("orders.json", order)
       .then(response => {
         setLoading(false);
+        history.push("/");
       })
       .catch(error => {
         setLoading(false);
       });
-    console.log(ingredients);
   };
 
   if (loading) return <Spinner />;
