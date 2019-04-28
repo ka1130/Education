@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import uuidv4 from "uuid/v4";
 import _ from "lodash";
 import Button from "components/UI/Button";
 import Spinner from "components/UI/Spinner";
@@ -63,14 +62,15 @@ const initialFormData = {
 const ContactData = ({ history }) => {
   const { ingredients, price } = history.location.state;
   const [loading, setLoading] = useState(false);
-  const [orderForm, setOrderForm] = useState(initialFormData);
+  const [orderData, setOrderData] = useState(initialFormData);
 
   const handleOrder = e => {
     e.preventDefault();
     setLoading(true);
     const order = {
       ingredients,
-      price
+      price,
+      orderData
     };
     orders
       .post("orders.json", order)
@@ -86,14 +86,13 @@ const ContactData = ({ history }) => {
   if (loading) return <Spinner />;
 
   const handleInputChange = (e, inputIdentifier) => {
-    const updatedFormData = _.cloneDeep(orderForm);
-    updatedFormData[inputIdentifier] = e.target.value;
-    setOrderForm(updatedFormData);
+    const updatedData = _.cloneDeep(orderData);
+    updatedData[inputIdentifier].value = e.target.value;
+    setOrderData(updatedData);
   };
 
-  const renderInputs = () =>
-    Object.entries(orderForm).map(entry => {
-      console.log(entry);
+  const renderInputs = () => {
+    return Object.entries(orderData).map(entry => {
       const { elementType, elementConfig, value } = entry[1];
       const id = entry[0];
       return (
@@ -106,11 +105,12 @@ const ContactData = ({ history }) => {
         />
       );
     });
+  };
 
   return (
     <div className={styles.wrapper}>
       <h4>Enter your contact data</h4>
-      <form>
+      <form onSubmit={handleOrder}>
         {renderInputs()}
         <Button btnType="success" onClick={handleOrder}>
           ORDER
