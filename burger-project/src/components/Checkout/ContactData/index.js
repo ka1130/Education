@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import uuidv4 from "uuid/v4";
+import _ from "lodash";
 import Button from "components/UI/Button";
 import Spinner from "components/UI/Spinner";
 import Input from "components/UI/Input";
@@ -8,7 +9,7 @@ import styles from "./ContactData.module.scss";
 
 const initialFormData = {
   name: {
-    elementType: "input",
+    elementType: "text",
     elementConfig: {
       type: "text",
       placeholder: "Your name"
@@ -16,7 +17,7 @@ const initialFormData = {
     value: ""
   },
   street: {
-    elementType: "input",
+    elementType: "text",
     elementConfig: {
       type: "text",
       placeholder: "Street"
@@ -24,7 +25,7 @@ const initialFormData = {
     value: ""
   },
   zipCode: {
-    elementType: "input",
+    elementType: "text",
     elementConfig: {
       type: "text",
       placeholder: "Zip Code"
@@ -32,7 +33,7 @@ const initialFormData = {
     value: ""
   },
   country: {
-    elementType: "input",
+    elementType: "text",
     elementConfig: {
       type: "text",
       placeholder: "Country"
@@ -40,7 +41,7 @@ const initialFormData = {
     value: ""
   },
   email: {
-    elementType: "input",
+    elementType: "email",
     elementConfig: {
       type: "text",
       placeholder: "Email"
@@ -84,16 +85,24 @@ const ContactData = ({ history }) => {
 
   if (loading) return <Spinner />;
 
+  const handleInputChange = (e, inputIdentifier) => {
+    const updatedFormData = _.cloneDeep(orderForm);
+    updatedFormData[inputIdentifier] = e.target.value;
+    setOrderForm(updatedFormData);
+  };
+
   const renderInputs = () =>
     Object.entries(orderForm).map(entry => {
       console.log(entry);
       const { elementType, elementConfig, value } = entry[1];
+      const id = entry[0];
       return (
         <Input
-          key={uuidv4()}
+          key={id}
           elementType={elementType}
           elementConfig={elementConfig}
           value={value}
+          onChange={e => handleInputChange(e, id)}
         />
       );
     });
@@ -102,7 +111,6 @@ const ContactData = ({ history }) => {
     <div className={styles.wrapper}>
       <h4>Enter your contact data</h4>
       <form>
-        {/* <Input elementType="" elementConfig="" value="" /> */}
         {renderInputs()}
         <Button btnType="success" onClick={handleOrder}>
           ORDER
