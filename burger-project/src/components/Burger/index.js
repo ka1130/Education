@@ -5,6 +5,7 @@ import styles from "./Burger.module.css";
 
 const Burger = props => {
   const { ingredients, purchasable } = props;
+  console.log(ingredients);
   const renderContent = obj => {
     if (!purchasable) return <p>Start adding ingredients</p>;
     return Object.entries(obj).map(entry =>

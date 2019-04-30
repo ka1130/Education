@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addIngredient, removeIngredient } from "redux/actions";
 import Burger from "components/Burger";
@@ -9,53 +9,13 @@ import OrderSummary from "components/Burger/OrderSummary";
 import withErrorHandler from "components/hoc/withErrorHandler";
 import orders from "apis/orders";
 
-const INGREDIENT_PRICES = {
-  salad: 0.5,
-  cheese: 0.4,
-  meat: 1.3,
-  bacon: 0.7
-};
-
 const BurgerBuilder = props => {
-  const [ingredients, setIngredients] = useState(null);
-  const [price, setPrice] = useState(4);
-  const [purchasable, setPurchasable] = useState(false);
+  const { ingredients, price } = props.burger;
   const [purchasing, setPurchasing] = useState(false);
-  const [loading, setLoading] = useState(false);
+  let loading = false;
 
-  useEffect(() => {
-    (async () => {
-      const response = await orders.get("ingredients.json");
-      setIngredients(response.data);
-      handlePurchasable(response.data);
-    })();
-  }, []);
-
-  const handlePurchasable = ingredients => {
-    const totalIngredients = Object.values(ingredients).reduce(
-      (total, amount) => total + amount
-    );
-    if (totalIngredients > 0) {
-      setPurchasable(true);
-    } else {
-      setPurchasable(false);
-    }
-  };
-
-  // const handleIngredientAdd = type => {
-  //   const newIngredients = { ...ingredients, [type]: ingredients[type] + 1 };
-  //   setIngredients(newIngredients);
-  //   setPrice(price + INGREDIENT_PRICES[type]);
-  //   handlePurchasable(newIngredients);
-  // };
-
-  const handleIngredientRemove = type => {
-    const newIngredients = { ...ingredients, [type]: ingredients[type] - 1 };
-    if (ingredients[type] === 0) return;
-    setIngredients(newIngredients);
-    setPrice(price - INGREDIENT_PRICES[type]);
-    handlePurchasable(newIngredients);
-  };
+  const purchasable =
+    Object.values(ingredients).reduce((el, acc) => el + acc) > 0;
 
   const handleOrderClick = () => setPurchasing(true);
 
@@ -86,14 +46,13 @@ const BurgerBuilder = props => {
   };
 
   const renderBurgerContents = () => {
+    console.log(ingredients);
     if (ingredients) {
       return (
         <>
           <Burger ingredients={ingredients} purchasable={purchasable} />
           <BuildControls
-            // onIngredientAdd={handleIngredientAdd}
             onIngredientAdd={props.addIngredient}
-            // onIngredientRemove={handleIngredientRemove}
             onIngredientRemove={props.removeIngredient}
             disabled={disabledInfo}
             price={price}
@@ -117,10 +76,11 @@ const BurgerBuilder = props => {
   );
 };
 
-// export default withErrorHandler(BurgerBuilder, orders);
 const enhancedBurgerBuilder = withErrorHandler(BurgerBuilder, orders);
 
+const mapStateToProps = state => ({ burger: state.burger });
+
 export default connect(
-  null,
+  mapStateToProps,
   { addIngredient, removeIngredient }
 )(enhancedBurgerBuilder);
