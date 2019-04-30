@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import _ from "lodash";
 import Button from "components/UI/Button";
 import Spinner from "components/UI/Spinner";
@@ -59,8 +60,8 @@ const initialFormData = {
   }
 };
 
-const ContactData = ({ history }) => {
-  const { ingredients, price } = history.location.state;
+const ContactData = ({ burger, history }) => {
+  const { ingredients, price } = burger;
   const [loading, setLoading] = useState(false);
   const [orderData, setOrderData] = useState(initialFormData);
 
@@ -120,4 +121,6 @@ const ContactData = ({ history }) => {
   );
 };
 
-export default ContactData;
+const mapStateToProps = state => ({ burger: state.burger });
+
+export default connect(mapStateToProps)(ContactData);
