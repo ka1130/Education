@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { addIngredient, removeIngredient } from "redux/actions";
 import Burger from "components/Burger";
 import BuildControls from "components/Burger/BuildControls";
 import Modal from "components/UI/Modal";
@@ -40,12 +42,12 @@ const BurgerBuilder = props => {
     }
   };
 
-  const handleIngredientAdd = type => {
-    const newIngredients = { ...ingredients, [type]: ingredients[type] + 1 };
-    setIngredients(newIngredients);
-    setPrice(price + INGREDIENT_PRICES[type]);
-    handlePurchasable(newIngredients);
-  };
+  // const handleIngredientAdd = type => {
+  //   const newIngredients = { ...ingredients, [type]: ingredients[type] + 1 };
+  //   setIngredients(newIngredients);
+  //   setPrice(price + INGREDIENT_PRICES[type]);
+  //   handlePurchasable(newIngredients);
+  // };
 
   const handleIngredientRemove = type => {
     const newIngredients = { ...ingredients, [type]: ingredients[type] - 1 };
@@ -89,8 +91,10 @@ const BurgerBuilder = props => {
         <>
           <Burger ingredients={ingredients} purchasable={purchasable} />
           <BuildControls
-            onIngredientAdd={handleIngredientAdd}
-            onIngredientRemove={handleIngredientRemove}
+            // onIngredientAdd={handleIngredientAdd}
+            onIngredientAdd={props.addIngredient}
+            // onIngredientRemove={handleIngredientRemove}
+            onIngredientRemove={props.removeIngredient}
             disabled={disabledInfo}
             price={price}
             purchasable={purchasable}
@@ -113,4 +117,10 @@ const BurgerBuilder = props => {
   );
 };
 
-export default withErrorHandler(BurgerBuilder, orders);
+// export default withErrorHandler(BurgerBuilder, orders);
+const enhancedBurgerBuilder = withErrorHandler(BurgerBuilder, orders);
+
+export default connect(
+  null,
+  { addIngredient, removeIngredient }
+)(enhancedBurgerBuilder);

@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import ingredientsReducer from "redux/reducers/ingredientsReducer";
+import burgerReducer from "redux/reducers/burgerReducer";
 
 export default combineReducers({
-  ingredients: ingredientsReducer
+  burger: burgerReducer
 });
