@@ -1,15 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
 import rootReducer from "redux/reducers";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const logger = store => {
+  return next => {
+    return action => {
+      console.log("middleware dispatching", action);
+      const result = next(action);
+      // so that the action is passed to the reducer
+      // at this moment we could for example change the action
+      console.log("middleware: next state", store.getState());
+      return result;
+    };
+  };
+};
+
 const store = createStore(
   rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeEnhancers(applyMiddleware(thunk, logger))
 );
 
 ReactDOM.render(

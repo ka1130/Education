@@ -46,7 +46,6 @@ const BurgerBuilder = props => {
   };
 
   const renderBurgerContents = () => {
-    console.log(ingredients);
     if (ingredients) {
       return (
         <>
