@@ -11,7 +11,7 @@ import withErrorHandler from "components/hoc/withErrorHandler";
 
 const initialFormData = {
   name: {
-    elementType: "text",
+    elementType: "input",
     elementConfig: {
       type: "text",
       placeholder: "Your name"
@@ -19,7 +19,7 @@ const initialFormData = {
     value: ""
   },
   street: {
-    elementType: "text",
+    elementType: "input",
     elementConfig: {
       type: "text",
       placeholder: "Street"
@@ -27,7 +27,7 @@ const initialFormData = {
     value: ""
   },
   zipCode: {
-    elementType: "text",
+    elementType: "input",
     elementConfig: {
       type: "text",
       placeholder: "Zip Code"
@@ -35,7 +35,7 @@ const initialFormData = {
     value: ""
   },
   country: {
-    elementType: "text",
+    elementType: "input",
     elementConfig: {
       type: "text",
       placeholder: "Country"
@@ -43,7 +43,7 @@ const initialFormData = {
     value: ""
   },
   email: {
-    elementType: "email",
+    elementType: "input",
     elementConfig: {
       type: "text",
       placeholder: "Email"
