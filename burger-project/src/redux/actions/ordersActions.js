@@ -12,9 +12,9 @@ export const purchaseBurgerFailed = error => ({
 });
 
 export const purchaseBurger = orderData => async dispatch => {
+  dispatch({ type: actions.PURCHASE_BURGER_BEGIN });
   try {
     const response = await orders.post("/orders.json", orderData);
-    console.log(response);
     dispatch(purchaseBurgerSuccess(response.data.name, orderData));
   } catch (error) {
     dispatch(purchaseBurgerFailed(error));

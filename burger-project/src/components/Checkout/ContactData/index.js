@@ -7,6 +7,7 @@ import Spinner from "components/UI/Spinner";
 import Input from "components/UI/Input";
 import orders from "apis/orders";
 import styles from "./ContactData.module.scss";
+import withErrorHandler from "components/hoc/withErrorHandler";
 
 const initialFormData = {
   name: {
@@ -61,32 +62,22 @@ const initialFormData = {
   }
 };
 
-const ContactData = ({ burger, history, purchaseBurger }) => {
+const ContactData = ({ burger, orders, history, purchaseBurger }) => {
   const { ingredients, price } = burger;
-  // const [loading, setLoading] = useState(false);
+  const { loading } = orders;
   const [orderData, setOrderData] = useState(initialFormData);
 
   const handleOrder = e => {
     e.preventDefault();
-    // setLoading(true);
     const order = {
       ingredients,
       price,
       orderData
     };
-    // orders
-    //   .post("orders.json", order)
-    //   .then(response => {
-    //     setLoading(false);
-    //     history.push("/");
-    //   })
-    //   .catch(error => {
-    //     setLoading(false);
-    //   });
     purchaseBurger(order);
   };
 
-  // if (loading) return <Spinner />;
+  if (loading) return <Spinner />;
 
   const handleInputChange = (e, inputIdentifier) => {
     const updatedData = _.cloneDeep(orderData);
@@ -123,9 +114,14 @@ const ContactData = ({ burger, history, purchaseBurger }) => {
   );
 };
 
-const mapStateToProps = state => ({ burger: state.burger });
+const mapStateToProps = state => ({
+  burger: state.burger,
+  orders: state.orders
+});
+
+const enhancedContactData = withErrorHandler(ContactData, orders);
 
 export default connect(
   mapStateToProps,
   { purchaseBurger }
-)(ContactData);
+)(enhancedContactData);
