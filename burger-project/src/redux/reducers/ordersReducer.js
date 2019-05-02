@@ -23,7 +23,19 @@ const loading = (state = false, action) => {
   }
 };
 
+const purchased = (state = false, action) => {
+  switch (action.type) {
+    case actions.PURCHASE_INIT:
+      return false;
+    case actions.PURCHASE_BURGER_SUCCESS:
+      return true;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   orders,
-  loading
+  loading,
+  purchased
 });

@@ -1,6 +1,8 @@
 import * as actions from "redux/actions/types";
 import orders from "apis/orders";
 
+export const initPurchase = () => ({ type: actions.PURCHASE_INIT });
+
 export const purchaseBurgerSuccess = (id, orderData) => ({
   type: actions.PURCHASE_BURGER_SUCCESS,
   payload: { id, orderData }
