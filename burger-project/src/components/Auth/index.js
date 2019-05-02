@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import _ from "lodash";
+import { auth } from "redux/actions/authActions";
 import Input from "components/UI/Input";
 import Button from "components/UI/Button";
 import styles from "./Auth.module.scss";
@@ -23,13 +25,19 @@ const initialControls = {
   }
 };
 
-const Auth = () => {
+const Auth = props => {
   const [controls, setControls] = useState(initialControls);
 
   const handleInputChange = (e, inputIdentifier) => {
     const updatedData = _.cloneDeep(controls);
     updatedData[inputIdentifier].value = e.target.value;
     setControls(updatedData);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const { email, password } = controls;
+    props.auth(email.value, password.value);
   };
 
   const renderInputs = () => {
@@ -50,12 +58,17 @@ const Auth = () => {
 
   return (
     <div className={styles.wrapper}>
-      <form>
+      <form onSubmit={e => handleSubmit(e)}>
         {renderInputs()}
-        <Button btnType="Success">SUBMIT</Button>
+        <Button btnType="success" type="submit">
+          SUBMIT
+        </Button>
       </form>
     </div>
   );
 };
 
-export default Auth;
+export default connect(
+  null,
+  { auth }
+)(Auth);
