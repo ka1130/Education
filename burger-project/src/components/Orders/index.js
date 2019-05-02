@@ -15,7 +15,6 @@ const Orders = props => {
 
   if (orders.loading) return <Spinner />;
   if (!orders || !orders.length) return <p>No orders</p>;
-  console.log(orders);
   return (
     <div>
       {orders.map(order => (
@@ -23,7 +22,6 @@ const Orders = props => {
       ))}
     </div>
   );
-  return <div />;
 };
 
 const enhancedOrders = withErrorHandler(Orders, ordersApi);
