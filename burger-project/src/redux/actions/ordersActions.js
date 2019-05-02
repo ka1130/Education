@@ -8,17 +8,25 @@ export const purchaseBurgerSuccess = (id, orderData) => ({
   payload: { id, orderData }
 });
 
-export const purchaseBurgerFailed = error => ({
-  type: actions.PURCHASE_BURGER_FAILED,
-  payload: error
-});
-
 export const purchaseBurger = orderData => async dispatch => {
   dispatch({ type: actions.PURCHASE_BURGER_BEGIN });
   try {
     const response = await orders.post("/orders.json", orderData);
     dispatch(purchaseBurgerSuccess(response.data.name, orderData));
   } catch (error) {
-    dispatch(purchaseBurgerFailed(error));
+    dispatch({ type: actions.PURCHASE_BURGER_FAILED, payload: error });
+  }
+};
+
+export const fetchOrders = () => async dispatch => {
+  dispatch({ type: actions.FETCH_ORDERS_INIT });
+  try {
+    const response = await orders.get("/orders.json");
+    let ordersArr = Object.keys(response.data).map(key => {
+      return { ...response.data[key], id: key };
+    });
+    dispatch({ type: actions.FETCH_ORDERS_SUCCESS, payload: ordersArr });
+  } catch (error) {
+    dispatch({ type: actions.FETCH_ORDERS_FAILED, payload: error });
   }
 };

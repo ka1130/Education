@@ -5,6 +5,7 @@ import {
   removeIngredient,
   initIngredients
 } from "redux/actions/ingredientsActions";
+import { initPurchase } from "redux/actions/ordersActions";
 import Burger from "components/Burger";
 import BuildControls from "components/Burger/BuildControls";
 import Modal from "components/UI/Modal";
@@ -13,12 +14,19 @@ import OrderSummary from "components/Burger/OrderSummary";
 import withErrorHandler from "components/hoc/withErrorHandler";
 import orders from "apis/orders";
 
-const BurgerBuilder = props => {
-  const { ingredients, price } = props.burger;
+const BurgerBuilder = ({
+  burger,
+  history,
+  initIngredients,
+  initPurchase,
+  addIngredient,
+  removeIngredient
+}) => {
+  const { ingredients, price } = burger;
   const [purchasing, setPurchasing] = useState(false);
 
   useEffect(() => {
-    props.initIngredients();
+    initIngredients();
   }, []);
 
   const purchasable = ingredients
@@ -30,7 +38,8 @@ const BurgerBuilder = props => {
   const handleModalClose = () => setPurchasing(false);
 
   const handlePurchaseContinue = () => {
-    props.history.push("/checkout", { ingredients, price });
+    initPurchase();
+    history.push("/checkout", { ingredients, price });
   };
 
   const disabledInfo = { ...ingredients };
@@ -58,8 +67,8 @@ const BurgerBuilder = props => {
       <>
         <Burger ingredients={ingredients} purchasable={purchasable} />
         <BuildControls
-          onIngredientAdd={props.addIngredient}
-          onIngredientRemove={props.removeIngredient}
+          onIngredientAdd={addIngredient}
+          onIngredientRemove={removeIngredient}
           disabled={disabledInfo}
           price={price}
           purchasable={purchasable}
@@ -85,5 +94,5 @@ const mapStateToProps = state => ({ burger: state.burger });
 
 export default connect(
   mapStateToProps,
-  { addIngredient, removeIngredient, initIngredients }
+  { addIngredient, removeIngredient, initIngredients, initPurchase }
 )(enhancedBurgerBuilder);

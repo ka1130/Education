@@ -1,15 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
-import { initPurchase } from "redux/actions/ordersActions";
+
 import CheckoutSummary from "components/CheckoutSummary";
 import ContactData from "components/Checkout/ContactData";
 
-const Checkout = ({ burger, history, match, initPurchase, orders }) => {
-  useEffect(() => {
-    initPurchase();
-  }, []);
-
+const Checkout = ({ burger, history, match, orders }) => {
   const { ingredients } = burger;
   const { purchased } = orders;
 
@@ -38,7 +34,4 @@ const mapStateToProps = state => ({
   orders: state.orders
 });
 
-export default connect(
-  mapStateToProps,
-  { initPurchase }
-)(Checkout);
+export default connect(mapStateToProps)(Checkout);

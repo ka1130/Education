@@ -6,6 +6,8 @@ const orders = (state = [], action) => {
     case actions.PURCHASE_BURGER_SUCCESS:
       const newOrder = { ...action.payload.orderData, id: [action.payload.id] };
       return [...state, newOrder];
+    case actions.FETCH_ORDERS_SUCCESS:
+      return action.payload;
     default:
       return state;
   }
@@ -14,9 +16,12 @@ const orders = (state = [], action) => {
 const loading = (state = false, action) => {
   switch (action.type) {
     case actions.PURCHASE_BURGER_BEGIN:
+    case actions.FETCH_ORDERS_INIT:
       return true;
     case actions.PURCHASE_BURGER_SUCCESS:
     case actions.PURCHASE_BURGER_FAILED:
+    case actions.FETCH_ORDERS_SUCCESS:
+    case actions.FETCH_ORDERS_FAILED:
       return false;
     default:
       return state;

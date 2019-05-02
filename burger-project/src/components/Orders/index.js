@@ -1,27 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { fetchOrders } from "redux/actions/ordersActions";
 import ordersApi from "apis/orders";
 import Order from "components/Order";
+import Spinner from "components/UI/Spinner";
 import withErrorHandler from "components/hoc/withErrorHandler";
 
-const Orders = () => {
-  const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
+const Orders = props => {
+  const { orders } = props.orders;
 
   useEffect(() => {
-    (async () => {
-      try {
-        const response = await ordersApi.get("/orders.json");
-        let ordersArr = Object.keys(response.data).map(key => {
-          return { ...response.data[key], id: key };
-        });
-        setOrders(ordersArr);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-      }
-    })();
+    props.fetchOrders();
   }, []);
 
+  if (orders.loading) return <Spinner />;
+  if (!orders || !orders.length) return <p>No orders</p>;
+  console.log(orders);
   return (
     <div>
       {orders.map(order => (
@@ -29,6 +23,14 @@ const Orders = () => {
       ))}
     </div>
   );
+  return <div />;
 };
 
-export default withErrorHandler(Orders, ordersApi);
+const enhancedOrders = withErrorHandler(Orders, ordersApi);
+
+const mapStateToProps = state => ({ orders: state.orders });
+
+export default connect(
+  mapStateToProps,
+  { fetchOrders }
+)(enhancedOrders);
