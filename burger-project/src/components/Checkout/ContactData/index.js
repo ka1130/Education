@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
+import { purchaseBurger } from "redux/actions/ordersActions";
 import Button from "components/UI/Button";
 import Spinner from "components/UI/Spinner";
 import Input from "components/UI/Input";
@@ -60,31 +61,32 @@ const initialFormData = {
   }
 };
 
-const ContactData = ({ burger, history }) => {
+const ContactData = ({ burger, history, purchaseBurger }) => {
   const { ingredients, price } = burger;
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [orderData, setOrderData] = useState(initialFormData);
 
   const handleOrder = e => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
     const order = {
       ingredients,
       price,
       orderData
     };
-    orders
-      .post("orders.json", order)
-      .then(response => {
-        setLoading(false);
-        history.push("/");
-      })
-      .catch(error => {
-        setLoading(false);
-      });
+    // orders
+    //   .post("orders.json", order)
+    //   .then(response => {
+    //     setLoading(false);
+    //     history.push("/");
+    //   })
+    //   .catch(error => {
+    //     setLoading(false);
+    //   });
+    purchaseBurger(order);
   };
 
-  if (loading) return <Spinner />;
+  // if (loading) return <Spinner />;
 
   const handleInputChange = (e, inputIdentifier) => {
     const updatedData = _.cloneDeep(orderData);
@@ -123,4 +125,7 @@ const ContactData = ({ burger, history }) => {
 
 const mapStateToProps = state => ({ burger: state.burger });
 
-export default connect(mapStateToProps)(ContactData);
+export default connect(
+  mapStateToProps,
+  { purchaseBurger }
+)(ContactData);

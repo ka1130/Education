@@ -6,7 +6,7 @@ import styles from "./Burger.module.css";
 const Burger = props => {
   const { ingredients, purchasable } = props;
   const renderContent = obj => {
-    if (!purchasable) return <p>Start adding ingredients</p>;
+    if (!purchasable || !ingredients) return <p>Start adding ingredients</p>;
     return Object.entries(obj).map(entry =>
       Array.from(Array(entry[1])).map(() => (
         <BurgerIngredient key={uuidv4()} type={entry[0]} />

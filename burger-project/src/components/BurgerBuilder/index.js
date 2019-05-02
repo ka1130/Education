@@ -21,10 +21,9 @@ const BurgerBuilder = props => {
     props.initIngredients();
   }, []);
 
-  let loading = false;
-
-  const purchasable =
-    Object.values(ingredients).reduce((el, acc) => el + acc) > 0;
+  const purchasable = ingredients
+    ? Object.values(ingredients).reduce((el, acc) => el + acc) > 0
+    : false;
 
   const handleOrderClick = () => setPurchasing(true);
 
@@ -40,7 +39,7 @@ const BurgerBuilder = props => {
   }
 
   const renderModalContent = () => {
-    if (!loading && ingredients) {
+    if (ingredients) {
       return (
         <OrderSummary
           ingredients={ingredients}
@@ -55,23 +54,19 @@ const BurgerBuilder = props => {
   };
 
   const renderBurgerContents = () => {
-    if (ingredients) {
-      return (
-        <>
-          <Burger ingredients={ingredients} purchasable={purchasable} />
-          <BuildControls
-            onIngredientAdd={props.addIngredient}
-            onIngredientRemove={props.removeIngredient}
-            disabled={disabledInfo}
-            price={price}
-            purchasable={purchasable}
-            onOrderClick={handleOrderClick}
-          />
-        </>
-      );
-    } else {
-      return <Spinner />;
-    }
+    return (
+      <>
+        <Burger ingredients={ingredients} purchasable={purchasable} />
+        <BuildControls
+          onIngredientAdd={props.addIngredient}
+          onIngredientRemove={props.removeIngredient}
+          disabled={disabledInfo}
+          price={price}
+          purchasable={purchasable}
+          onOrderClick={handleOrderClick}
+        />
+      </>
+    );
   };
 
   return (

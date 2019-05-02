@@ -1,8 +1,4 @@
-import {
-  ADD_INGREDIENT,
-  REMOVE_INGREDIENT,
-  SET_INGREDIENTS
-} from "redux/actions/types";
+import * as actions from "redux/actions/types";
 import { combineReducers } from "redux";
 
 const INGREDIENT_PRICES = {
@@ -12,20 +8,13 @@ const INGREDIENT_PRICES = {
   bacon: 0.7
 };
 
-const initialIngredients = {
-  meat: 0,
-  bacon: 0,
-  cheese: 0,
-  salad: 0
-};
-
-const ingredients = (state = initialIngredients, action) => {
+const ingredients = (state = null, action) => {
   switch (action.type) {
-    case ADD_INGREDIENT:
+    case actions.ADD_INGREDIENT:
       return { ...state, [action.payload]: state[action.payload] + 1 };
-    case REMOVE_INGREDIENT:
+    case actions.REMOVE_INGREDIENT:
       return { ...state, [action.payload]: state[action.payload] - 1 };
-    case SET_INGREDIENTS:
+    case actions.SET_INGREDIENTS:
       return { ...state, ...action.payload };
     default:
       return state;
@@ -34,10 +23,19 @@ const ingredients = (state = initialIngredients, action) => {
 
 const price = (state = 0, action) => {
   switch (action.type) {
-    case ADD_INGREDIENT:
+    case actions.ADD_INGREDIENT:
       return state + INGREDIENT_PRICES[action.payload];
-    case REMOVE_INGREDIENT:
+    case actions.REMOVE_INGREDIENT:
       return state - INGREDIENT_PRICES[action.payload];
+    default:
+      return state;
+  }
+};
+
+const error = (state = false, action) => {
+  switch (action.type) {
+    case actions.FETCH_INGREDIENTS_FAILED:
+      return true;
     default:
       return state;
   }
@@ -45,5 +43,6 @@ const price = (state = 0, action) => {
 
 export default combineReducers({
   ingredients,
-  price
+  price,
+  error
 });
