@@ -1,4 +1,8 @@
-import { ADD_INGREDIENT, REMOVE_INGREDIENT } from "redux/actions/types";
+import {
+  ADD_INGREDIENT,
+  REMOVE_INGREDIENT,
+  SET_INGREDIENTS
+} from "redux/actions/types";
 import { combineReducers } from "redux";
 
 const INGREDIENT_PRICES = {
@@ -21,6 +25,8 @@ const ingredients = (state = initialIngredients, action) => {
       return { ...state, [action.payload]: state[action.payload] + 1 };
     case REMOVE_INGREDIENT:
       return { ...state, [action.payload]: state[action.payload] - 1 };
+    case SET_INGREDIENTS:
+      return { ...state, ...action.payload };
     default:
       return state;
   }

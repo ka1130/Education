@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { addIngredient, removeIngredient } from "redux/actions";
+import {
+  addIngredient,
+  removeIngredient,
+  initIngredients
+} from "redux/actions/ingredientsActions";
 import Burger from "components/Burger";
 import BuildControls from "components/Burger/BuildControls";
 import Modal from "components/UI/Modal";
@@ -12,6 +16,11 @@ import orders from "apis/orders";
 const BurgerBuilder = props => {
   const { ingredients, price } = props.burger;
   const [purchasing, setPurchasing] = useState(false);
+
+  useEffect(() => {
+    props.initIngredients();
+  }, []);
+
   let loading = false;
 
   const purchasable =
@@ -81,5 +90,5 @@ const mapStateToProps = state => ({ burger: state.burger });
 
 export default connect(
   mapStateToProps,
-  { addIngredient, removeIngredient }
+  { addIngredient, removeIngredient, initIngredients }
 )(enhancedBurgerBuilder);
