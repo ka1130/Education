@@ -60,14 +60,10 @@ const Auth = ({ auth, authenticate }) => {
     });
   };
 
-  const renderInfo = () => {
-    if (auth.loading) return <Spinner />;
-    if (auth.error) return <h5>{auth.error}</h5>;
-  };
-
   return (
     <div className={styles.wrapper}>
-      {renderInfo()}
+      {auth.loading ? <Spinner /> : null}
+      {auth.error ? <h5>{auth.error}</h5> : null}
       <form onSubmit={e => handleSubmit(e)}>
         {renderInputs()}
         <Button btnType="success" type="submit">

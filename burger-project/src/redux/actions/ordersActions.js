@@ -18,10 +18,11 @@ export const purchaseBurger = orderData => async dispatch => {
   }
 };
 
-export const fetchOrders = () => async dispatch => {
+export const fetchOrders = () => async (dispatch, getState) => {
   dispatch({ type: actions.FETCH_ORDERS_INIT });
   try {
-    const response = await orders.get("/orders.json");
+    const token = getState().auth.token;
+    const response = await orders.get(`/orders.json?auth=${token}`);
     let ordersArr = Object.keys(response.data).map(key => {
       return { ...response.data[key], id: key };
     });

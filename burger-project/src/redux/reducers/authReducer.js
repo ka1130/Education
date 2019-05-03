@@ -6,6 +6,7 @@ const token = (state = null, action) => {
     case actions.AUTH_SUCCESS:
       return action.payload.idToken;
     case actions.LOGOUT:
+    case actions.AUTH_FAILED:
       return null;
     default:
       return state;
@@ -17,6 +18,7 @@ const userID = (state = null, action) => {
     case actions.AUTH_SUCCESS:
       return action.payload.localId;
     case actions.LOGOUT:
+    case actions.AUTH_FAILED:
       return null;
     default:
       return state;
@@ -28,6 +30,9 @@ const error = (state = null, action) => {
     case actions.AUTH_FAILED:
       const errorMessage = action.payload.response.data.error.message;
       return errorMessage;
+    case actions.AUTH_SUCCESS:
+    case actions.LOGOUT:
+      return false;
     default:
       return state;
   }
