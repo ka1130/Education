@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import _ from "lodash";
-import { auth } from "redux/actions/authActions";
+import { auth, setAuthRedirectPath } from "redux/actions/authActions";
 import Input from "components/UI/Input";
 import Button from "components/UI/Button";
 import Spinner from "components/UI/Spinner";
@@ -27,10 +27,17 @@ const initialControls = {
   }
 };
 
-const Auth = ({ auth, authenticate }) => {
+const Auth = ({ auth, authenticate, buildingBurger, setAuthRedirectPath }) => {
   const [controls, setControls] = useState(initialControls);
   const [isSignedUp, setIsSignedUp] = useState(true);
   const isAuthenticated = auth.token !== null;
+  const { authRedirectPath } = auth;
+
+  useEffect(() => {
+    if (!buildingBurger && authRedirectPath !== "/") {
+      setAuthRedirectPath("/");
+    }
+  }, []);
 
   const handleInputChange = (e, inputIdentifier) => {
     const updatedData = _.cloneDeep(controls);
@@ -66,7 +73,7 @@ const Auth = ({ auth, authenticate }) => {
     <div className={styles.wrapper}>
       {auth.loading ? <Spinner /> : null}
       {auth.error ? <h5>{auth.error}</h5> : null}
-      {isAuthenticated ? <Redirect to="/" /> : null}
+      {isAuthenticated ? <Redirect to={authRedirectPath} /> : null}
       <form onSubmit={e => handleSubmit(e)}>
         {renderInputs()}
         <Button btnType="success" type="submit">
@@ -80,9 +87,12 @@ const Auth = ({ auth, authenticate }) => {
   );
 };
 
-const mapStateToProps = state => ({ auth: state.auth });
+const mapStateToProps = state => ({
+  auth: state.auth,
+  buildingBurger: state.burger.building
+});
 
 export default connect(
   mapStateToProps,
-  { authenticate: auth }
+  { authenticate: auth, setAuthRedirectPath }
 )(Auth);

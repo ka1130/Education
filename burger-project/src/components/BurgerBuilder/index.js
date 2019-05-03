@@ -6,6 +6,7 @@ import {
   initIngredients
 } from "redux/actions/ingredientsActions";
 import { initPurchase } from "redux/actions/ordersActions";
+import { setAuthRedirectPath } from "redux/actions/authActions";
 import Burger from "components/Burger";
 import BuildControls from "components/Burger/BuildControls";
 import Modal from "components/UI/Modal";
@@ -21,7 +22,8 @@ const BurgerBuilder = ({
   initIngredients,
   initPurchase,
   addIngredient,
-  removeIngredient
+  removeIngredient,
+  setAuthRedirectPath
 }) => {
   const { ingredients, price } = burger;
   const [purchasing, setPurchasing] = useState(false);
@@ -39,6 +41,7 @@ const BurgerBuilder = ({
     if (isAuthed) {
       setPurchasing(true);
     } else {
+      setAuthRedirectPath("/checkout");
       history.push("/auth");
     }
   };
@@ -103,5 +106,11 @@ const mapStateToProps = state => ({ burger: state.burger, auth: state.auth });
 
 export default connect(
   mapStateToProps,
-  { addIngredient, removeIngredient, initIngredients, initPurchase }
+  {
+    addIngredient,
+    removeIngredient,
+    initIngredients,
+    initPurchase,
+    setAuthRedirectPath
+  }
 )(enhancedBurgerBuilder);

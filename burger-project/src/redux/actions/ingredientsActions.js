@@ -11,13 +11,11 @@ export const removeIngredient = ingredient => ({
   payload: ingredient
 });
 
-export const initIngredients = () => async (dispatch, getState) => {
+export const initIngredients = () => async dispatch => {
   try {
     const response = await orders.get("/ingredients.json");
-    console.log(getState());
     dispatch({ type: actions.SET_INGREDIENTS, payload: response.data });
   } catch (error) {
-    console.error(error);
     dispatch({ type: actions.FETCH_INGREDIENTS_FAILED, payload: error });
   }
 };

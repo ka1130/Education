@@ -8,6 +8,18 @@ const INGREDIENT_PRICES = {
   bacon: 0.7
 };
 
+const building = (state = false, action) => {
+  switch (action.type) {
+    case actions.ADD_INGREDIENT:
+    case actions.REMOVE_INGREDIENT:
+      return true;
+    case actions.SET_INGREDIENTS:
+      return false;
+    default:
+      return state;
+  }
+};
+
 const ingredients = (state = null, action) => {
   switch (action.type) {
     case actions.ADD_INGREDIENT:
@@ -42,6 +54,7 @@ const error = (state = false, action) => {
 };
 
 export default combineReducers({
+  building,
   ingredients,
   price,
   error

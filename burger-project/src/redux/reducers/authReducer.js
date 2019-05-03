@@ -50,9 +50,19 @@ const loading = (state = false, action) => {
   }
 };
 
+const authRedirectPath = (state = "/", action) => {
+  switch (action.type) {
+    case actions.SET_AUTH_REDIRECT_PATH:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   token,
   userID,
   error,
-  loading
+  loading,
+  authRedirectPath
 });
