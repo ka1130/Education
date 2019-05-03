@@ -25,8 +25,12 @@ export const auth = (email, password, isSignedUp) => async dispatch => {
     const authData = { email, password, returnSecureToken: true };
     const authURL = isSignedUp ? signupURL : signinURL;
     const response = await axios.post(authURL, authData);
+    const { expiresIn } = response.data;
+    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+    localStorage.setItem("token", response.data.idToken);
+    localStorage.setItem("expirationDate", expirationDate);
     dispatch({ type: actions.AUTH_SUCCESS, payload: response.data });
-    dispatch(checkAuthTimeout(response.data.expiresIn));
+    dispatch(checkAuthTimeout(expiresIn));
   } catch (error) {
     dispatch({ type: actions.AUTH_FAILED, payload: error });
   }
