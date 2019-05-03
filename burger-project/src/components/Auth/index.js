@@ -27,6 +27,7 @@ const initialControls = {
 
 const Auth = props => {
   const [controls, setControls] = useState(initialControls);
+  const [isSignedUp, setIsSignedUp] = useState(true);
 
   const handleInputChange = (e, inputIdentifier) => {
     const updatedData = _.cloneDeep(controls);
@@ -37,8 +38,10 @@ const Auth = props => {
   const handleSubmit = e => {
     e.preventDefault();
     const { email, password } = controls;
-    props.auth(email.value, password.value);
+    props.auth(email.value, password.value, isSignedUp);
   };
+
+  const switchAuthMode = () => setIsSignedUp(!isSignedUp);
 
   const renderInputs = () => {
     return Object.entries(controls).map(entry => {
@@ -64,6 +67,9 @@ const Auth = props => {
           SUBMIT
         </Button>
       </form>
+      <Button btnType="danger" onClick={switchAuthMode}>
+        SWITCH TO {isSignedUp ? "SIGN IN" : "SIGN UP"}
+      </Button>
     </div>
   );
 };
