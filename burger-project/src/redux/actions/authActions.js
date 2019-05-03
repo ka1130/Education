@@ -17,6 +17,8 @@ const checkAuthTimeout = expTime => dispatch => {
   }, expTime * 1000);
 };
 
+export const logout = () => ({ type: actions.LOGOUT });
+
 export const auth = (email, password, isSignedUp) => async dispatch => {
   dispatch({ type: actions.AUTH_INIT });
   try {
