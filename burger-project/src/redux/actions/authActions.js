@@ -55,7 +55,7 @@ export const checkAuthStatus = () => async dispatch => {
     dispatch(logout());
   } else {
     const expirationTime = new Date(localStorage.getItem("expirationTime"));
-    if (expirationTime > new Date()) {
+    if (expirationTime <= new Date()) {
       dispatch(logout());
     } else {
       try {
@@ -67,7 +67,9 @@ export const checkAuthStatus = () => async dispatch => {
           payload: { localId: userID, idToken: token }
         });
         dispatch(
-          checkAuthStatus(expirationTime.getSeconds() - new Date().getSeconds())
+          checkAuthStatus(
+            expirationTime.getTime() - new Date().getTime() / 1000
+          )
         );
       } catch (error) {
         dispatch({ type: actions.AUTH_FAILED, payload: error });
