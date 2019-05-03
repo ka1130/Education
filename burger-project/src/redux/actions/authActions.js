@@ -17,7 +17,11 @@ const checkAuthTimeout = expTime => dispatch => {
   }, expTime * 1000);
 };
 
-export const logout = () => ({ type: actions.LOGOUT });
+export const logout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("expirationTime");
+  return { type: actions.LOGOUT };
+};
 
 export const auth = (email, password, isSignedUp) => async dispatch => {
   dispatch({ type: actions.AUTH_INIT });
@@ -26,9 +30,9 @@ export const auth = (email, password, isSignedUp) => async dispatch => {
     const authURL = isSignedUp ? signupURL : signinURL;
     const response = await axios.post(authURL, authData);
     const { expiresIn } = response.data;
-    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+    const expirationTime = new Date(new Date().getTime() + expiresIn * 1000);
     localStorage.setItem("token", response.data.idToken);
-    localStorage.setItem("expirationDate", expirationDate);
+    localStorage.setItem("expirationTime", expirationTime);
     dispatch({ type: actions.AUTH_SUCCESS, payload: response.data });
     dispatch(checkAuthTimeout(expiresIn));
   } catch (error) {
@@ -40,3 +44,34 @@ export const setAuthRedirectPath = path => ({
   type: actions.SET_AUTH_REDIRECT_PATH,
   payload: path
 });
+
+export const checkAuthStatus = () => async dispatch => {
+  const token = localStorage.getItem("token");
+  const userDataURL = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=${
+    process.env.REACT_APP_API_KEY
+  }`;
+  // https://firebase.google.com/docs/reference/rest/auth#section-get-account-info
+  if (!token) {
+    dispatch(logout());
+  } else {
+    const expirationTime = new Date(localStorage.getItem("expirationTime"));
+    if (expirationTime > new Date()) {
+      dispatch(logout());
+    } else {
+      try {
+        const response = await axios.post(userDataURL, { idToken: token });
+        const userID = response.data.users[0].localId;
+        console.log(response);
+        dispatch({
+          type: actions.AUTH_SUCCESS,
+          payload: { localId: userID, idToken: token }
+        });
+        dispatch(
+          checkAuthStatus(expirationTime.getSeconds() - new Date().getSeconds())
+        );
+      } catch (error) {
+        dispatch({ type: actions.AUTH_FAILED, payload: error });
+      }
+    }
+  }
+};
