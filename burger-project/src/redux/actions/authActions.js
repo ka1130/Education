@@ -17,9 +17,10 @@ export const auth = (email, password, isSignedUp) => async dispatch => {
     const authData = { email, password, returnSecureToken: true };
     const authURL = isSignedUp ? signupURL : signinURL;
     const response = await axios.post(authURL, authData);
-    console.log(response);
+    console.log("res", response);
     dispatch({ type: actions.AUTH_SUCCESS, payload: response.data });
   } catch (error) {
+    console.log("error", error);
     dispatch({ type: actions.AUTH_FAILED, payload: error });
   }
 };

@@ -4,6 +4,7 @@ import _ from "lodash";
 import { auth } from "redux/actions/authActions";
 import Input from "components/UI/Input";
 import Button from "components/UI/Button";
+import Spinner from "components/UI/Spinner";
 import styles from "./Auth.module.scss";
 
 const initialControls = {
@@ -25,7 +26,7 @@ const initialControls = {
   }
 };
 
-const Auth = props => {
+const Auth = ({ auth, authenticate }) => {
   const [controls, setControls] = useState(initialControls);
   const [isSignedUp, setIsSignedUp] = useState(true);
 
@@ -38,7 +39,7 @@ const Auth = props => {
   const handleSubmit = e => {
     e.preventDefault();
     const { email, password } = controls;
-    props.auth(email.value, password.value, isSignedUp);
+    authenticate(email.value, password.value, isSignedUp);
   };
 
   const switchAuthMode = () => setIsSignedUp(!isSignedUp);
@@ -59,6 +60,8 @@ const Auth = props => {
     });
   };
 
+  if (auth.loading) return <Spinner />;
+
   return (
     <div className={styles.wrapper}>
       <form onSubmit={e => handleSubmit(e)}>
@@ -74,7 +77,9 @@ const Auth = props => {
   );
 };
 
+const mapStateToProps = state => ({ auth: state.auth });
+
 export default connect(
-  null,
-  { auth }
+  mapStateToProps,
+  { authenticate: auth }
 )(Auth);
