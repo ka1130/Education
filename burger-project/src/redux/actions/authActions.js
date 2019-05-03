@@ -11,6 +11,12 @@ const signinURL = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/ve
 // https://firebase.google.com/docs/reference/rest/auth#section-create-email-password
 // API key: https://console.firebase.google.com/u/0/project/burger-udemy-92254/settings/general/
 
+const checkAuthTimeout = expTime => dispatch => {
+  setTimeout(() => {
+    dispatch({ type: actions.LOGOUT });
+  }, expTime * 1000);
+};
+
 export const auth = (email, password, isSignedUp) => async dispatch => {
   dispatch({ type: actions.AUTH_INIT });
   try {
@@ -19,6 +25,7 @@ export const auth = (email, password, isSignedUp) => async dispatch => {
     const response = await axios.post(authURL, authData);
     console.log("res", response);
     dispatch({ type: actions.AUTH_SUCCESS, payload: response.data });
+    dispatch(checkAuthTimeout(response.data.expiresIn));
   } catch (error) {
     console.log("error", error);
     dispatch({ type: actions.AUTH_FAILED, payload: error });

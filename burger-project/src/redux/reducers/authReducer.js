@@ -5,6 +5,8 @@ const token = (state = null, action) => {
   switch (action.type) {
     case actions.AUTH_SUCCESS:
       return action.payload.idToken;
+    case actions.LOGOUT:
+      return null;
     default:
       return state;
   }
@@ -14,6 +16,8 @@ const userID = (state = null, action) => {
   switch (action.type) {
     case actions.AUTH_SUCCESS:
       return action.payload.localId;
+    case actions.LOGOUT:
+      return null;
     default:
       return state;
   }
