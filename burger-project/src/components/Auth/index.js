@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import _ from "lodash";
 import { auth } from "redux/actions/authActions";
 import Input from "components/UI/Input";
@@ -29,6 +30,7 @@ const initialControls = {
 const Auth = ({ auth, authenticate }) => {
   const [controls, setControls] = useState(initialControls);
   const [isSignedUp, setIsSignedUp] = useState(true);
+  const isAuthenticated = auth.token !== null;
 
   const handleInputChange = (e, inputIdentifier) => {
     const updatedData = _.cloneDeep(controls);
@@ -64,6 +66,7 @@ const Auth = ({ auth, authenticate }) => {
     <div className={styles.wrapper}>
       {auth.loading ? <Spinner /> : null}
       {auth.error ? <h5>{auth.error}</h5> : null}
+      {isAuthenticated ? <Redirect to="/" /> : null}
       <form onSubmit={e => handleSubmit(e)}>
         {renderInputs()}
         <Button btnType="success" type="submit">

@@ -15,6 +15,7 @@ import withErrorHandler from "components/hoc/withErrorHandler";
 import orders from "apis/orders";
 
 const BurgerBuilder = ({
+  auth,
   burger,
   history,
   initIngredients,
@@ -24,6 +25,7 @@ const BurgerBuilder = ({
 }) => {
   const { ingredients, price } = burger;
   const [purchasing, setPurchasing] = useState(false);
+  const isAuthed = auth.token !== null;
 
   useEffect(() => {
     initIngredients();
@@ -33,7 +35,13 @@ const BurgerBuilder = ({
     ? Object.values(ingredients).reduce((el, acc) => el + acc) > 0
     : false;
 
-  const handleOrderClick = () => setPurchasing(true);
+  const handleOrderClick = () => {
+    if (isAuthed) {
+      setPurchasing(true);
+    } else {
+      history.push("/auth");
+    }
+  };
 
   const handleModalClose = () => setPurchasing(false);
 
@@ -67,6 +75,7 @@ const BurgerBuilder = ({
       <>
         <Burger ingredients={ingredients} purchasable={purchasable} />
         <BuildControls
+          isAuthed={isAuthed}
           onIngredientAdd={addIngredient}
           onIngredientRemove={removeIngredient}
           disabled={disabledInfo}
@@ -90,7 +99,7 @@ const BurgerBuilder = ({
 
 const enhancedBurgerBuilder = withErrorHandler(BurgerBuilder, orders);
 
-const mapStateToProps = state => ({ burger: state.burger });
+const mapStateToProps = state => ({ burger: state.burger, auth: state.auth });
 
 export default connect(
   mapStateToProps,
