@@ -62,15 +62,15 @@ export const checkAuthStatus = () => async dispatch => {
         const response = await axios.post(userDataURL, { idToken: token });
         const userID = response.data.users[0].localId;
         console.log(response);
-        dispatch({
-          type: actions.AUTH_SUCCESS,
-          payload: { localId: userID, idToken: token }
-        });
-        dispatch(
-          checkAuthStatus(
-            expirationTime.getTime() - new Date().getTime() / 1000
-          )
-        );
+        // dispatch({
+        //   type: actions.AUTH_SUCCESS,
+        //   payload: { localId: userID, idToken: token }
+        // });
+        // dispatch(
+        //   checkAuthStatus(
+        //     expirationTime.getTime() - new Date().getTime() / 1000
+        //   )
+        // );
       } catch (error) {
         dispatch({ type: actions.AUTH_FAILED, payload: error });
       }

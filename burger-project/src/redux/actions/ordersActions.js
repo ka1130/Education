@@ -13,7 +13,6 @@ export const purchaseBurger = orderData => async (dispatch, getState) => {
   try {
     const token = getState().auth.token;
     const response = await orders.post(`/orders.json?auth=${token}`, orderData);
-    // const response = await orders.post(`/orders.json`, orderData);
     dispatch(purchaseBurgerSuccess(response.data.name, orderData));
   } catch (error) {
     dispatch({ type: actions.PURCHASE_BURGER_FAILED, payload: error });
@@ -23,8 +22,9 @@ export const purchaseBurger = orderData => async (dispatch, getState) => {
 export const fetchOrders = () => async (dispatch, getState) => {
   dispatch({ type: actions.FETCH_ORDERS_INIT });
   try {
-    const token = getState().auth.token;
-    const response = await orders.get(`/orders.json?auth=${token}`);
+    const { token, userID } = getState().auth;
+    const queryParams = `?auth=${token}&orderBy="userID"&equalTo="${userID}"`;
+    const response = await orders.get(`/orders.json${queryParams}`);
     let ordersArr = Object.keys(response.data).map(key => {
       return { ...response.data[key], id: key };
     });

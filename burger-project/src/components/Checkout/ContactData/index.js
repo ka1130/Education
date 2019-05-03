@@ -62,7 +62,7 @@ const initialFormData = {
   }
 };
 
-const ContactData = ({ burger, orders, history, purchaseBurger }) => {
+const ContactData = ({ userID, burger, orders, purchaseBurger }) => {
   const { ingredients, price } = burger;
   const { loading } = orders;
   const [orderData, setOrderData] = useState(initialFormData);
@@ -72,7 +72,8 @@ const ContactData = ({ burger, orders, history, purchaseBurger }) => {
     const order = {
       ingredients,
       price,
-      orderData
+      orderData,
+      userID
     };
     purchaseBurger(order);
   };
@@ -115,6 +116,7 @@ const ContactData = ({ burger, orders, history, purchaseBurger }) => {
 };
 
 const mapStateToProps = state => ({
+  userID: state.auth.userID,
   burger: state.burger,
   orders: state.orders
 });

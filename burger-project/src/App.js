@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { checkAuthStatus } from "redux/actions/authActions";
 import Auth from "components/Auth";
