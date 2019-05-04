@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import NavigationItem from "components/Navigation/NavigationItems/NavigationItem";
 import styles from "./NavigationItems.module.scss";
 
-const NavigationItems = ({ isLoggedIn, logout }) => {
+export const NavigationItems = ({ isLoggedIn }) => {
   const renderAuthBtn = () => {
     if (isLoggedIn) {
       return <NavigationItem link="/logout">Logout</NavigationItem>;
