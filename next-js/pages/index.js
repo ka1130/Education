@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Router from "next/router";
 
-const indexPage = () => {
+const Main = () => {
   return (
     <div>
       <h1>The main page</h1>
@@ -23,4 +23,4 @@ const indexPage = () => {
   );
 };
 
-export default indexPage;
+export default Main;
