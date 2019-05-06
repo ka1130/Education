@@ -3,10 +3,12 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import rootReducer from "redux/reducers";
-import "./index.css";
-import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import createSagaMiddleware from "redux-saga";
+import rootReducer from "redux/reducers";
+import { watchAuth } from "redux/sagas";
+import App from "./App";
+import "./index.css";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -23,10 +25,14 @@ const logger = store => {
   };
 };
 
+const sagaMiddleware = createSagaMiddleware();
+
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk, logger))
+  composeEnhancers(applyMiddleware(thunk, logger, sagaMiddleware))
 );
+
+sagaMiddleware.run(watchAuth);
 
 ReactDOM.render(
   <Provider store={store}>

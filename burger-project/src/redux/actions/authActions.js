@@ -18,9 +18,9 @@ const checkAuthTimeout = expTime => dispatch => {
 };
 
 export const logout = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("expirationTime");
-  return { type: actions.LOGOUT };
+  // localStorage.removeItem("token");
+  // localStorage.removeItem("expirationTime");
+  return { type: actions.LOGOUT_INIT };
 };
 
 export const auth = (email, password, isSignedUp) => async dispatch => {
