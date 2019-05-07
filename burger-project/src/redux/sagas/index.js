@@ -5,6 +5,7 @@ import {
   authSaga,
   checkAuthStatusSaga
 } from "redux/sagas/authSagas";
+import { initIngredientsSaga } from "redux/sagas/ingredientsSagas";
 import * as actions from "redux/actions/types";
 
 export function* watchAuth() {
@@ -13,4 +14,8 @@ export function* watchAuth() {
   yield takeEvery(actions.AUTH_CHECK_TIMEOUT, checkAuthTimeoutSaga);
   yield takeEvery(actions.AUTH_USER, authSaga);
   yield takeEvery(actions.AUTH_CHECK_STATE, checkAuthStatusSaga);
+}
+
+export function* watchIngredients() {
+  yield takeEvery(actions.INIT_INGREDIENTS, initIngredientsSaga);
 }
