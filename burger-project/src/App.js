@@ -11,7 +11,7 @@ import Logout from "components/Auth/Logout";
 
 const App = ({ checkAuthStatus, isAuthed }) => {
   useEffect(() => {
-    checkAuthStatus();
+    // checkAuthStatus();
   }, []);
 
   const renderRoutes = () => {
@@ -45,7 +45,11 @@ const mapStateToProps = state => ({
   isAuthed: state.auth.token !== null
 });
 
+const mapDispatchToProps = dispatch => ({
+  checkAuthStatus: () => dispatch(checkAuthStatus())
+});
+
 export default connect(
   mapStateToProps,
-  { checkAuthStatus }
+  mapDispatchToProps
 )(App);

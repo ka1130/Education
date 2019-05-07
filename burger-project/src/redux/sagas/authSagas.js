@@ -26,7 +26,6 @@ export function* checkAuthTimeoutSaga(action) {
 }
 
 export function* authSaga(action) {
-  console.log(action);
   yield put({ type: actionTypes.AUTH_INIT });
   const { email, password } = action.payload;
   const authData = {
@@ -51,5 +50,40 @@ export function* authSaga(action) {
     yield put(actions.checkAuthTimeout(expiresIn));
   } catch (error) {
     yield put({ type: actionTypes.AUTH_FAILED, payload: error });
+  }
+}
+
+export function* checkAuthStatusSaga(action) {
+  console.log("check");
+  const token = yield localStorage.getItem("token");
+  const userDataURL = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=${
+    process.env.REACT_APP_API_KEY
+  }`;
+  if (!token) {
+    yield put({ type: actionTypes.LOGOUT_INIT });
+  } else {
+    const expirationTime = yield new Date(
+      localStorage.getItem("expirationTime")
+    );
+    if (expirationTime <= new Date()) {
+      yield put({ type: actionTypes.LOGOUT_INIT });
+    } else {
+      try {
+        const response = yield axios.post(userDataURL, { idToken: token });
+        const userID = response.data.users[0].localId;
+        console.log(response);
+        yield put({
+          type: actionTypes.AUTH_SUCCESS,
+          payload: { localId: userID, idToken: token }
+        });
+        yield put(
+          actions.checkAuthStatus(
+            expirationTime.getTime() - new Date().getTime() / 1000
+          )
+        );
+      } catch (error) {
+        yield put({ type: actionTypes.AUTH_FAILED, payload: error });
+      }
+    }
   }
 }
