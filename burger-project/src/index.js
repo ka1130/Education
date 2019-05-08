@@ -6,7 +6,12 @@ import thunk from "redux-thunk";
 import * as serviceWorker from "./serviceWorker";
 import createSagaMiddleware from "redux-saga";
 import rootReducer from "redux/reducers";
-import { watchAuth, watchIngredients, watchOrders } from "redux/sagas";
+import {
+  watchAuth,
+  watchIngredients,
+  watchOrders,
+  watchFetchOrders
+} from "redux/sagas";
 import App from "./App";
 import "./index.css";
 
@@ -35,6 +40,7 @@ const store = createStore(
 sagaMiddleware.run(watchAuth);
 sagaMiddleware.run(watchIngredients);
 sagaMiddleware.run(watchOrders);
+sagaMiddleware.run(watchFetchOrders);
 
 ReactDOM.render(
   <Provider store={store}>

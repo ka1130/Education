@@ -10,7 +10,7 @@ const Orders = props => {
   const { orders } = props.orders;
 
   useEffect(() => {
-    props.fetchOrders();
+    props.fetchOrders(props.token, props.userID);
   }, []);
 
   if (orders.loading) return <Spinner />;
@@ -26,7 +26,11 @@ const Orders = props => {
 
 const enhancedOrders = withErrorHandler(Orders, ordersApi);
 
-const mapStateToProps = state => ({ orders: state.orders });
+const mapStateToProps = state => ({
+  orders: state.orders,
+  token: state.auth.token,
+  userID: state.auth.userID
+});
 
 export default connect(
   mapStateToProps,

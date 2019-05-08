@@ -15,3 +15,18 @@ export function* purchaseBurgerSaga(action) {
     yield put({ type: actionTypes.PURCHASE_BURGER_FAILED, payload: error });
   }
 }
+
+export function* fetchOrdersSaga(action) {
+  yield put({ type: actionTypes.FETCH_ORDERS_INIT });
+  try {
+    const { token, userID } = action;
+    const queryParams = `?auth=${token}&orderBy="userID"&equalTo="${userID}"`;
+    const response = yield orders.get(`/orders.json${queryParams}`);
+    let ordersArr = Object.keys(response.data).map(key => {
+      return { ...response.data[key], id: key };
+    });
+    yield put({ type: actionTypes.FETCH_ORDERS_SUCCESS, payload: ordersArr });
+  } catch (error) {
+    yield put({ type: actionTypes.FETCH_ORDERS_FAILED, payload: error });
+  }
+}
