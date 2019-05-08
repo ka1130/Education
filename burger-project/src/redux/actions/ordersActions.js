@@ -8,16 +8,11 @@ export const purchaseBurgerSuccess = (id, orderData) => ({
   payload: { id, orderData }
 });
 
-export const purchaseBurger = orderData => async (dispatch, getState) => {
-  dispatch({ type: actions.PURCHASE_BURGER_BEGIN });
-  try {
-    const token = getState().auth.token;
-    const response = await orders.post(`/orders.json?auth=${token}`, orderData);
-    dispatch(purchaseBurgerSuccess(response.data.name, orderData));
-  } catch (error) {
-    dispatch({ type: actions.PURCHASE_BURGER_FAILED, payload: error });
-  }
-};
+export const purchaseBurger = (orderData, token) => ({
+  type: actions.PURCHASE_BURGER,
+  orderData,
+  token
+});
 
 export const fetchOrders = () => async (dispatch, getState) => {
   dispatch({ type: actions.FETCH_ORDERS_INIT });

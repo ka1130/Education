@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
+import axios from "axios";
 import { purchaseBurger } from "redux/actions/ordersActions";
 import Button from "components/UI/Button";
 import Spinner from "components/UI/Spinner";
@@ -62,12 +63,12 @@ const initialFormData = {
   }
 };
 
-const ContactData = ({ userID, burger, orders, purchaseBurger }) => {
+const ContactData = ({ userID, burger, orders, purchaseBurger, token }) => {
   const { ingredients, price } = burger;
   const { loading } = orders;
   const [orderData, setOrderData] = useState(initialFormData);
 
-  const handleOrder = e => {
+  const handleOrder = async e => {
     e.preventDefault();
     const order = {
       ingredients,
@@ -75,7 +76,8 @@ const ContactData = ({ userID, burger, orders, purchaseBurger }) => {
       orderData,
       userID
     };
-    purchaseBurger(order);
+
+    purchaseBurger(order, token);
   };
 
   if (loading) return <Spinner />;
@@ -117,6 +119,7 @@ const ContactData = ({ userID, burger, orders, purchaseBurger }) => {
 
 const mapStateToProps = state => ({
   userID: state.auth.userID,
+  token: state.auth.token,
   burger: state.burger,
   orders: state.orders
 });

@@ -6,6 +6,7 @@ import {
   checkAuthStatusSaga
 } from "redux/sagas/authSagas";
 import { initIngredientsSaga } from "redux/sagas/ingredientsSagas";
+import { purchaseBurgerSaga } from "redux/sagas/ordersSagas";
 import * as actions from "redux/actions/types";
 
 export function* watchAuth() {
@@ -18,4 +19,8 @@ export function* watchAuth() {
 
 export function* watchIngredients() {
   yield takeEvery(actions.INIT_INGREDIENTS, initIngredientsSaga);
+}
+
+export function* watchOrders() {
+  yield takeEvery(actions.PURCHASE_BURGER, purchaseBurgerSaga);
 }
