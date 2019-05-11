@@ -1,44 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "components/UI/Modal";
 
 const withErrorHandler = (WrappedComponent, axiosInstance) => {
-  return class extends React.Component {
-    state = { error: null };
+  return props => {
+    const [error, setError] = useState(null);
 
-    componentWillMount() {
-      this.reqInterceptor = axiosInstance.interceptors.request.use(request => {
-        this.setState({ error: null });
-        return request;
-      });
+    const reqInterceptor = axiosInstance.interceptors.request.use(request => {
+      setError({ error: null });
+      return request;
+    });
 
-      this.respInterceptor = axiosInstance.interceptors.response.use(
-        response => response,
-        error => {
-          this.setState({ error });
-          return Promise.reject(error);
-        }
-      );
-    }
+    const respInterceptor = axiosInstance.interceptors.response.use(
+      response => response,
+      err => {
+        setError({ err });
+        return Promise.reject(err);
+      }
+    );
 
-    componentWillUnmount() {
-      axiosInstance.interceptors.request.eject(this.reqInterceptor);
-      axiosInstance.interceptors.response.eject(this.respInterceptor);
-    }
+    useEffect(() => {
+      // a cleanup fn, equivalent of componentWiiUnmount
+      return () => {
+        axiosInstance.interceptors.request.eject(reqInterceptor);
+        axiosInstance.interceptors.response.eject(respInterceptor);
+      };
+    }, [reqInterceptor, respInterceptor]);
+    // the 2.arg, [], is necessary, run it whenever one of the passed values change
 
-    render() {
-      const { error } = this.state;
-      return (
-        <>
-          <Modal
-            isOpen={error}
-            onModalClose={() => this.setState({ error: null })}
-          >
-            {error ? error.message : null}
-          </Modal>
-          <WrappedComponent {...this.props} />
-        </>
-      );
-    }
+    return (
+      <>
+        <Modal isOpen={error} onModalClose={() => setError({ error: null })}>
+          {error ? error.message : null}
+        </Modal>
+        <WrappedComponent {...props} />
+      </>
+    );
   };
 };
 
