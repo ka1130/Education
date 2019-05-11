@@ -6,14 +6,14 @@ const withErrorHandler = (WrappedComponent, axiosInstance) => {
     const [error, setError] = useState(null);
 
     const reqInterceptor = axiosInstance.interceptors.request.use(request => {
-      setError({ error: null });
+      setError(null);
       return request;
     });
 
     const respInterceptor = axiosInstance.interceptors.response.use(
       response => response,
       err => {
-        setError({ err });
+        setError(err);
         return Promise.reject(err);
       }
     );
@@ -27,6 +27,7 @@ const withErrorHandler = (WrappedComponent, axiosInstance) => {
     }, [reqInterceptor, respInterceptor]);
     // the 2.arg, [], is necessary, run it whenever one of the passed values change
 
+    console.log(error ? "true" : false);
     return (
       <>
         <Modal isOpen={error} onModalClose={() => setError({ error: null })}>

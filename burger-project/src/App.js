@@ -2,11 +2,8 @@ import React, { useEffect, Suspense } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { checkAuthStatus } from "redux/actions/authActions";
-// import Auth from "components/Auth";
 import BurgerBuilder from "components/BurgerBuilder";
 import Layout from "components/Layout";
-// import Checkout from "components/Checkout";
-// import Orders from "components/Orders";
 import Logout from "components/Auth/Logout";
 
 const Checkout = React.lazy(() => import("components/Checkout"));
@@ -15,7 +12,7 @@ const Auth = React.lazy(() => import("components/Auth"));
 
 const App = ({ checkAuthStatus, isAuthed }) => {
   useEffect(() => {
-    // checkAuthStatus();
+    checkAuthStatus();
   }, []);
 
   const renderRoutes = () => {
@@ -23,8 +20,8 @@ const App = ({ checkAuthStatus, isAuthed }) => {
       return (
         <>
           <Route exact path="/" component={BurgerBuilder} />
-          <Route path="/checkout" render={() => <Checkout />} />
-          <Route path="/orders" render={() => <Orders />} />
+          <Route path="/checkout" render={props => <Checkout {...props} />} />
+          <Route path="/orders" render={props => <Orders {...props} />} />
           <Route path="/logout" component={Logout} />
         </>
       );
@@ -32,7 +29,7 @@ const App = ({ checkAuthStatus, isAuthed }) => {
       return (
         <>
           <Route exact path="/" component={BurgerBuilder} />
-          <Route path="/auth" render={() => <Auth />} />
+          <Route path="/auth" render={props => <Auth {...props} />} />
         </>
       );
     }
