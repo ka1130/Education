@@ -11,4 +11,9 @@ const Modal = ({ isOpen, children, onModalClose }) => (
   </>
 );
 
-export default Modal;
+export default React.memo(
+  Modal,
+  (prevProps, nextProps) =>
+    prevProps.isOpen === nextProps.isOpen &&
+    prevProps.children === nextProps.children
+);

@@ -27,7 +27,6 @@ const withErrorHandler = (WrappedComponent, axiosInstance) => {
     }, [reqInterceptor, respInterceptor]);
     // the 2.arg, [], is necessary, run it whenever one of the passed values change
 
-    console.log(error ? "true" : false);
     return (
       <>
         <Modal isOpen={error} onModalClose={() => setError({ error: null })}>
