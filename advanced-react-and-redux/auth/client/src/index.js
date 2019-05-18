@@ -5,10 +5,11 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
-import App from "components/App";
-import Welcome from "components/Welcome";
-import Signup from "components/auth/Signup";
 import reducers from "reducers";
+import App from "components/App";
+import Feature from "components/Feature";
+import Signup from "components/auth/Signup";
+import Welcome from "components/Welcome";
 
 const store = createStore(reducers, {}, applyMiddleware(thunk));
 
@@ -17,6 +18,7 @@ ReactDOM.render(
     <BrowserRouter>
       <App>
         <Route path="/" component={Welcome} />
+        <Route path="/feature" component={Feature} />
         <Route path="/signup" component={Signup} />
       </App>
     </BrowserRouter>

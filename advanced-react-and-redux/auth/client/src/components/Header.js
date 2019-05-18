@@ -7,7 +7,7 @@ const Header = () => {
       <Link to="/">Redux Auth</Link>
       <Link to="/signin">Sign in</Link>
       <Link to="/signup">Sign up</Link>
-      <Link to="/festure">Feature</Link>
+      <Link to="/feature">Feature</Link>
     </div>
   );
 };
