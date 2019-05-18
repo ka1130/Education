@@ -4,9 +4,8 @@ import { reduxForm, Field } from "redux-form";
 import { compose } from "redux";
 import * as actions from "actions";
 
-const Signup = ({ handleSubmit, signup }) => {
+const Signup = ({ handleSubmit, signup, errorMessage }) => {
   const onSubmit = formProps => {
-    console.log(formProps);
     signup(formProps);
   };
 
@@ -25,14 +24,19 @@ const Signup = ({ handleSubmit, signup }) => {
           autoComplete="none"
         />
       </fieldset>
+      <div>{errorMessage}</div>
       <button>Sign Up!</button>
     </form>
   );
 };
 
+const mapStateToProps = state => ({
+  errorMessage: state.auth.errorMessage
+});
+
 export default compose(
   connect(
-    null,
+    mapStateToProps,
     actions
   ),
   reduxForm({ form: "signup" })
