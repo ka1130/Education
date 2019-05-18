@@ -11,7 +11,13 @@ import Feature from "components/Feature";
 import Signup from "components/auth/Signup";
 import Welcome from "components/Welcome";
 
-const store = createStore(reducers, {}, applyMiddleware(thunk));
+const store = createStore(
+  reducers,
+  {
+    auth: { authenticated: localStorage.getItem("token") }
+  },
+  applyMiddleware(thunk)
+);
 
 ReactDOM.render(
   <Provider store={store}>
