@@ -4,9 +4,11 @@ import { reduxForm, Field } from "redux-form";
 import { compose } from "redux";
 import * as actions from "actions";
 
-const Signup = ({ handleSubmit, signup, errorMessage }) => {
+const Signup = ({ handleSubmit, signup, errorMessage, history }) => {
   const onSubmit = formProps => {
-    signup(formProps);
+    signup(formProps, () => {
+      history.push("/feature");
+    });
   };
 
   return (
