@@ -20,6 +20,9 @@ const ToastAlert = ({ alert, dismissAlert }) => (
 
 const MyToast = ({ alert, dismissAlert }) => (
   <div
+    // here we got rid of the default "toast" className and replaced it with custom "myToast"
+    // that adds a series of overrides
+    // ready Toast component comes with a set of JS inline styles that are really hard to override
     className={`${styles[alert.csn]} ${styles.alert} ${styles.myToast}`}
     onClick={() => dismissAlert(alert)}
   >
