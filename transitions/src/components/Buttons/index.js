@@ -12,7 +12,7 @@ const alerts = [
 const Buttons = ({ onFireAlert }) => (
   <div>
     {alerts.map(alert => (
-      <button key={alert.id} onClick={() => onFireAlert(alert)}>
+      <button key={alert.id} onClick={() => onFireAlert(alert, uuidv4())}>
         {alert.type}
       </button>
     ))}
@@ -24,7 +24,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onFireAlert: a => dispatch(fireAlert(a))
+  onFireAlert: (a, id) => dispatch(fireAlert(a, id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Buttons);
