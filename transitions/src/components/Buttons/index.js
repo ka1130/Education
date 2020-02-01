@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import { fireAlert } from "redux/actions/alerts";
 
 const alerts = [
-  { id: uuidv4(), type: "oops" },
-  { id: uuidv4(), type: "you messed up" },
-  { id: uuidv4(), type: "all is fine" }
+  { id: uuidv4(), type: "oops", csn: "alert1", no: 1 },
+  { id: uuidv4(), type: "you messed up", csn: "alert2", no: 2 },
+  { id: uuidv4(), type: "all is fine", csn: "alert3", no: 3 }
 ];
 
 const Buttons = ({ onFireAlert }) => (
