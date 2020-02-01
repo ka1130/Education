@@ -4,23 +4,27 @@ import { connect } from "react-redux";
 import { fireAlert } from "redux/actions/alerts";
 
 const alerts = [
-  { id: uuidv4(), message: "oops" },
-  { id: uuidv4(), message: "you messed up" },
-  { id: uuidv4(), message: "all is fine" }
+  { id: uuidv4(), type: "oops" },
+  { id: uuidv4(), type: "you messed up" },
+  { id: uuidv4(), type: "all is fine" }
 ];
 
 const Buttons = ({ onFireAlert }) => (
   <div>
     {alerts.map(alert => (
       <button key={alert.id} onClick={() => onFireAlert(alert)}>
-        {alert.message}
+        {alert.type}
       </button>
     ))}
   </div>
 );
 
+const mapStateToProps = state => ({
+  alerts: state.alerts
+});
+
 const mapDispatchToProps = dispatch => ({
   onFireAlert: a => dispatch(fireAlert(a))
 });
 
-export default connect(null, mapDispatchToProps)(Buttons);
+export default connect(mapStateToProps, mapDispatchToProps)(Buttons);
