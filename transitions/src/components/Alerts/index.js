@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { dismissAlert } from "redux/actions/alerts";
+import transitions from "./transitions.module.scss";
 import styles from "./styles.module.scss";
 
 const Alert = ({ alert, dismissAlert }) => (
@@ -16,7 +17,7 @@ const Alert = ({ alert, dismissAlert }) => (
 const Alerts = ({ alerts, onAlertDismiss }) => (
   <TransitionGroup className={styles.alerts}>
     {alerts.map(alert => (
-      <CSSTransition key={alert.id} timeout={500} classNames="move">
+      <CSSTransition key={alert.id} timeout={500} classNames={transitions}>
         {/* maybe css modules instead of global styles as above? */}
         <Alert alert={alert} key={alert.id} dismissAlert={onAlertDismiss} />
       </CSSTransition>

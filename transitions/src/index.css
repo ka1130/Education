@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-.move-enter {
+/* .move-enter {
   opacity: 0.01;
   transform: translate(-40px, 0);
 }
@@ -32,4 +32,4 @@ code {
   opacity: 0.01;
   transform: translate(40px, 0);
   transition: all 500ms ease-in;
-}
+} */
