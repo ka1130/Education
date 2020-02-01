@@ -2,14 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import styles from "./styles.module.scss";
 
-const Alert = ({ type }) => (
-  <div className={styles.alert}>
-    <h6>{type}</h6>
-  </div>
-);
+const Alert = ({ type }) => <div className={styles.alert}>{type}</div>;
 
 const Alerts = ({ alerts }) => (
-  <div>
+  <div className={styles.alerts}>
     {alerts.map(alert => (
       <Alert type={alert.type} key={alert.id} />
     ))}

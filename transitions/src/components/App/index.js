@@ -6,8 +6,8 @@ import styles from "./styles.module.scss";
 const App = () => (
   <div className={styles.wrapper}>
     <h2>APP</h2>
-    <Alerts />
     <Buttons />
+    <Alerts />
   </div>
 );
 
