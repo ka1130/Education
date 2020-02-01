@@ -6,39 +6,35 @@ import Toast from "react-bootstrap/Toast";
 import transitions from "./transitions.module.scss";
 import styles from "./styles.module.scss";
 
-const SimpleAlert = ({ alert, dismissAlert }) => (
-  <div
-    className={`${styles[alert.csn]} ${styles.alert}`}
-    onClick={() => dismissAlert(alert)}
-  >
-    {alert.type}
-  </div>
-);
-
 const ToastAlert = ({ alert, dismissAlert }) => (
   <Toast
     className={`${styles[alert.csn]} ${styles.alert}`}
-    onClick={() => dismissAlert(alert)}
+    onClose={() => dismissAlert(alert)}
   >
     <Toast.Header>
-      {/* <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" /> */}
-      <strong className="mr-auto"> {alert.type}</strong>
-      {/* <small>11 mins ago</small> */}
+      <strong className="mr-auto">{alert.type}</strong>
     </Toast.Header>
     <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
   </Toast>
+);
+
+const MyToast = ({ alert, dismissAlert }) => (
+  <div
+    className={`${styles[alert.csn]} ${styles.alert} ${styles.myToast}`}
+    onClick={() => dismissAlert(alert)}
+  >
+    <div className="toast-header">
+      <strong className="mr-auto">{alert.type}</strong>
+    </div>
+    <div class="toast-body">Hello, world! This is a toast message.</div>
+  </div>
 );
 
 const Alerts = ({ alerts, onAlertDismiss }) => (
   <TransitionGroup className={styles.alerts}>
     {alerts.map(alert => (
       <CSSTransition key={alert.id} timeout={500} classNames={transitions}>
-        {/* maybe css modules instead of global styles as above? */}
-        <SimpleAlert
-          alert={alert}
-          key={alert.id}
-          dismissAlert={onAlertDismiss}
-        />
+        <MyToast alert={alert} key={alert.id} dismissAlert={onAlertDismiss} />
       </CSSTransition>
     ))}
   </TransitionGroup>
