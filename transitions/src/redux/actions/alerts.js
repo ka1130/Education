@@ -1,6 +1,6 @@
-import { FIRE_ACTION } from "redux/actions/types";
+import { FIRE_ALERT } from "redux/actions/types";
 
-export const fireAlert = () => ({
-  type: FIRE_ACTION,
-  payload: "FooBar"
+export const fireAlert = alert => ({
+  type: FIRE_ALERT,
+  payload: alert
 });
