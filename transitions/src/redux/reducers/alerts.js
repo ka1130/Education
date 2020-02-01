@@ -1,3 +1,10 @@
+import { FIRE_ACTION } from "redux/actions/types";
+
 export default (state = [], action) => {
-  return state;
+  switch (action.type) {
+    case FIRE_ACTION:
+      return [{ type: "foo" }];
+    default:
+      return state;
+  }
 };
